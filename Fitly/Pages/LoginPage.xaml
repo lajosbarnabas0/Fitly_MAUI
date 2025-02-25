@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fitly.Pages.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+    BackgroundColor="{x:StaticResource fitly_darkgray}"
+    Loaded="ContentPage_Loaded"
+    Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontFamily" Value="Montserrat" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid Margin="20" RowDefinitions="0.2*,1.5*">
+        <Border Stroke="{x:StaticResource fitly_darkgray}" HorizontalOptions="Center">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="expand_more_24.png" WidthRequest="50"/>
+                <Label Text="Menü" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="25"/>
+            </StackLayout>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="NavMenu_Tapped"/>
+            </Border.GestureRecognizers>
+        </Border>
+        <Border
+        Grid.Row="1"
+        Padding="15"
+        BackgroundColor="{x:StaticResource fitly_darkgreen}"
+        Stroke="{x:StaticResource fitly_darkgreen}"
+        StrokeShape="RoundRectangle 20">
+            <Grid RowDefinitions="*,*,*,*,*" StyleId="Login_Grid">
+                <Label
+                Grid.Row="0"
+                FontAttributes="Bold"
+                FontSize="35"
+                HorizontalOptions="Center"
+                Text="Bejelentkezés"
+                TextColor="White"
+                VerticalOptions="Center" />
+                <StackLayout Grid.Row="1" Orientation="Vertical">
+                    <Label FontSize="18" Text="E-mail" Margin="10,0,0,5"/>
+                    <Border
+                    BackgroundColor="{x:StaticResource fitly_darkgray}"
+                    Stroke="{x:StaticResource fitly_darkgray}"
+                    StrokeShape="RoundRectangle 5">
+                        <Entry
+                        Placeholder="E-mail"
+                        PlaceholderColor="LightGray"
+                        ReturnType="Done" 
+                        Keyboard="Email"/>
+                    </Border>
+                </StackLayout>
+                <StackLayout Grid.Row="2">
+                    <Label FontSize="18" Text="Jelszó" Margin="10,0,0,5"/>
+                    <Border
+                    BackgroundColor="{x:StaticResource fitly_darkgray}"
+                    Stroke="{x:StaticResource fitly_darkgray}"
+                    StrokeShape="RoundRectangle 5">
+                        <Entry
+                        Placeholder="Jelszó"
+                        PlaceholderColor="LightGray"
+                        ReturnType="Done" />
+                    </Border>
+                </StackLayout>
+                <Button
+                Grid.Row="3"
+                BackgroundColor="{x:StaticResource fitly_green}"
+                FontAttributes="Bold"
+                FontSize="18"
+                HeightRequest="60"
+                Text="Bejelentkezés"
+                WidthRequest="200" 
+                Margin="0,0,0,20"
+                x:Name="Login_Button"
+                Clicked="Login_Button_Clicked"/>
+                <Grid Grid.Row="4" ColumnDefinitions="*,*" ColumnSpacing="10">
+                    <Label Grid.Column="0" Text="Van már fiókod?" FontSize="16" HorizontalOptions="End"/>
+                    <Label
+                    Grid.Column="1"
+                    Text="Regisztrálj itt!"
+                    FontSize="16"
+                    TextColor="{x:StaticResource fitly_green}"
+                    TextDecorations="Underline">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding IfNoAccountRegisteredCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+
+</ContentPage>

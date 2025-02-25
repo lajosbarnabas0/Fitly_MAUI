@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup
+    x:Class="Fitly.Navigation.NavigationPopUp"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+    CanBeDismissedByTappingOutsideOfPopup="True"
+    Color="Transparent">
+
+    <mct:Popup.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontFamily" Value="Montserrat" />
+            <Setter Property="FontSize" Value="25" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+    </mct:Popup.Resources>
+    <Border Stroke="{x:StaticResource fitly_darkgray}" StrokeShape="RoundRectangle 15">
+        <Grid
+            Padding="15"
+            BackgroundColor="{x:StaticResource fitly_darkgray}"
+            HeightRequest="300"
+            RowDefinitions="*,*,*,*"
+            VerticalOptions="Start"
+            WidthRequest="300">
+            <Label Grid.Row="0" Text="Kezdőlap" StyleId="HomePage">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="HomePage_Tapped" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Grid.Row="1" Text="Változtass" StyleId="MakeAChangePage">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="MakeAChangePage_Tapped" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Grid.Row="2" Text="Közösség" StyleId="SocialPage">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="SocialPage_Tapped" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Grid.Row="3" Text="Profil" StyleId="ProfilePage">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ProfilePage_Tapped" />
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+    </Border>
+</mct:Popup>

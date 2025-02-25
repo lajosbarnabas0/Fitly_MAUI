@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fitly.Pages.RegisterPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="RegisterPage"
+    BackgroundColor="{x:StaticResource fitly_darkgray}"
+    Shell.NavBarIsVisible="False"
+    Loaded="ContentPage_Loaded">
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontFamily" Value="Montserrat" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid Margin="20" RowDefinitions="0.2*,1.5*">
+        <Border Stroke="{x:StaticResource fitly_darkgray}" HorizontalOptions="Center">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="expand_more_24.png" WidthRequest="50"/>
+                <Label Text="Menü" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="25"/>
+            </StackLayout>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="NavMenu_Tapped"/>
+            </Border.GestureRecognizers>
+        </Border>
+        <Border
+            Grid.Row="1"
+            Padding="15"
+            BackgroundColor="{x:StaticResource fitly_darkgreen}"
+            Stroke="{x:StaticResource fitly_darkgreen}"
+            StrokeShape="RoundRectangle 20"
+            StyleId="Main_Border">
+            <Grid RowDefinitions="*,*,*,*,*,*">
+                <Label
+                    Grid.Row="0"
+                    FontAttributes="Bold"
+                    FontSize="35"
+                    HorizontalOptions="Center"
+                    Text="Regisztráció"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+                <StackLayout Grid.Row="1" Orientation="Vertical" StyleId="Name_STCK">
+                    <Label
+                        Margin="10,0,0,5"
+                        FontSize="18"
+                        Text="Teljes név"
+                       />
+                    <Border
+                        BackgroundColor="{x:StaticResource fitly_darkgray}"
+                        Stroke="{x:StaticResource fitly_darkgray}"
+                        StrokeShape="RoundRectangle 5">
+                        <Entry
+                            Placeholder="Teljes név"
+                            PlaceholderColor="LightGray"
+                            ReturnType="Done" />
+                    </Border>
+                </StackLayout>
+                <Grid
+                    Grid.Row="2"
+                    ColumnDefinitions="*,*"
+                    ColumnSpacing="15"
+                    StyleId="Email_Grid">
+                    <StackLayout Grid.Column="0">
+                        <Label
+                            Margin="10,0,0,5"
+                            FontSize="18"
+                            Text="E-mail" />
+                        <Border
+                            BackgroundColor="{x:StaticResource fitly_darkgray}"
+                            Stroke="{x:StaticResource fitly_darkgray}"
+                            StrokeShape="RoundRectangle 5">
+                            <Entry
+                                Keyboard="Email"
+                                Placeholder="E-mail"
+                                PlaceholderColor="LightGray"
+                                ReturnType="Done" />
+                        </Border>
+                    </StackLayout>
+                    <StackLayout Grid.Column="1">
+                        <Label
+                            Margin="10,0,0,5"
+                            FontSize="18"
+                            Text="Jelszó"/>
+                        <Border
+                            BackgroundColor="{x:StaticResource fitly_darkgray}"
+                            Stroke="{x:StaticResource fitly_darkgray}"
+                            StrokeShape="RoundRectangle 5">
+                            <Entry
+                                Placeholder="Jelszó"
+                                PlaceholderColor="LightGray"
+                                ReturnType="Done" />
+                        </Border>
+                    </StackLayout>
+                </Grid>
+                <StackLayout Grid.Row="3" StyleId="Password_STCK">
+                    <Label
+                        Margin="10,0,0,5"
+                        FontSize="18"
+                        Text="Jelszó megerősítése" />
+                    <Border
+                        BackgroundColor="{x:StaticResource fitly_darkgray}"
+                        Stroke="{x:StaticResource fitly_darkgray}"
+                        StrokeShape="RoundRectangle 5">
+                        <Entry
+                            Placeholder="Jelszó megerősítése"
+                            PlaceholderColor="LightGray"
+                            ReturnType="Done" />
+                    </Border>
+                </StackLayout>
+                <Button
+                    x:Name="Register_Button"
+                    Grid.Row="4"
+                    Margin="0,0,0,20"
+                    BackgroundColor="{x:StaticResource fitly_green}"
+                    Clicked="Register_Button_Clicked"
+                    StyleId="Register_Button"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    HeightRequest="60"
+                    Text="Regisztráció"
+                    WidthRequest="200"
+                    />
+                <Grid
+                    Grid.Row="5"
+                    ColumnDefinitions="*,*"
+                    ColumnSpacing="10"
+                    StyleId="Label_grid">
+                    <Label
+                        Grid.Column="0"
+                        FontSize="16"
+                        HorizontalOptions="End"
+                        Text="Van már fiókod?" />
+                    <Label
+                        Grid.Column="1"
+                        FontSize="16"
+                        Text="Jelentkezz be!"
+                        TextColor="{x:StaticResource fitly_green}"
+                        TextDecorations="Underline">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding IfAlreadyHaveAccountCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</ContentPage>
