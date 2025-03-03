@@ -15,77 +15,95 @@
         </Style>
     </ContentPage.Resources>
 
-    <Grid Margin="20" RowDefinitions="0.2*,1.5*">
-        <Border Stroke="{x:StaticResource fitly_darkgray}" HorizontalOptions="Center">
+    <Grid Margin="15" RowDefinitions="0.2*,1.5*">
+        <Border HorizontalOptions="Center" Stroke="{x:StaticResource fitly_darkgray}">
             <StackLayout Orientation="Horizontal">
-                <Image Source="expand_more_24.png" WidthRequest="50"/>
-                <Label Text="Menü" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="25"/>
+                <Image Source="expand_more_24.png" WidthRequest="50" />
+                <Label
+                    FontSize="25"
+                    HorizontalOptions="Center"
+                    Text="Menü"
+                    TextColor="White"
+                    VerticalOptions="Center" />
             </StackLayout>
             <Border.GestureRecognizers>
-                <TapGestureRecognizer Tapped="NavMenu_Tapped"/>
+                <TapGestureRecognizer Tapped="NavMenu_Tapped" />
             </Border.GestureRecognizers>
         </Border>
         <Border
-        Grid.Row="1"
-        Padding="15"
-        BackgroundColor="{x:StaticResource fitly_darkgreen}"
-        Stroke="{x:StaticResource fitly_darkgreen}"
-        StrokeShape="RoundRectangle 20">
+            Grid.Row="1"
+            Padding="15"
+            BackgroundColor="{x:StaticResource fitly_darkgreen}"
+            Stroke="{x:StaticResource fitly_darkgreen}"
+            StrokeShape="RoundRectangle 20">
             <Grid RowDefinitions="*,*,*,*,*" StyleId="Login_Grid">
                 <Label
-                Grid.Row="0"
-                FontAttributes="Bold"
-                FontSize="35"
-                HorizontalOptions="Center"
-                Text="Bejelentkezés"
-                TextColor="White"
-                VerticalOptions="Center" />
+                    Grid.Row="0"
+                    FontAttributes="Bold"
+                    FontSize="35"
+                    HorizontalOptions="Center"
+                    Text="Bejelentkezés"
+                    TextColor="White"
+                    VerticalOptions="Center" />
                 <StackLayout Grid.Row="1" Orientation="Vertical">
-                    <Label FontSize="18" Text="E-mail" Margin="10,0,0,5"/>
+                    <Label
+                        Margin="5,0,0,5"
+                        FontSize="18"
+                        Text="E-mail" />
                     <Border
-                    BackgroundColor="{x:StaticResource fitly_darkgray}"
-                    Stroke="{x:StaticResource fitly_darkgray}"
-                    StrokeShape="RoundRectangle 5">
+                        BackgroundColor="{x:StaticResource fitly_darkgray}"
+                        Stroke="{x:StaticResource fitly_darkgray}"
+                        StrokeShape="RoundRectangle 5">
                         <Entry
-                        Placeholder="E-mail"
-                        PlaceholderColor="LightGray"
-                        ReturnType="Done" 
-                        TextColor="White"
-                        Keyboard="Email"/>
+                            Keyboard="Email"
+                            Placeholder="E-mail"
+                            PlaceholderColor="LightGray"
+                            ReturnType="Done"
+                            TextColor="White" />
                     </Border>
                 </StackLayout>
                 <StackLayout Grid.Row="2">
-                    <Label FontSize="18" Text="Jelszó" Margin="10,0,0,5"/>
+                    <Label
+                        Margin="5,0,0,5"
+                        FontSize="18"
+                        Text="Jelszó" />
                     <Border
-                    BackgroundColor="{x:StaticResource fitly_darkgray}"
-                    Stroke="{x:StaticResource fitly_darkgray}"
-                    StrokeShape="RoundRectangle 5">
+                        BackgroundColor="{x:StaticResource fitly_darkgray}"
+                        Stroke="{x:StaticResource fitly_darkgray}"
+                        StrokeShape="RoundRectangle 5">
                         <Entry
-                        Placeholder="Jelszó"
-                        PlaceholderColor="LightGray"
-                        TextColor="White"
-                        ReturnType="Done" />
+                            Placeholder="Jelszó"
+                            PlaceholderColor="LightGray"
+                            ReturnType="Done"
+                            TextColor="White" />
                     </Border>
                 </StackLayout>
                 <Button
-                Grid.Row="3"
-                BackgroundColor="{x:StaticResource fitly_green}"
-                FontAttributes="Bold"
-                FontSize="18"
-                HeightRequest="60"
-                Text="Bejelentkezés"
-                WidthRequest="200" 
-                Margin="0,0,0,20"
-                x:Name="Login_Button"
-                Clicked="Login_Button_Clicked"/>
-                <Grid Grid.Row="4" ColumnDefinitions="*,*" ColumnSpacing="10">
-                    <Label Grid.Column="0" Text="Van már fiókod?" FontSize="16" HorizontalOptions="End"/>
+                    x:Name="Login_Button"
+                    Grid.Row="3"
+                    Margin="0,0,0,20"
+                    BackgroundColor="{x:StaticResource fitly_green}"
+                    Clicked="Login_Button_Clicked"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    HeightRequest="60"
+                    Text="Bejelentkezés"
+                    WidthRequest="200" />
+                <Grid
+                    Grid.Row="4"
+                    ColumnDefinitions="*,*"
+                    ColumnSpacing="10">
                     <Label
-                    Grid.Column="1"
-                    Text="Regisztrálj itt!"
-                    FontSize="16"
-                    TextColor="{x:StaticResource fitly_green}"
-                    TextDecorations="Underline">
+                        Grid.Column="0"
+                        FontSize="16"
+                        HorizontalOptions="End"
+                        Text="Van már fiókod?" />
+                    <Label
+                        Grid.Column="1"
+                        FontSize="16"
+                        Text="Regisztrálj itt!"
+                        TextColor="{x:StaticResource fitly_green}"
+                        TextDecorations="Underline">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding IfNoAccountRegisteredCommand}" />
                         </Label.GestureRecognizers>

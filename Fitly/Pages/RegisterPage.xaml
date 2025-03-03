@@ -14,7 +14,7 @@
         </Style>
     </ContentPage.Resources>
 
-    <Grid Margin="20" RowDefinitions="0.2*,1.5*">
+    <Grid Margin="15" RowDefinitions="0.2*,1.5*">
         <Border HorizontalOptions="Center" Stroke="{x:StaticResource fitly_darkgray}">
             <StackLayout Orientation="Horizontal">
                 <Image Source="expand_more_24.png" WidthRequest="50" />
@@ -36,7 +36,7 @@
             Stroke="{x:StaticResource fitly_darkgreen}"
             StrokeShape="RoundRectangle 20"
             StyleId="Main_Border">
-            <Grid RowDefinitions="*,*,*,*,*,*">
+            <Grid RowDefinitions="*,*,*,*,*,*,*">
                 <Label
                     Grid.Row="0"
                     FontAttributes="Bold"
@@ -50,7 +50,7 @@
                     Orientation="Vertical"
                     StyleId="Name_STCK">
                     <Label
-                        Margin="10,0,0,5"
+                        Margin="5,0,0,5"
                         FontSize="18"
                         Text="Teljes név" />
                     <Border
@@ -70,7 +70,7 @@
                     StyleId="Email_Grid">
                     <StackLayout Grid.Column="0">
                         <Label
-                            Margin="10,0,0,5"
+                            Margin="5,0,0,5"
                             FontSize="18"
                             Text="E-mail" />
                         <Border
@@ -78,7 +78,6 @@
                             Stroke="{x:StaticResource fitly_darkgray}"
                             StrokeShape="RoundRectangle 5">
                             <Entry
-                                Keyboard="Email"
                                 Placeholder="E-mail"
                                 PlaceholderColor="LightGray"
                                 TextColor="White" />
@@ -86,7 +85,7 @@
                     </StackLayout>
                     <StackLayout Grid.Column="1">
                         <Label
-                            Margin="10,0,0,5"
+                            Margin="5,0,0,5"
                             FontSize="18"
                             Text="Jelszó" />
                         <Border
@@ -102,7 +101,7 @@
                 </Grid>
                 <StackLayout Grid.Row="3" StyleId="Password_STCK">
                     <Label
-                        Margin="10,0,0,5"
+                        Margin="5,0,0,5"
                         FontSize="18"
                         Text="Jelszó megerősítése" />
                     <Border
@@ -115,9 +114,49 @@
                             TextColor="White" />
                     </Border>
                 </StackLayout>
+
+                <Grid
+                    Grid.Row="4"
+                    ColumnDefinitions="*,*"
+                    ColumnSpacing="15"
+                    StyleId="Date_Grid">
+                    <StackLayout Grid.Column="0">
+                        <Label
+                            Margin="5,0,0,5"
+                            FontSize="18"
+                            Text="Születési dátum" />
+                        <Border
+                            BackgroundColor="{x:StaticResource fitly_darkgray}"
+                            Stroke="{x:StaticResource fitly_darkgray}"
+                            StrokeShape="RoundRectangle 5">
+                            <DatePicker TextColor="LightGray" />
+                        </Border>
+                    </StackLayout>
+                    <StackLayout Grid.Column="1">
+                        <Label
+                            Margin="5,0,0,5"
+                            FontSize="18"
+                            Text="Nem" />
+                        <Border
+                            BackgroundColor="{x:StaticResource fitly_darkgray}"
+                            Stroke="{x:StaticResource fitly_darkgray}"
+                            StrokeShape="RoundRectangle 5">
+                            <Picker>
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Férfi</x:String>
+                                        <x:String>Nő</x:String>
+                                        <x:String>Egyéb</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </Border>
+                    </StackLayout>
+                </Grid>
+
                 <Button
                     x:Name="Register_Button"
-                    Grid.Row="4"
+                    Grid.Row="5"
                     Margin="0,0,0,20"
                     BackgroundColor="{x:StaticResource fitly_green}"
                     Clicked="Register_Button_Clicked"
@@ -128,7 +167,7 @@
                     Text="Regisztráció"
                     WidthRequest="200" />
                 <Grid
-                    Grid.Row="5"
+                    Grid.Row="6"
                     ColumnDefinitions="*,*"
                     ColumnSpacing="10"
                     StyleId="Label_grid">
