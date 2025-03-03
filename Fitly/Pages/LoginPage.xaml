@@ -50,6 +50,7 @@
                         Placeholder="E-mail"
                         PlaceholderColor="LightGray"
                         ReturnType="Done" 
+                        TextColor="White"
                         Keyboard="Email"/>
                     </Border>
                 </StackLayout>
@@ -62,6 +63,7 @@
                         <Entry
                         Placeholder="Jelszó"
                         PlaceholderColor="LightGray"
+                        TextColor="White"
                         ReturnType="Done" />
                     </Border>
                 </StackLayout>
