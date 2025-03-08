@@ -36,7 +36,7 @@
             BackgroundColor="{x:StaticResource fitly_darkgreen}"
             Stroke="{x:StaticResource fitly_darkgreen}"
             StrokeShape="RoundRectangle 20">
-            <Grid RowDefinitions="*,*,*,*,*" StyleId="Login_Grid">
+            <Grid RowDefinitions="*,*,*,*,0.5*,*" StyleId="Login_Grid">
                 <Label
                     Grid.Row="0"
                     FontAttributes="Bold"
@@ -89,10 +89,20 @@
                     HeightRequest="60"
                     Text="Bejelentkezés"
                     WidthRequest="200" />
-                <Grid
+                <StackLayout
                     Grid.Row="4"
+                    BackgroundColor="{x:StaticResource fitly_darkgreen}"
+                    HorizontalOptions="Center"
+                    Orientation="Horizontal">
+                    <CheckBox VerticalOptions="Center" Color="{x:StaticResource fitly_green}" IsChecked="{Binding StayLoggedInChecked}"/>
+                    <Label Text="Maradjon bejelentkezve" VerticalOptions="Center" />
+                </StackLayout>
+                <Grid
+                    Grid.Row="5"
                     ColumnDefinitions="*,*"
-                    ColumnSpacing="10">
+                    ColumnSpacing="10"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
                     <Label
                         Grid.Column="0"
                         FontSize="16"
