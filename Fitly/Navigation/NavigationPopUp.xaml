@@ -24,22 +24,34 @@
             RowDefinitions="*,*,*,*"
             VerticalOptions="Start"
             WidthRequest="300">
-            <Label Grid.Row="0" Text="Kezdőlap" StyleId="HomePage">
+            <Label
+                Grid.Row="0"
+                StyleId="HomePage"
+                Text="Kezdőlap">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="HomePage_Tapped" />
                 </Label.GestureRecognizers>
             </Label>
-            <Label Grid.Row="1" Text="Változtass" StyleId="MakeAChangePage">
+            <Label
+                Grid.Row="1"
+                StyleId="MakeAChangePage"
+                Text="Változtass">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="MakeAChangePage_Tapped" />
                 </Label.GestureRecognizers>
             </Label>
-            <Label Grid.Row="2" Text="Közösség" StyleId="SocialPage">
+            <Label
+                Grid.Row="2"
+                StyleId="SocialPage"
+                Text="Közösség">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="SocialPage_Tapped" />
                 </Label.GestureRecognizers>
             </Label>
-            <Label Grid.Row="3" Text="Profil" StyleId="ProfilePage">
+            <Label
+                Grid.Row="3"
+                StyleId="ProfilePage"
+                Text="Profil">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="ProfilePage_Tapped" />
                 </Label.GestureRecognizers>

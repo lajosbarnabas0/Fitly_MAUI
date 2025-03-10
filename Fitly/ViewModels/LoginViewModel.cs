@@ -2,53 +2,58 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Fitly.API;
-using Windows.Services.Maps;
+using Fitly.Models;
+
 
 namespace Fitly.ViewModels
 {
     public partial class LoginViewModel : ObservableObject
     {
-        private readonly HTTPRequest _apiService = new HTTPRequest();
+        [ObservableProperty]
+        string? email;
+
+        [ObservableProperty]
+        string? password;
+
+        [ObservableProperty]
+        string? responseMessage;
 
         [RelayCommand]
-        async Task IfNoAccountRegistered()
+        public async Task Login()
         {
-            await Shell.Current.GoToAsync("//RegisterPage");
-        }
+            string url = "https://bgs.jedlik.eu/hm/backend/public/api/login";
+            var requestData = new LoginUserRequest
+            {
+                Email = Email,
+                Password = Password
+            };
 
-        [ObservableProperty]
-        private string name;
+            string jsonData = JsonSerializer.Serialize(requestData);
+            await Shell.Current.DisplayAlert("Elküldött JSON", jsonData, "OK");
 
-        [ObservableProperty]
-        private int age;
+            var response = await HTTPRequest<LoginUserResponse>.Post(url, requestData);
 
-        [ObservableProperty]
-        private string responseMessage;
+            if(response != null)
+            {
+                if(response.Token != null)
+                {
+                    await Shell.Current.DisplayAlert("Sikeres bejelentkezés!", "A bejelentkezés sikeres volt!", "Mégse");
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Hiba", "Hiba", "Mégse");
+                }
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Hiba", "Kérlek add meg az adataid!", "ok");
+            }
 
-        public MyViewModel()
-        {
-            SendDataCommand = new AsyncRelayCommand(SendDataAsync);
-        }
-
-        public IAsyncRelayCommand SendDataCommand { get; }
-
-        private async Task SendDataAsync()
-        {
-            var data = new { Name, Age };
-            var result = await ApiService.Post<ResponseModel>("https://example.com/api/data", data);
-
-            ResponseMessage = result != null ? $"Siker: {result.Message}" : "Sikertelen küldés!";
         }
     }
-
-    public class ResponseModel
-    {
-        public string Message { get; set; }
-    }
-}
 }

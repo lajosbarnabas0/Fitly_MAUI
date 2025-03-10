@@ -59,7 +59,8 @@
                             Placeholder="E-mail"
                             PlaceholderColor="LightGray"
                             ReturnType="Done"
-                            TextColor="White" />
+                            TextColor="White"
+                            Text="{Binding Email}"/>
                     </Border>
                 </StackLayout>
                 <StackLayout Grid.Row="2">
@@ -75,7 +76,9 @@
                             Placeholder="Jelszó"
                             PlaceholderColor="LightGray"
                             ReturnType="Done"
-                            TextColor="White" />
+                            TextColor="White"
+                            IsPassword="True"
+                            Text="{Binding Password}"/>
                     </Border>
                 </StackLayout>
                 <Button
@@ -88,7 +91,8 @@
                     FontSize="18"
                     HeightRequest="60"
                     Text="Bejelentkezés"
-                    WidthRequest="200" />
+                    WidthRequest="200"
+                    Command="{Binding LoginCommand}"/>
                 <StackLayout
                     Grid.Row="4"
                     BackgroundColor="{x:StaticResource fitly_darkgreen}"
@@ -100,16 +104,19 @@
                 <Grid
                     Grid.Row="5"
                     ColumnDefinitions="*,*"
+                    RowDefinitions="*,*"
                     ColumnSpacing="10"
                     HorizontalOptions="Center"
                     VerticalOptions="Center">
                     <Label
                         Grid.Column="0"
+                        Grid.Row="0"
                         FontSize="16"
                         HorizontalOptions="End"
                         Text="Van már fiókod?" />
                     <Label
                         Grid.Column="1"
+                        Grid.Row="0"
                         FontSize="16"
                         Text="Regisztrálj itt!"
                         TextColor="{x:StaticResource fitly_green}"
@@ -118,6 +125,7 @@
                             <TapGestureRecognizer Command="{Binding IfNoAccountRegisteredCommand}" />
                         </Label.GestureRecognizers>
                     </Label>
+                    <Label Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding ResponseMessage}"/>
                 </Grid>
             </Grid>
         </Border>
