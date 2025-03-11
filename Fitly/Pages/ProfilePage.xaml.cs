@@ -5,9 +5,9 @@ using Fitly.ViewModels;
 
 namespace Fitly.Pages;
 
-public partial class RegisterPage : ContentPage
+public partial class ProfilePage : ContentPage
 {
-	public RegisterPage(RegisterViewModel vm)
+	public ProfilePage(ProfileViewModel vm)
 	{
 		InitializeComponent();
 		this.BindingContext = vm;
@@ -17,15 +17,9 @@ public partial class RegisterPage : ContentPage
     {
         await LoadedAnimation.AnimateElementsOnPage(this);
     }
+
     private void NavMenu_Tapped(object sender, TappedEventArgs e)
     {
         this.ShowPopup(new NavigationPopUp());
     }
-
-    private async void Register_Button_Clicked(object sender, EventArgs e)
-    {
-        await Register_Button.ScaleTo(1.1, 200, Easing.CubicOut);
-        await Register_Button.ScaleTo(1.0, 300, Easing.CubicIn);
-    }
-
 }

@@ -28,7 +28,7 @@ public partial class NavigationPopUp : Popup
     
     private async void ProfilePage_Tapped(object sender, TappedEventArgs e)
     {
-        await Shell.Current.GoToAsync("//RegisterPage");
+        await Shell.Current.GoToAsync("//ProfilePage");
         Close();
     }
 }

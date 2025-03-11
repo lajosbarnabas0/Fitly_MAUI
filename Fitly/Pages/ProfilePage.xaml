@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fitly.Pages.ProfilePage"
+             BackgroundColor="{x:StaticResource fitly_darkgray}"
+             Loaded="ContentPage_Loaded"
+             Shell.NavBarIsVisible="False"
+             >
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontFamily" Value="Montserrat" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="0.2*,1.5*" Margin="15">
+        <Border HorizontalOptions="Center" Stroke="{x:StaticResource fitly_darkgray}">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="expand_more_24.png" WidthRequest="50" />
+                <Label
+            FontSize="25"
+            HorizontalOptions="Center"
+            Text="Menü"
+            TextColor="White"
+            VerticalOptions="Center" />
+            </StackLayout>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="NavMenu_Tapped" />
+            </Border.GestureRecognizers>
+        </Border>
+    </Grid>
+</ContentPage>
