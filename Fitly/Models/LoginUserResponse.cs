@@ -8,8 +8,8 @@ namespace Fitly.Models
 {
     public class LoginUserResponse
     {
-        public string Token { get; set; }
-        public string User { get; set; }
+        public string token { get; set; }
+        public User user { get; set; }
 
     }
 }

@@ -12,6 +12,7 @@ using Fitly.Models;
 
 namespace Fitly.ViewModels
 {
+
     public partial class LoginViewModel : ObservableObject
     {
         [ObservableProperty]
@@ -29,31 +30,28 @@ namespace Fitly.ViewModels
             string url = "https://bgs.jedlik.eu/hm/backend/public/api/login";
             var requestData = new LoginUserRequest
             {
-                Email = Email,
-                Password = Password
+                email = Email,
+                password = Password
             };
-
-            string jsonData = JsonSerializer.Serialize(requestData);
-            await Shell.Current.DisplayAlert("Elküldött JSON", jsonData, "OK");
 
             var response = await HTTPRequest<LoginUserResponse>.Post(url, requestData);
 
             if(response != null)
             {
-                if(response.Token != null)
+                if(response.token != null)
                 {
-                    await Shell.Current.DisplayAlert("Sikeres bejelentkezés!", "A bejelentkezés sikeres volt!", "Mégse");
+                    ResponseMessage = "Sikeres bejelentkezés!";
+                    await SecureStorage.Default.SetAsync("LoginToken", response.token);
                 }
                 else
                 {
-                    await Shell.Current.DisplayAlert("Hiba", "Hiba", "Mégse");
+                    ResponseMessage = "Sikertelen bejelentkezés!";
                 }
             }
             else
             {
                 await Shell.Current.DisplayAlert("Hiba", "Kérlek add meg az adataid!", "ok");
             }
-
         }
     }
 }
