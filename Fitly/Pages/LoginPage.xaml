@@ -59,8 +59,8 @@
                             Placeholder="E-mail"
                             PlaceholderColor="LightGray"
                             ReturnType="Done"
-                            TextColor="White"
-                            Text="{Binding Email}"/>
+                            Text="{Binding Email}"
+                            TextColor="White" />
                     </Border>
                 </StackLayout>
                 <StackLayout Grid.Row="2">
@@ -73,12 +73,12 @@
                         Stroke="{x:StaticResource fitly_darkgray}"
                         StrokeShape="RoundRectangle 5">
                         <Entry
+                            IsPassword="True"
                             Placeholder="Jelszó"
                             PlaceholderColor="LightGray"
                             ReturnType="Done"
-                            TextColor="White"
-                            IsPassword="True"
-                            Text="{Binding Password}"/>
+                            Text="{Binding Password}"
+                            TextColor="White" />
                     </Border>
                 </StackLayout>
                 <Button
@@ -87,36 +87,39 @@
                     Margin="0,0,0,20"
                     BackgroundColor="{x:StaticResource fitly_green}"
                     Clicked="Login_Button_Clicked"
+                    Command="{Binding LoginCommand}"
                     FontAttributes="Bold"
                     FontSize="18"
                     HeightRequest="60"
                     Text="Bejelentkezés"
-                    WidthRequest="200"
-                    Command="{Binding LoginCommand}"/>
+                    WidthRequest="200" />
                 <StackLayout
                     Grid.Row="4"
                     BackgroundColor="{x:StaticResource fitly_darkgreen}"
                     HorizontalOptions="Center"
                     Orientation="Horizontal">
-                    <CheckBox VerticalOptions="Center" Color="{x:StaticResource fitly_green}" IsChecked="{Binding StayLoggedInChecked}"/>
+                    <CheckBox
+                        IsChecked="{Binding StayLoggedInChecked}"
+                        VerticalOptions="Center"
+                        Color="{x:StaticResource fitly_green}" />
                     <Label Text="Maradjon bejelentkezve" VerticalOptions="Center" />
                 </StackLayout>
                 <Grid
                     Grid.Row="5"
                     ColumnDefinitions="*,*"
-                    RowDefinitions="*,*"
                     ColumnSpacing="10"
                     HorizontalOptions="Center"
+                    RowDefinitions="*,*"
                     VerticalOptions="Center">
                     <Label
-                        Grid.Column="0"
                         Grid.Row="0"
+                        Grid.Column="0"
                         FontSize="16"
                         HorizontalOptions="End"
                         Text="Van már fiókod?" />
                     <Label
-                        Grid.Column="1"
                         Grid.Row="0"
+                        Grid.Column="1"
                         FontSize="16"
                         Text="Regisztrálj itt!"
                         TextColor="{x:StaticResource fitly_green}"
@@ -125,7 +128,10 @@
                             <TapGestureRecognizer Command="{Binding IfNoAccountRegisteredCommand}" />
                         </Label.GestureRecognizers>
                     </Label>
-                    <Label Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding ResponseMessage}"/>
+                    <Label
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        Text="{Binding ResponseMessage}" />
                 </Grid>
             </Grid>
         </Border>

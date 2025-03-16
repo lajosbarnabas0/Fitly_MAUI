@@ -24,6 +24,9 @@ namespace Fitly.ViewModels
         [ObservableProperty]
         string? responseMessage;
 
+        [ObservableProperty]
+        bool stayLoggedInChecked;
+
         [RelayCommand]
         public async Task Login()
         {

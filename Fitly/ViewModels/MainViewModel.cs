@@ -11,15 +11,9 @@ namespace Fitly.ViewModels
     public partial class MainViewModel : ObservableObject
     {
         [RelayCommand]
-        async Task LoginButtonClicked()
+        async Task LetsBeginButtonClicked()
         {
-            await Shell.Current.GoToAsync("//LoginPage");
-        }
-
-        [RelayCommand]
-        async Task RegisterButtonClicked()
-        {
-            await Shell.Current.GoToAsync("//RegisterPage");
+            await Shell.Current.GoToAsync("//LetsBeginPage");
         }
     }
 }

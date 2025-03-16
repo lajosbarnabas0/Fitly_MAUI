@@ -15,16 +15,10 @@ namespace Fitly.Pages
             this.BindingContext = vm;
         }
 
-        private async void Register_Button_Clicked(object sender, EventArgs e)
+        private async void LetsBegin_Button_Clicked(object sender, EventArgs e)
         {
-            await Register_Button.ScaleTo(1.1, 200, Easing.CubicOut);
-            await Register_Button.ScaleTo(1.0, 300, Easing.CubicIn);
-        }
-
-        private async void Login_Button_Clicked(object sender, EventArgs e)
-        {
-            await Login_Button.ScaleTo(1.1, 200, Easing.CubicOut);
-            await Login_Button.ScaleTo(1.0, 300, Easing.CubicIn);
+            await letsBegin_Button.ScaleTo(1.1, 200, Easing.CubicOut);
+            await letsBegin_Button.ScaleTo(1.0, 300, Easing.CubicIn);
         }
 
         private async void ContentPage_Loaded(object sender, EventArgs e)

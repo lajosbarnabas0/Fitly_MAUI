@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fitly.Pages.LetsBeginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+    BackgroundColor="{x:StaticResource fitly_darkgray}"
+    Loaded="ContentPage_Loaded"
+    Shell.NavBarIsVisible="False">
+    <ContentPage.Behaviors>
+        <tool:StatusBarBehavior StatusBarColor="{x:StaticResource fitly_darkgray}" />
+    </ContentPage.Behaviors>
+
+    <Grid RowDefinitions="0.2*,1.5*">
+        <Border HorizontalOptions="Center" Stroke="{x:StaticResource fitly_darkgray}">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="expand_more_24.png" WidthRequest="50" />
+                <Label
+                    FontSize="25"
+                    HorizontalOptions="Center"
+                    Text="Menü"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+            </StackLayout>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="NavMenu_Tapped" />
+            </Border.GestureRecognizers>
+        </Border>
+
+        <Grid Grid.Row="1" RowDefinitions="1.5*,*,*">
+            <Image
+                Grid.Row="0"
+                Margin="0,0,0,20"
+                HeightRequest="200"
+                Source="logo.png"
+                StyleId="Logo_Image"
+                WidthRequest="200" />
+
+            <StackLayout
+                Grid.Row="1"
+                Spacing="15"
+                StyleId="Registration_STCKP">
+                <StackLayout HorizontalOptions="Center">
+                    <Label
+                        FontSize="18"
+                        HorizontalTextAlignment="Center"
+                        Text="A legjobb felhasználói élmény"
+                        TextColor="{x:StaticResource fitly_white}" />
+                    <Label
+                        FontSize="18"
+                        HorizontalTextAlignment="Center"
+                        Text="érdekében, regisztrálj be!"
+                        TextColor="{x:StaticResource fitly_white}" />
+                </StackLayout>
+
+                <Button
+                    x:Name="registration_Button"
+                    BackgroundColor="{x:StaticResource fitly_green}"
+                    Command="{Binding RegistrationButtonClickedCommand}"
+                    FontSize="18"
+                    HeightRequest="60"
+                    StyleId="Register_Button"
+                    Text="Regisztráció"
+                    WidthRequest="160" />
+            </StackLayout>
+
+            <StackLayout
+                Grid.Row="2"
+                Spacing="15"
+                StyleId="Login_STCKP">
+                <StackLayout HorizontalOptions="Center">
+                    <Label
+                        FontSize="18"
+                        HorizontalTextAlignment="Center"
+                        Text="Amennyiben már regisztráltál,"
+                        TextColor="{x:StaticResource fitly_white}" />
+                    <Label
+                        FontSize="18"
+                        HorizontalTextAlignment="Center"
+                        Text="jelentkezz be!"
+                        TextColor="{x:StaticResource fitly_white}" />
+                </StackLayout>
+
+                <Button
+                    x:Name="login_Button"
+                    BackgroundColor="{x:StaticResource fitly_green}"
+                    Command="{Binding LoginClickedCommand}"
+                    FontSize="18"
+                    HeightRequest="60"
+                    StyleId="Login_Button"
+                    Text="Belépés"
+                    VerticalOptions="Start"
+                    WidthRequest="160" />
+            </StackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>
