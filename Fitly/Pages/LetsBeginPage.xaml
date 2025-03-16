@@ -58,7 +58,7 @@
                     BackgroundColor="{x:StaticResource fitly_green}"
                     Command="{Binding RegistrationButtonClickedCommand}"
                     FontSize="18"
-                    HeightRequest="60"
+                    HeightRequest="50"
                     StyleId="Register_Button"
                     Text="Regisztráció"
                     WidthRequest="160" />
@@ -73,7 +73,8 @@
                         FontSize="18"
                         HorizontalTextAlignment="Center"
                         Text="Amennyiben már regisztráltál,"
-                        TextColor="{x:StaticResource fitly_white}" />
+                        TextColor="{x:StaticResource fitly_white}"
+                        WidthRequest="300" />
                     <Label
                         FontSize="18"
                         HorizontalTextAlignment="Center"
@@ -86,7 +87,7 @@
                     BackgroundColor="{x:StaticResource fitly_green}"
                     Command="{Binding LoginClickedCommand}"
                     FontSize="18"
-                    HeightRequest="60"
+                    HeightRequest="50"
                     StyleId="Login_Button"
                     Text="Belépés"
                     VerticalOptions="Start"

@@ -24,7 +24,7 @@ namespace Fitly.API
             return null;
         }
 
-        public static async Task<T?> Post(string url, object data)
+        public static async Task<T> Post(string url, object data)
         {
             try
             {
@@ -41,10 +41,9 @@ namespace Fitly.API
                 }
                 else
                 {
-                    // Hiba esetén megjelenítünk egy Alertet, a MainThread-en
                     await MainThread.InvokeOnMainThreadAsync(async () =>
                     {
-                        await Shell.Current.DisplayAlert("Hiba", $"Hiba történt: {response.StatusCode} - {response.ReasonPhrase}", "OK");
+                        await Shell.Current.DisplayAlert("Hiba", "Hiba történt", "OK");
                     });
                 }
             }
@@ -52,7 +51,7 @@ namespace Fitly.API
             {
                 await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
-                    await Shell.Current.DisplayAlert("Hiba", $"Hiba történt: {ex.Message}", "OK");
+                    await Shell.Current.DisplayAlert("Hiba", "Hiba történt", "OK");
                 });
             }
             return null;

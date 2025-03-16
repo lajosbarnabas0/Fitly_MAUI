@@ -24,7 +24,7 @@
         ContentTemplate="{DataTemplate pages:ProfilePage}"
         Route="ProfilePage" />
     <ShellContent
-    Title="LetsBegin"
-    ContentTemplate="{DataTemplate pages:LetsBeginPage}"
-    Route="LetsBeginPage" />
+        Title="LetsBegin"
+        ContentTemplate="{DataTemplate pages:LetsBeginPage}"
+        Route="LetsBeginPage" />
 </Shell>

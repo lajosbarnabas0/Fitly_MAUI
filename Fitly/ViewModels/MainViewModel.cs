@@ -13,7 +13,17 @@ namespace Fitly.ViewModels
         [RelayCommand]
         async Task LetsBeginButtonClicked()
         {
-            await Shell.Current.GoToAsync("//LetsBeginPage");
+            string? isLoginSet = SecureStorage.Default.GetAsync("LoginToken").Result;
+
+            if(isLoginSet != null)
+            {
+                await Shell.Current.GoToAsync("//ProfilePage");
+            }
+            else
+            {
+                await Shell.Current.GoToAsync("//LetsBeginPage");
+            }
+
         }
     }
 }

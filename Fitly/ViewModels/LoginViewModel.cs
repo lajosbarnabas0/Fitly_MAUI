@@ -22,9 +22,6 @@ namespace Fitly.ViewModels
         string? password;
 
         [ObservableProperty]
-        string? responseMessage;
-
-        [ObservableProperty]
         bool stayLoggedInChecked;
 
         [RelayCommand]
@@ -37,23 +34,24 @@ namespace Fitly.ViewModels
                 password = Password
             };
 
-            var response = await HTTPRequest<LoginUserResponse>.Post(url, requestData);
+            var response = await AuthData.LoginUser(url, requestData);
 
             if(response != null)
             {
-                if(response.token != null)
+                if(response.token != null && StayLoggedInChecked)
                 {
-                    ResponseMessage = "Sikeres bejelentkezés!";
-                    await SecureStorage.Default.SetAsync("LoginToken", response.token);
+                    await SecureStorage.Default.SetAsync("LoginToken", response.token );
+                    await SecureStorage.Default.SetAsync("UserId", response.user.id.ToString());
+                    await Shell.Current.GoToAsync("//ProfilePage");
                 }
                 else
                 {
-                    ResponseMessage = "Sikertelen bejelentkezés!";
+                    await Shell.Current.DisplayAlert("Hiba", "Sikertelen bejelentkezés", "Ok");
                 }
             }
             else
             {
-                await Shell.Current.DisplayAlert("Hiba", "Kérlek add meg az adataid!", "ok");
+                await Shell.Current.DisplayAlert("Hiba", "Kérlek add meg az adataid!", "Ok");
             }
         }
     }

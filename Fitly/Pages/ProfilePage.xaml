@@ -12,6 +12,8 @@
             <Setter Property="FontFamily" Value="Montserrat" />
         </Style>
     </ContentPage.Resources>
+    
+    <!--TODO: navigáció-ban profil menü lekelezése, ha nincs bejelentkezve a felhasználó-->
 
     <Grid RowDefinitions="0.2*,1.5*" Margin="15">
         <Border HorizontalOptions="Center" Stroke="{x:StaticResource fitly_darkgray}">
@@ -28,5 +30,7 @@
                 <TapGestureRecognizer Tapped="NavMenu_Tapped" />
             </Border.GestureRecognizers>
         </Border>
+
+        <Button Command="{Binding LogoutCommand}" Grid.Row="1" Text="Kijelentkezés" HeightRequest="50" WidthRequest="150"/>
     </Grid>
 </ContentPage>
