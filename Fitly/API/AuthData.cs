@@ -15,5 +15,10 @@ namespace Fitly.API
         {
             return await HTTPRequest<LoginUserResponse>.Post(url, requestData);
         }
+
+        public static async Task<RegisterUserResponse> RegisterUser(string url, object requestData)
+        {
+            return await HTTPRequest<RegisterUserResponse>.Post(url, requestData);
+        }
     }
 }

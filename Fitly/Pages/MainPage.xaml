@@ -44,12 +44,13 @@
                 StyleId="Label_Stack">
                 <Label
                     FontAttributes="Bold"
-                    FontSize="35"
+                    FontSize="20"
                     HeightRequest="50"
                     HorizontalOptions="Center"
+                    HorizontalTextAlignment="End"
                     Text="Formáld a jövődet!"
                     TextColor="{x:StaticResource fitly_green}"
-                    VerticalOptions="Start" />
+                    VerticalOptions="Center" />
 
                 <StackLayout HorizontalOptions="Center">
                     <Label

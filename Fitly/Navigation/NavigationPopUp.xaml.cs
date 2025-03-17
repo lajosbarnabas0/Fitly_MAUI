@@ -28,7 +28,16 @@ public partial class NavigationPopUp : Popup
     
     private async void ProfilePage_Tapped(object sender, TappedEventArgs e)
     {
-        await Shell.Current.GoToAsync("//LetsBeginPage");
-        Close();
+        string? isLoginSet = SecureStorage.Default.GetAsync("LoginToken").Result;
+        if(isLoginSet != null)
+        {
+            await Shell.Current.GoToAsync("//ProfilePage");
+            Close();
+        }
+        else
+        {
+            await Shell.Current.GoToAsync("//LetsBeginPage");
+            Close();
+        }
     }
 }

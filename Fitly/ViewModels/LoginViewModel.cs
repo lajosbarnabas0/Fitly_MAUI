@@ -21,9 +21,6 @@ namespace Fitly.ViewModels
         [ObservableProperty]
         string? password;
 
-        [ObservableProperty]
-        bool stayLoggedInChecked;
-
         [RelayCommand]
         public async Task Login()
         {
@@ -38,11 +35,12 @@ namespace Fitly.ViewModels
 
             if(response != null)
             {
-                if(response.token != null && StayLoggedInChecked)
+                if (response.token != null)
                 {
-                    await SecureStorage.Default.SetAsync("LoginToken", response.token );
+                    await SecureStorage.Default.SetAsync("LoginToken", response.token);
                     await SecureStorage.Default.SetAsync("UserId", response.user.id.ToString());
                     await Shell.Current.GoToAsync("//ProfilePage");
+
                 }
                 else
                 {
@@ -53,6 +51,12 @@ namespace Fitly.ViewModels
             {
                 await Shell.Current.DisplayAlert("Hiba", "Kérlek add meg az adataid!", "Ok");
             }
+        }
+
+        [RelayCommand]
+        public async Task IfNoAccountRegistered()
+        {
+            Shell.Current.GoToAsync("//RegisterPage");
         }
     }
 }

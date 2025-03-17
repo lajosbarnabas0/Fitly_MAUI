@@ -4,8 +4,8 @@
              x:Class="Fitly.Pages.ProfilePage"
              BackgroundColor="{x:StaticResource fitly_darkgray}"
              Loaded="ContentPage_Loaded"
-             Shell.NavBarIsVisible="False"
-             >
+             Shell.NavBarIsVisible="False">
+    
     <ContentPage.Resources>
         <Style TargetType="Label">
             <Setter Property="TextColor" Value="White" />

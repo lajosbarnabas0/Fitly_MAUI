@@ -39,13 +39,6 @@ namespace Fitly.API
                     string resultString = await response.Content.ReadAsStringAsync();
                     return JsonSerializer.Deserialize<T>(resultString);
                 }
-                else
-                {
-                    await MainThread.InvokeOnMainThreadAsync(async () =>
-                    {
-                        await Shell.Current.DisplayAlert("Hiba", "Hiba történt", "OK");
-                    });
-                }
             }
             catch (Exception ex)
             {

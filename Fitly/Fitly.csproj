@@ -44,7 +44,7 @@
 		<MauiIcon Include="Resources\Raw\appicon.svg" ForegroundFile="Resources\AppIcon\fitly_appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\fitly_splash.png" Color="#131213" BaseSize="512,512" Resize="false" />
+		<MauiSplashScreen Include="Resources\Splash\fitly_splash.png" Color="#131213" BaseSize="128,128" Resize="false" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -67,10 +67,6 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Resources\NewFolder\" />
 	</ItemGroup>
 
 	<ItemGroup>
