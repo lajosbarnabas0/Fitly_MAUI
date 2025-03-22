@@ -16,6 +16,7 @@ public partial class RegisterPage : ContentPage
     private async void ContentPage_Loaded(object sender, EventArgs e)
     {
         await LoadedAnimation.AnimateElementsOnPage(this);
+        gender_PCKR.SelectedItem = null;
     }
     private void NavMenu_Tapped(object sender, TappedEventArgs e)
     {

@@ -9,8 +9,6 @@ namespace Fitly.API
 {
     public static class AuthData
     {
-        //var response = await HTTPRequest<LoginUserResponse>.Post(url, requestData);
-
         public static async Task<LoginUserResponse> LoginUser(string url, object requestData)
         {
             return await HTTPRequest<LoginUserResponse>.Post(url, requestData);

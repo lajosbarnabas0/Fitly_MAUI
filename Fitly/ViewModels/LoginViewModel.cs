@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Fitly.API;
@@ -20,6 +21,12 @@ namespace Fitly.ViewModels
 
         [ObservableProperty]
         string? password;
+
+        private void ResetFields()
+        {
+            Email = string.Empty;
+            Password = string.Empty;
+        }
 
         [RelayCommand]
         public async Task Login()
@@ -40,6 +47,7 @@ namespace Fitly.ViewModels
                     await SecureStorage.Default.SetAsync("LoginToken", response.token);
                     await SecureStorage.Default.SetAsync("UserId", response.user.id.ToString());
                     await Shell.Current.GoToAsync("//ProfilePage");
+                    ResetFields();
 
                 }
                 else

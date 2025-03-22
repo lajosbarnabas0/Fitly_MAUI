@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Fitly.API;
+using Fitly.Helper;
 using Fitly.Models;
+using Fitly.Pages;
 using static System.Net.WebRequestMethods;
 
 namespace Fitly.ViewModels
@@ -37,6 +39,26 @@ namespace Fitly.ViewModels
             await Shell.Current.GoToAsync("//LoginPage");
         }
 
+        private string ConvertGenderToServerFormat(string gender)
+        {
+            return gender switch
+            {
+                "Férfi" => "male",
+                "Nő" => "female",
+                "Egyéb" => "other",
+            };
+        }
+
+        private void ResetFields()
+        {
+            Name = string.Empty;
+            Email = string.Empty;
+            Password = string.Empty;
+            Password_confirmation = string.Empty;
+            Birthday = null; // Alapértelmezett dátum
+            Gender = null; // Picker alaphelyzetbe állítása
+        }
+
         [RelayCommand]
         public async Task Register()
         {
@@ -48,7 +70,7 @@ namespace Fitly.ViewModels
                 password = Password,
                 password_confirmation = Password_confirmation,
                 birthday = Birthday,
-                gender = Gender
+                gender = ConvertGenderToServerFormat(Gender)
             };
 
             var response = await AuthData.RegisterUser(url, requestData);
@@ -57,7 +79,8 @@ namespace Fitly.ViewModels
             {
                 if (response != null)
                 {
-                    await Shell.Current.GoToAsync("//ProfilePage");
+                    await Shell.Current.GoToAsync("//LoginPage");
+                    ResetFields();
                 }
                 else
                 {

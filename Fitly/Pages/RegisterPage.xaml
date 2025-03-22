@@ -59,8 +59,8 @@
                         <Entry
                             Placeholder="Teljes név"
                             PlaceholderColor="LightGray"
-                            TextColor="White" 
-                            Text="{Binding Name}"/>
+                            Text="{Binding Name}"
+                            TextColor="White" />
                     </Border>
                 </StackLayout>
                 <Grid
@@ -81,9 +81,8 @@
                                 Keyboard="Email"
                                 Placeholder="E-mail"
                                 PlaceholderColor="LightGray"
-                                TextColor="White" 
                                 Text="{Binding Email}"
-                                />
+                                TextColor="White" />
                         </Border>
                     </StackLayout>
                     <StackLayout Grid.Column="1">
@@ -99,9 +98,8 @@
                                 IsPassword="True"
                                 Placeholder="Jelszó"
                                 PlaceholderColor="LightGray"
-                                TextColor="White"
                                 Text="{Binding Password}"
-                                />
+                                TextColor="White" />
                         </Border>
                     </StackLayout>
                 </Grid>
@@ -118,8 +116,8 @@
                             IsPassword="True"
                             Placeholder="Jelszó megerősítése"
                             PlaceholderColor="LightGray"
-                            TextColor="White" 
-                            Text="{Binding Password_confirmation}"/>
+                            Text="{Binding Password_confirmation}"
+                            TextColor="White" />
                     </Border>
                 </StackLayout>
 
@@ -137,7 +135,7 @@
                             BackgroundColor="{x:StaticResource fitly_darkgray}"
                             Stroke="{x:StaticResource fitly_darkgray}"
                             StrokeShape="RoundRectangle 5">
-                            <DatePicker TextColor="LightGray" Date="{Binding Birthday}" />
+                            <DatePicker Date="{Binding Birthday}" TextColor="LightGray" />
                         </Border>
                     </StackLayout>
                     <StackLayout Grid.Column="1">
@@ -149,8 +147,8 @@
                             BackgroundColor="{x:StaticResource fitly_darkgray}"
                             Stroke="{x:StaticResource fitly_darkgray}"
                             StrokeShape="RoundRectangle 5">
-                            <Picker SelectedItem="{Binding Gender}">
-                                <Picker.ItemsSource >
+                            <Picker x:Name="gender_PCKR" SelectedItem="{Binding Gender}">
+                                <Picker.ItemsSource>
                                     <x:Array Type="{x:Type x:String}">
                                         <x:String>Férfi</x:String>
                                         <x:String>Nő</x:String>
@@ -168,12 +166,12 @@
                     Margin="0,0,0,20"
                     BackgroundColor="{x:StaticResource fitly_green}"
                     Clicked="Register_Button_Clicked"
+                    Command="{Binding RegisterCommand}"
                     FontAttributes="Bold"
                     FontSize="18"
                     HeightRequest="60"
                     StyleId="Register_Button"
                     Text="Regisztráció"
-                    Command="{Binding RegisterCommand}"
                     WidthRequest="200" />
                 <Grid
                     Grid.Row="6"

@@ -31,9 +31,10 @@ namespace Fitly.API
                 using var client = new HttpClient();
                 var content = new StringContent(JsonSerializer.Serialize(data), Encoding.UTF8, "application/json");
                 var request = new HttpRequestMessage(HttpMethod.Post, url) { Content = content };
+                request.Headers.Add("Accept", "application/json");
 
                 using var response = await client.SendAsync(request).ConfigureAwait(false);
-
+                request.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
                 if (response.IsSuccessStatusCode)
                 {
                     string resultString = await response.Content.ReadAsStringAsync();
