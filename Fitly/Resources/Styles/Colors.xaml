@@ -16,6 +16,7 @@
     <Color x:Key="fitly_white">#fdfdfd</Color>
     <Color x:Key="fitly_green">#6abc5c</Color>
     <Color x:Key="fitly_gray">#2B2A2B</Color>
+    <Color x:Key="fitly_red">#b84040</Color>
 
 
     <Color x:Key="White">White</Color>
