@@ -21,6 +21,7 @@
                 <StackLayout Orientation="Horizontal">
                     <Image Source="expand_more_24.png" WidthRequest="50" />
                     <Label
+                        FontAutoScalingEnabled="True"
                         FontSize="25"
                         HorizontalOptions="Center"
                         Text="Menü"
@@ -41,7 +42,8 @@
                     <Label
                         Grid.Row="0"
                         FontAttributes="Bold"
-                        FontSize="35"
+                        FontAutoScalingEnabled="True"
+                        FontSize="32"
                         HorizontalOptions="Center"
                         Text="Bejelentkezés"
                         TextColor="White"
@@ -49,6 +51,7 @@
                     <StackLayout Grid.Row="1" Orientation="Vertical">
                         <Label
                             Margin="5,0,0,5"
+                            FontAutoScalingEnabled="True"
                             FontSize="18"
                             Text="E-mail" />
                         <Border
@@ -67,6 +70,7 @@
                     <StackLayout Grid.Row="2">
                         <Label
                             Margin="5,0,0,5"
+                            FontAutoScalingEnabled="True"
                             FontSize="18"
                             Text="Jelszó" />
                         <Border
@@ -104,12 +108,14 @@
                         <Label
                             Grid.Row="0"
                             Grid.Column="0"
+                            FontAutoScalingEnabled="True"
                             FontSize="16"
                             HorizontalOptions="End"
                             Text="Van már fiókod?" />
                         <Label
                             Grid.Row="0"
                             Grid.Column="1"
+                            FontAutoScalingEnabled="True"
                             FontSize="16"
                             Text="Regisztrálj itt!"
                             TextColor="{x:StaticResource fitly_green}"
@@ -121,6 +127,7 @@
                         <Label
                             Grid.Row="1"
                             Grid.ColumnSpan="2"
+                            FontAutoScalingEnabled="True"
                             Text="{Binding ResponseMessage}" />
                     </Grid>
                 </Grid>

@@ -38,7 +38,7 @@
                 RowDefinitions="0.4*,*,*,*,*,*,*,*,*"
                 RowSpacing="20">
 
-                <Label FontSize="22" Text="Az én adataim"  HorizontalOptions="Center" />
+                <Label FontSize="22" Text="Az én adataim"  HorizontalOptions="Center" FontAutoScalingEnabled="True" />
 
                 <StackLayout
                     Grid.Row="1"
@@ -50,7 +50,7 @@
                         FontSize="18"
                         HorizontalOptions="Center"
                         Text="Magasság (cm)"
-                        VerticalOptions="Center" />
+                        VerticalOptions="Center" FontAutoScalingEnabled="True"/>
                     <Border
                         BackgroundColor="{x:StaticResource Gray900}"
                         Stroke="{x:StaticResource Gray900}"
@@ -75,7 +75,7 @@
                         FontSize="18"
                         HorizontalOptions="Center"
                         Text="Súly (kg)"
-                        VerticalOptions="Center" />
+                        VerticalOptions="Center" FontAutoScalingEnabled="True"/>
                     <Border
                         BackgroundColor="{x:StaticResource Gray900}"
                         HorizontalOptions="Center"
@@ -101,7 +101,7 @@
                     <Label
                         FontSize="18"
                         Text="Ajánlott kalória"
-                        VerticalOptions="Center" />
+                        VerticalOptions="Center" FontAutoScalingEnabled="True"/>
                     <Border
                         BackgroundColor="{x:StaticResource Gray900}"
                         HorizontalOptions="Center"
@@ -127,7 +127,7 @@
                         FontSize="18"
                         HorizontalOptions="Center"
                         Text="Fogyás / hízás"
-                        VerticalOptions="Center" />
+                        VerticalOptions="Center" FontAutoScalingEnabled="True"/>
                     <Border
                         BackgroundColor="{x:StaticResource Gray900}"
                         Stroke="{x:StaticResource Gray900}"
@@ -157,7 +157,7 @@
                         FontSize="18"
                         HorizontalOptions="Center"
                         Text="Cél súly (kg)"
-                        VerticalOptions="Center" />
+                        VerticalOptions="Center" FontAutoScalingEnabled="True"/>
                     <Border
                         BackgroundColor="{x:StaticResource Gray900}"
                         Stroke="{x:StaticResource Gray900}"

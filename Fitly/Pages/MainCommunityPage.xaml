@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fitly.Pages.MainCommunityPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+    BackgroundColor="{x:StaticResource fitly_darkgray}"
+    Loaded="ContentPage_Loaded"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="0.2*,1.5*">
+        <Border HorizontalOptions="Center" Stroke="{x:StaticResource fitly_darkgray}">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="expand_more_24.png" WidthRequest="50" />
+                <Label
+                    FontSize="25"
+                    HorizontalOptions="Center"
+                    Text="Menü"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+            </StackLayout>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="NavMenu_Tapped" />
+            </Border.GestureRecognizers>
+        </Border>
+
+        <Grid Grid.Row="1" RowDefinitions="*,*">
+            <Border
+                BackgroundColor="{x:StaticResource Gray900}"
+                HeightRequest="100"
+                HorizontalOptions="Center"
+                Stroke="{x:StaticResource Gray900}"
+                StrokeShape="RoundRectangle 15"
+                VerticalOptions="Center"
+                WidthRequest="300">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="posts_BDR_Tapped" />
+                </Border.GestureRecognizers>
+                <StackLayout
+                    Padding="10"
+                    Orientation="Horizontal"
+                    Spacing="20">
+                    <Label
+                        Padding="10"
+                        FontAutoScalingEnabled="True"
+                        FontSize="18"
+                        HorizontalTextAlignment="Center"
+                        LineBreakMode="WordWrap"
+                        StyleId="posts_LBL"
+                        Text="Közösségi oldalunk"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+
+                    <Image
+                        HeightRequest="20"
+                        Source="right_arrow_24"
+                        WidthRequest="20" />
+                </StackLayout>
+            </Border>
+            
+            <Border
+                x:Name="recipes_BRD"
+                Grid.Row="1"
+                BackgroundColor="{x:StaticResource Gray900}"
+                HeightRequest="100"
+                HorizontalOptions="Center"
+                Stroke="{x:StaticResource Gray900}"
+                StrokeShape="RoundRectangle 15"
+                VerticalOptions="Center"
+                WidthRequest="300">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="recipes_BDR_Tapped" />
+                </Border.GestureRecognizers>
+                <StackLayout
+                    Padding="10"
+                    Orientation="Horizontal"
+                    Spacing="20">
+                    <Label
+                        Padding="10"
+                        FontAutoScalingEnabled="True"
+                        FontSize="18"
+                        HorizontalTextAlignment="Center"
+                        LineBreakMode="WordWrap"
+                        StyleId="recipes_LBL"
+                        Text="Közösségi receptek"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+
+                    <Image
+                        HeightRequest="20"
+                        Source="right_arrow_24"
+                        WidthRequest="20" />
+                </StackLayout>
+            </Border>
+        </Grid>
+    </Grid>
+
+</ContentPage>

@@ -43,11 +43,13 @@
                     StyleId="Registration_STCKP">
                     <StackLayout HorizontalOptions="Center">
                         <Label
+                            FontAutoScalingEnabled="True"
                             FontSize="18"
                             HorizontalTextAlignment="Center"
                             Text="A legjobb felhasználói élmény"
                             TextColor="{x:StaticResource fitly_white}" />
                         <Label
+                            FontAutoScalingEnabled="True"
                             FontSize="18"
                             HorizontalTextAlignment="Center"
                             Text="érdekében, regisztrálj be!"
@@ -71,12 +73,14 @@
                     StyleId="Login_STCKP">
                     <StackLayout HorizontalOptions="Center">
                         <Label
+                            FontAutoScalingEnabled="True"
                             FontSize="18"
                             HorizontalTextAlignment="Center"
                             Text="Amennyiben már regisztráltál,"
                             TextColor="{x:StaticResource fitly_white}"
                             WidthRequest="300" />
                         <Label
+                            FontAutoScalingEnabled="True"
                             FontSize="18"
                             HorizontalTextAlignment="Center"
                             Text="jelentkezz be!"

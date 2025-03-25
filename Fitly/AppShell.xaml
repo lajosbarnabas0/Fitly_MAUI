@@ -27,4 +27,8 @@
         Title="LetsBegin"
         ContentTemplate="{DataTemplate pages:LetsBeginPage}"
         Route="LetsBeginPage" />
+    <ShellContent
+        Title="MainCommunity"
+        ContentTemplate="{DataTemplate pages:MainCommunityPage}"
+        Route="MainCommunityPage" />
 </Shell>

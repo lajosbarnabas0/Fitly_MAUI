@@ -18,6 +18,7 @@
                 <StackLayout Orientation="Horizontal">
                     <Image Source="expand_more_24.png" WidthRequest="50" />
                     <Label
+                        FontAutoScalingEnabled="True"
                         FontSize="25"
                         HorizontalOptions="Center"
                         Text="Menü"
@@ -45,6 +46,7 @@
                     StyleId="Label_Stack">
                     <Label
                         FontAttributes="Bold"
+                        FontAutoScalingEnabled="True"
                         FontSize="20"
                         HeightRequest="50"
                         HorizontalOptions="Center"
@@ -55,11 +57,13 @@
 
                     <StackLayout HorizontalOptions="Center">
                         <Label
+                            FontAutoScalingEnabled="True"
                             FontSize="18"
                             HorizontalTextAlignment="Center"
                             Text="Építsd fel az álomtested,"
                             TextColor="{x:StaticResource fitly_white}" />
                         <Label
+                            FontAutoScalingEnabled="True"
                             FontSize="18"
                             HorizontalTextAlignment="Center"
                             Text="kezdd el most az edzést!"
@@ -73,6 +77,7 @@
                     BackgroundColor="{x:StaticResource fitly_green}"
                     Clicked="LetsBegin_Button_Clicked"
                     Command="{Binding LetsBeginButtonClickedCommand}"
+                    FontAutoScalingEnabled="True"
                     FontSize="20"
                     HeightRequest="70"
                     StyleId="Register_Button"

@@ -21,9 +21,10 @@ public partial class NavigationPopUp : Popup
         return;
     }
     
-    private void SocialPage_Tapped(object sender, TappedEventArgs e)
+    private async void SocialPage_Tapped(object sender, TappedEventArgs e)
     {
-        return;
+        await Shell.Current.GoToAsync("//MainCommunityPage");
+        Close(); ;
     }
     
     private async void ProfilePage_Tapped(object sender, TappedEventArgs e)

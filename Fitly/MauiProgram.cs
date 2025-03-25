@@ -30,6 +30,8 @@ namespace Fitly
             builder.Services.AddSingleton<ProfileViewModel>();
             builder.Services.AddSingleton<LetsBeginPage>();
             builder.Services.AddSingleton<LetsBeginViewModel>();
+            builder.Services.AddSingleton<MainCommunityPage>();
+            builder.Services.AddSingleton<MainCommunityViewModel>();
 
             Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping(nameof(Entry), (handler, view) =>
             {

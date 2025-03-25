@@ -40,6 +40,7 @@
                     <Label
                         Grid.Row="0"
                         FontAttributes="Bold"
+                        FontAutoScalingEnabled="True"
                         FontSize="35"
                         HorizontalOptions="Center"
                         Text="Regisztráció"
@@ -51,6 +52,7 @@
                         StyleId="Name_STCK">
                         <Label
                             Margin="5,0,0,5"
+                            FontAutoScalingEnabled="True"
                             FontSize="18"
                             Text="Teljes név" />
                         <Border
@@ -72,6 +74,7 @@
                         <StackLayout Grid.Column="0">
                             <Label
                                 Margin="5,0,0,5"
+                                FontAutoScalingEnabled="True"
                                 FontSize="18"
                                 Text="E-mail" />
                             <Border
@@ -89,6 +92,7 @@
                         <StackLayout Grid.Column="1">
                             <Label
                                 Margin="5,0,0,5"
+                                FontAutoScalingEnabled="True"
                                 FontSize="18"
                                 Text="Jelszó" />
                             <Border
@@ -107,6 +111,7 @@
                     <StackLayout Grid.Row="3" StyleId="Password_STCK">
                         <Label
                             Margin="5,0,0,5"
+                            FontAutoScalingEnabled="True"
                             FontSize="18"
                             Text="Jelszó megerősítése" />
                         <Border
@@ -130,6 +135,7 @@
                         <StackLayout WidthRequest="160">
                             <Label
                                 Margin="5,0,0,5"
+                                FontAutoScalingEnabled="True"
                                 FontSize="18"
                                 Text="Születési dátum" />
                             <Border
@@ -142,6 +148,7 @@
                         <StackLayout WidthRequest="160">
                             <Label
                                 Margin="5,0,0,5"
+                                FontAutoScalingEnabled="True"
                                 FontSize="18"
                                 Text="Nem" />
                             <Border
@@ -181,11 +188,13 @@
                         StyleId="Label_grid">
                         <Label
                             Grid.Column="0"
+                            FontAutoScalingEnabled="True"
                             FontSize="16"
                             HorizontalOptions="End"
                             Text="Van már fiókod?" />
                         <Label
                             Grid.Column="1"
+                            FontAutoScalingEnabled="True"
                             FontSize="16"
                             Text="Jelentkezz be!"
                             TextColor="{x:StaticResource fitly_green}"
