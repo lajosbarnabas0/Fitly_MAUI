@@ -3,9 +3,15 @@
     x:Class="Fitly.Pages.ProfilePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
     BackgroundColor="{x:StaticResource fitly_darkgray}"
     Loaded="ContentPage_Loaded"
     Shell.NavBarIsVisible="False">
+
+    <ContentPage.Behaviors>
+        <tool:StatusBarBehavior StatusBarColor="{x:StaticResource fitly_darkgray}" />
+        <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
 
     <ContentPage.Resources>
         <Style TargetType="Label">
@@ -38,7 +44,11 @@
                 RowDefinitions="0.4*,*,*,*,*,*,*,*,*"
                 RowSpacing="20">
 
-                <Label FontSize="22" Text="Az én adataim"  HorizontalOptions="Center" FontAutoScalingEnabled="True" />
+                <Label
+                    FontAutoScalingEnabled="True"
+                    FontSize="22"
+                    HorizontalOptions="Center"
+                    Text="Az én adataim" />
 
                 <StackLayout
                     Grid.Row="1"
@@ -47,10 +57,11 @@
                     Spacing="5"
                     StyleId="data_STCK_1">
                     <Label
+                        FontAutoScalingEnabled="True"
                         FontSize="18"
                         HorizontalOptions="Center"
                         Text="Magasság (cm)"
-                        VerticalOptions="Center" FontAutoScalingEnabled="True"/>
+                        VerticalOptions="Center" />
                     <Border
                         BackgroundColor="{x:StaticResource Gray900}"
                         Stroke="{x:StaticResource Gray900}"
@@ -60,7 +71,8 @@
                         <Entry
                             x:Name="height_ENT"
                             HorizontalTextAlignment="Center"
-                            IsReadOnly="True"
+                            IsReadOnly="{Binding IsReadOnly}"
+                            Text="{Binding SelectedUser.height}"
                             TextColor="White" />
                     </Border>
                 </StackLayout>
@@ -72,10 +84,11 @@
                     Spacing="5"
                     StyleId="data_STCK_2">
                     <Label
+                        FontAutoScalingEnabled="True"
                         FontSize="18"
                         HorizontalOptions="Center"
                         Text="Súly (kg)"
-                        VerticalOptions="Center" FontAutoScalingEnabled="True"/>
+                        VerticalOptions="Center" />
                     <Border
                         BackgroundColor="{x:StaticResource Gray900}"
                         HorizontalOptions="Center"
@@ -86,7 +99,8 @@
                         <Entry
                             x:Name="weight_ENT"
                             HorizontalTextAlignment="Center"
-                            IsReadOnly="True"
+                            IsReadOnly="{Binding IsReadOnly}"
+                            Text="{Binding SelectedUser.weight}"
                             TextColor="White" />
                     </Border>
                 </StackLayout>
@@ -99,9 +113,10 @@
                     Spacing="5"
                     StyleId="data_STCK_3">
                     <Label
+                        FontAutoScalingEnabled="True"
                         FontSize="18"
                         Text="Ajánlott kalória"
-                        VerticalOptions="Center" FontAutoScalingEnabled="True"/>
+                        VerticalOptions="Center" />
                     <Border
                         BackgroundColor="{x:StaticResource Gray900}"
                         HorizontalOptions="Center"
@@ -112,7 +127,8 @@
                         <Entry
                             x:Name="recommended_cal_ENT"
                             HorizontalTextAlignment="Center"
-                            IsReadOnly="True"
+                            IsReadOnly="{Binding IsReadOnly}"
+                            Text="{Binding SelectedUser.recommended_calories}"
                             TextColor="White" />
                     </Border>
                 </StackLayout>
@@ -124,19 +140,20 @@
                     Spacing="5"
                     StyleId="data_STCK_4">
                     <Label
+                        FontAutoScalingEnabled="True"
                         FontSize="18"
                         HorizontalOptions="Center"
                         Text="Fogyás / hízás"
-                        VerticalOptions="Center" FontAutoScalingEnabled="True"/>
+                        VerticalOptions="Center" />
                     <Border
                         BackgroundColor="{x:StaticResource Gray900}"
                         Stroke="{x:StaticResource Gray900}"
                         StrokeShape="RoundRectangle 10"
                         WidthRequest="140">
                         <Picker
-                            x:Name="gender_PCKR"
-                            IsEnabled="False"
-                            SelectedItem="{Binding Gender}">
+                            x:Name="lose_or_gain_PCKR"
+                            IsEnabled="{Binding IsPickerEnabled}"
+                            SelectedItem="{Binding SelectedUser.lose_or_gain}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Fogyás</x:String>
@@ -154,10 +171,11 @@
                     Spacing="5"
                     StyleId="data_STCK_5">
                     <Label
+                        FontAutoScalingEnabled="True"
                         FontSize="18"
                         HorizontalOptions="Center"
                         Text="Cél súly (kg)"
-                        VerticalOptions="Center" FontAutoScalingEnabled="True"/>
+                        VerticalOptions="Center" />
                     <Border
                         BackgroundColor="{x:StaticResource Gray900}"
                         Stroke="{x:StaticResource Gray900}"
@@ -167,7 +185,8 @@
                         <Entry
                             x:Name="goal_weight_ENT"
                             HorizontalTextAlignment="Center"
-                            IsReadOnly="True"
+                            IsReadOnly="{Binding IsReadOnly}"
+                            Text="{Binding SelectedUser.goal_weight}"
                             TextColor="White" />
                     </Border>
                 </StackLayout>
@@ -179,43 +198,45 @@
                     Spacing="15"
                     StyleId="edit_BTN">
                     <Button
+                        x:Name="edit_BTN"
                         Grid.Row="6"
                         BackgroundColor="{x:StaticResource Gray400}"
+                        Command="{Binding editButtonCommand}"
                         FontSize="14"
                         HeightRequest="50"
                         Text="Szerkesztés"
-                        WidthRequest="120"
-                        x:Name="edit_BTN"/>
+                        WidthRequest="120" />
                     <Button
+                        x:Name="cancel_BTN"
                         Grid.Row="6"
                         BackgroundColor="{x:StaticResource Gray400}"
+                        Command="{Binding cancelButtonCommand}"
                         FontSize="14"
                         HeightRequest="50"
                         Text="Mégsem"
-                        WidthRequest="120"
-                        x:Name="cancel_BTN"/>
+                        WidthRequest="120" />
                 </StackLayout>
-                
+
                 <Button
+                    x:Name="save_BTN"
                     Grid.Row="7"
                     BackgroundColor="{x:StaticResource fitly_green}"
                     FontSize="14"
                     HeightRequest="50"
+                    StyleId="save_BTN"
                     Text="Mentés"
-                    WidthRequest="120"
-                    x:Name="save_BTN"
-                    StyleId="save_BTN"/>
+                    WidthRequest="120" />
 
                 <Button
                     Grid.Row="8"
+                    Margin="0,10,0,0"
                     BackgroundColor="{x:StaticResource fitly_red}"
                     Command="{Binding LogoutCommand}"
                     FontSize="14"
                     HeightRequest="50"
+                    StyleId="logout_BTN"
                     Text="Kijelentkezés"
-                    WidthRequest="150"
-                    Margin="0,10,0,0"
-                    StyleId="logout_BTN"/>
+                    WidthRequest="150" />
             </Grid>
         </Grid>
     </ScrollView>

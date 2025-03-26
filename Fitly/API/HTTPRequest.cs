@@ -10,9 +10,18 @@ namespace Fitly.API
     {
         private static readonly HttpClient client = new();
 
+        private static string loginToken = SecureStorage.Default.GetAsync("LoginToken").Result;
+
         public static async Task<T?> Get(string url)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, url);
+
+            // Authorization fejléc hozzáadása, ha van token
+            if (loginToken != null)
+            {
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", loginToken);
+            }
+
             using var response = await client.SendAsync(request).ConfigureAwait(false);
 
             if (response.IsSuccessStatusCode)
@@ -50,5 +59,39 @@ namespace Fitly.API
             }
             return null;
         }
+
+        public static async Task<T?> Put(string url, object data)
+        {
+            try
+            {
+                using var client = new HttpClient();
+                var content = new StringContent(JsonSerializer.Serialize(data), Encoding.UTF8, "application/json");
+                var request = new HttpRequestMessage(HttpMethod.Put, url) { Content = content };
+                request.Headers.Add("Accept", "application/json");
+
+                // Authorization fejléc hozzáadása, ha van token
+                if (loginToken != null)
+                {
+                    request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", loginToken);
+                }
+
+                using var response = await client.SendAsync(request).ConfigureAwait(false);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string resultString = await response.Content.ReadAsStringAsync();
+                    return JsonSerializer.Deserialize<T>(resultString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                }
+            }
+            catch (Exception ex)
+            {
+                await MainThread.InvokeOnMainThreadAsync(async () =>
+                {
+                    await Shell.Current.DisplayAlert("Hiba", "Hiba történt a PUT kérés során.", "OK");
+                });
+            }
+            return null;
+        }
+
     }
 }
