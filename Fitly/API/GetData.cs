@@ -13,5 +13,10 @@ namespace Fitly.API
         {
             return await HTTPRequest<User>.Get(url);
         }
+
+        public static async Task<User> UpdateProfile(string url, object data)
+        {
+            return await HTTPRequest<User>.Put(url, data);
+        }
     }
 }

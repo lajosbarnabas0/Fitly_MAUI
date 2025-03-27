@@ -127,7 +127,7 @@
                         <Entry
                             x:Name="recommended_cal_ENT"
                             HorizontalTextAlignment="Center"
-                            IsReadOnly="{Binding IsReadOnly}"
+                            IsReadOnly="True"
                             Text="{Binding SelectedUser.recommended_calories}"
                             TextColor="White" />
                     </Border>

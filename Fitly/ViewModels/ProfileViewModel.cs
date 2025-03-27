@@ -15,27 +15,11 @@ namespace Fitly.ViewModels
     public partial class ProfileViewModel : ObservableObject, INotifyPropertyChanged
     {
 
-        private bool _isReadOnly = true;
-        public bool IsReadOnly
-        {
-            get => _isReadOnly;
-            set
-            {
-                _isReadOnly = value;
-                OnPropertyChanged(nameof(IsReadOnly));
-            }
-        }
+        [ObservableProperty]
+        bool isReadOnly = true;
 
-        private bool _isPickerEnabled = true;
-        public bool IsPickerEnabled
-        {
-            get => _isPickerEnabled;
-            set
-            {
-                _isPickerEnabled = value;
-                OnPropertyChanged(nameof(IsPickerEnabled));
-            }
-        }
+        [ObservableProperty]
+        bool isPickerEnabled = true;
 
         [ObservableProperty]
         User selectedUser;
@@ -96,7 +80,32 @@ namespace Fitly.ViewModels
         [RelayCommand]
         async Task saveButton()
         {
+            string url = "https://bgs.jedlik.eu/hm/backend/public/api/users/profile";
+            var requestData = new User
+            {
+                weight = SelectedUser.weight,
+                height = SelectedUser.height,
+                lose_or_gain = SelectedUser.lose_or_gain,
+                goal_weight = SelectedUser.goal_weight
+            };
 
+            var response = await GetData.UpdateProfile(url, requestData);
+
+            if (response != null)
+            {
+                if (response != null)
+                {
+                    Console.WriteLine(response.name);
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Hiba", "Sikertelen bejelentkezés", "Ok");
+                }
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Hiba", "Kérlek add meg az adataid!", "Ok");
+            }
         }
     }
 }

@@ -55,8 +55,8 @@ namespace Fitly.ViewModels
             Email = string.Empty;
             Password = string.Empty;
             Password_confirmation = string.Empty;
-            Birthday = null; // Alapértelmezett dátum
-            Gender = null; // Picker alaphelyzetbe állítása
+            Birthday = null; 
+            Gender = null; 
         }
 
         [RelayCommand]
