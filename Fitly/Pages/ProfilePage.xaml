@@ -153,7 +153,8 @@
                         <Picker
                             x:Name="lose_or_gain_PCKR"
                             IsEnabled="{Binding IsPickerEnabled}"
-                            SelectedItem="{Binding SelectedUser.lose_or_gain}">
+                            SelectedItem="{Binding SelectedUser.lose_or_gain}"
+                            HorizontalTextAlignment="Center" TextColor="White">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Fogyás</x:String>
@@ -221,6 +222,7 @@
                     x:Name="save_BTN"
                     Grid.Row="7"
                     BackgroundColor="{x:StaticResource fitly_green}"
+                    Command="{Binding saveButtonCommand}"
                     FontSize="14"
                     HeightRequest="50"
                     StyleId="save_BTN"

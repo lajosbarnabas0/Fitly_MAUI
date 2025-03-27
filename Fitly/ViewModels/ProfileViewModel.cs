@@ -19,7 +19,7 @@ namespace Fitly.ViewModels
         bool isReadOnly = true;
 
         [ObservableProperty]
-        bool isPickerEnabled = true;
+        bool isPickerEnabled = false;
 
         [ObservableProperty]
         User selectedUser;
@@ -67,14 +67,14 @@ namespace Fitly.ViewModels
         async Task editButton()
         {
             IsReadOnly = false;
-            IsPickerEnabled = false;
+            IsPickerEnabled = true;
         }
 
         [RelayCommand]
         async Task cancelButton()
         {
             IsReadOnly = true;
-            IsPickerEnabled = true;
+            IsPickerEnabled = false;
         }
 
         [RelayCommand]
@@ -95,17 +95,18 @@ namespace Fitly.ViewModels
             {
                 if (response != null)
                 {
-                    Console.WriteLine(response.name);
+                    Console.WriteLine(response.message);
                 }
                 else
                 {
-                    await Shell.Current.DisplayAlert("Hiba", "Sikertelen bejelentkezés", "Ok");
+                    await Shell.Current.DisplayAlert("Hiba", "Sikertelen küldés", "Ok");
                 }
             }
             else
             {
-                await Shell.Current.DisplayAlert("Hiba", "Kérlek add meg az adataid!", "Ok");
+                await Shell.Current.DisplayAlert("Hiba", "Hiba történt!", "Ok");
             }
+            cancelButton();
         }
     }
 }

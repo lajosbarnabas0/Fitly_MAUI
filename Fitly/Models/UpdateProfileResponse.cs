@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Fitly.Models
 {
-    public class UpdateProfileRequest
+    public class UpdateProfileResponse
     {
+        public string message { get; set; }
+        public User user { get; set; }
     }
 }
