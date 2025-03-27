@@ -9,7 +9,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Fitly.API;
 using Fitly.Models;
-
 namespace Fitly.ViewModels
 {
     public partial class ProfileViewModel : ObservableObject, INotifyPropertyChanged
@@ -23,6 +22,9 @@ namespace Fitly.ViewModels
 
         [ObservableProperty]
         User selectedUser;
+
+        [ObservableProperty]
+        User originalUser;
 
         private readonly string url = "https://bgs.jedlik.eu/hm/backend/public/api/users";
 
@@ -42,6 +44,8 @@ namespace Fitly.ViewModels
                         string userJson = JsonSerializer.Serialize(user);
                         Preferences.Set("UserData", userJson);
                         SelectedUser = user;
+                        OriginalUser = user;
+
                     }
                     else
                     {
@@ -68,6 +72,7 @@ namespace Fitly.ViewModels
         {
             IsReadOnly = false;
             IsPickerEnabled = true;
+            OriginalUser = JsonSerializer.Deserialize<User>(JsonSerializer.Serialize(SelectedUser));
         }
 
         [RelayCommand]
@@ -75,38 +80,57 @@ namespace Fitly.ViewModels
         {
             IsReadOnly = true;
             IsPickerEnabled = false;
+            SelectedUser.weight = OriginalUser.weight;
+            SelectedUser.height = OriginalUser.height;
+            SelectedUser.lose_or_gain = OriginalUser.lose_or_gain;
+            SelectedUser.goal_weight = OriginalUser.goal_weight;
+
+            OnPropertyChanged(nameof(SelectedUser));
         }
 
         [RelayCommand]
         async Task saveButton()
         {
-            string url = "https://bgs.jedlik.eu/hm/backend/public/api/users/profile";
-            var requestData = new User
+            if (IsUserDataChanged())
             {
-                weight = SelectedUser.weight,
-                height = SelectedUser.height,
-                lose_or_gain = SelectedUser.lose_or_gain,
-                goal_weight = SelectedUser.goal_weight
-            };
+                string url = "https://bgs.jedlik.eu/hm/backend/public/api/users/profile";
+                var requestData = new User
+                {
+                    weight = SelectedUser.weight,
+                    height = SelectedUser.height,
+                    lose_or_gain = SelectedUser.lose_or_gain,
+                    goal_weight = SelectedUser.goal_weight
+                };
 
-            var response = await GetData.UpdateProfile(url, requestData);
+                var response = await GetData.UpdateProfile(url, requestData);
 
-            if (response != null)
-            {
                 if (response != null)
                 {
-                    Console.WriteLine(response.message);
+                    if (response != null)
+                    {
+                        Console.WriteLine(response.message);
+                    }
+                    else
+                    {
+                        await Shell.Current.DisplayAlert("Hiba", "Sikertelen küldés", "Ok");
+                    }
                 }
                 else
                 {
-                    await Shell.Current.DisplayAlert("Hiba", "Sikertelen küldés", "Ok");
+                    await Shell.Current.DisplayAlert("Hiba", "Hiba történt!", "Ok");
                 }
+                IsReadOnly = true;
+                IsPickerEnabled = false;
             }
             else
             {
-                await Shell.Current.DisplayAlert("Hiba", "Hiba történt!", "Ok");
+                await Shell.Current.DisplayAlert("Hiba", "Nem történt változtatás az adatokban!", "Ok");
             }
-            cancelButton();
+        }
+
+        private bool IsUserDataChanged()
+        {
+            return SelectedUser.weight != OriginalUser.weight || SelectedUser.height != OriginalUser.height || SelectedUser.lose_or_gain != OriginalUser.lose_or_gain || SelectedUser.goal_weight != OriginalUser.goal_weight;
         }
     }
 }

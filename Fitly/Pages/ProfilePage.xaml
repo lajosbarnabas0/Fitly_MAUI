@@ -153,7 +153,7 @@
                         <Picker
                             x:Name="lose_or_gain_PCKR"
                             IsEnabled="{Binding IsPickerEnabled}"
-                            SelectedItem="{Binding SelectedUser.lose_or_gain}"
+                            SelectedItem="{Binding SelectedUser.lose_or_gain, Mode=TwoWay}"
                             HorizontalTextAlignment="Center" TextColor="White">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
