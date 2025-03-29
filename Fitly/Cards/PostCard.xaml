@@ -2,10 +2,11 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Fitly.Cards.PostCard">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Border BackgroundColor="{x:StaticResource Gray900}" Stroke="{x:StaticResource Gray900}" StrokeShape="RoundRectangle 20" Padding="10">
+        <Grid RowDefinitions="*,*,*,*">
+            <Label Text="Title" x:Name="title_LBL"/>
+            <Label Text="Szerző" Grid.Row="1" x:Name="author_LBL"/>
+            <Label Text="Leírás féklsdnf flsdkhfbds fsdkléfhjdsklé flésdjk fsdkk fsd lkjdskgsd" Grid.Row="2" x:Name="content_LBL"/>
+        </Grid>
+    </Border>
 </ContentView>
