@@ -3,13 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Fitly.Pages.PostListPage"
              xmlns:cards="clr-namespace:Fitly.Cards"
+             xmlns:models="clr-namespace:Fitly.Models"
              BackgroundColor="{x:StaticResource fitly_darkgray}"
-             Shell.NavBarIsVisible="False">
-    <CollectionView>
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <cards:PostCard Title="{Binding Title}" Author="{Binding Author}" Content="{Binding Content}"/>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+             Shell.NavBarIsVisible="False"
+             Loaded="ContentPage_Loaded">
+
+    <Grid RowDefinitions="0.2*,1.5*">
+        <Border HorizontalOptions="Center" Stroke="{x:StaticResource fitly_darkgray}">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="expand_more_24.png" WidthRequest="50" />
+                <Label
+            FontSize="25"
+            HorizontalOptions="Center"
+            Text="Menü"
+            TextColor="White"
+            VerticalOptions="Center" />
+            </StackLayout>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="NavMenu_Tapped" />
+            </Border.GestureRecognizers>
+        </Border>
+        
+        <CollectionView ItemsSource="{Binding Posts}" Grid.Row="1">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Post">
+                    <cards:PostCard Title="{Binding Title}"
+                                    Author="{Binding User.Name}"
+                                    Content="{Binding Content}"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>

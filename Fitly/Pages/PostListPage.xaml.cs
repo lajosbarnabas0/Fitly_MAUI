@@ -1,12 +1,25 @@
+using CommunityToolkit.Maui.Views;
+using Fitly.Helper;
+using Fitly.Navigation;
 using Fitly.ViewModels;
 
 namespace Fitly.Pages;
 
 public partial class PostListPage : ContentPage
 {
-	public PostListPage(PostListViewModel vm)
+	public PostListPage()
 	{
 		InitializeComponent();
-		this.BindingContext = vm;
-	}
+        BindingContext = new PostListViewModel();
+    }
+
+    private async void ContentPage_Loaded(object sender, EventArgs e)
+    {
+        await LoadedAnimation.AnimateElementsOnPage(this);
+    }
+
+    private void NavMenu_Tapped(object sender, TappedEventArgs e)
+    {
+        this.ShowPopup(new NavigationPopUp());
+    }
 }

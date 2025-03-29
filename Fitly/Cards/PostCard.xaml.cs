@@ -1,50 +1,42 @@
 namespace Fitly.Cards;
 
 using CommunityToolkit.Mvvm.ComponentModel;
+using Fitly.Models;
 using Microsoft.Maui.Controls;
 
 public partial class PostCard : ContentView
 {
+    public static readonly BindableProperty TitleProperty =
+        BindableProperty.Create(nameof(Title), typeof(string), typeof(PostCard), defaultValue: "");
+
+    public static readonly BindableProperty AuthorProperty =
+        BindableProperty.Create(nameof(User.Name), typeof(string), typeof(PostCard), defaultValue: "");
+
+    public static readonly BindableProperty ContentProperty =
+        BindableProperty.Create(nameof(Content), typeof(string), typeof(PostCard), defaultValue: "");
 
     public string Title
     {
-        get
-		{
-			return title_LBL.Text;
-        }
-		set
-		{
-			title_LBL.Text = value;
-		}
-	}
+        get => (string)GetValue(TitleProperty);
+        set => SetValue(TitleProperty, value);
+    }
 
     public string Author
     {
-        get
-        {
-            return author_LBL.Text;
-        }
-        set
-        {
-            author_LBL.Text = value;
-        }
+        get => (string)GetValue(AuthorProperty);
+        set => SetValue(AuthorProperty, value);
     }
 
-    public string Content
+    public string Description
     {
-        get
-        {
-            return content_LBL.Text;
-        }
-        set
-        {
-            content_LBL.Text = value;
-        }
+        get => (string)GetValue(ContentProperty);
+        set => SetValue(ContentProperty, value);
     }
 
     public PostCard()
-	{
-		InitializeComponent();
-	}
-
+    {
+        InitializeComponent();
+        BindingContext = this;
+        
+    }
 }

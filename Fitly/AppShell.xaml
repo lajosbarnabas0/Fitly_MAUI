@@ -31,4 +31,8 @@
         Title="MainCommunity"
         ContentTemplate="{DataTemplate pages:MainCommunityPage}"
         Route="MainCommunityPage" />
+    <ShellContent
+        Title="PostList"
+        ContentTemplate="{DataTemplate pages:PostListPage}"
+        Route="PostListPage" />
 </Shell>

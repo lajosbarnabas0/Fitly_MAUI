@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Fitly.Cards.PostCard">
-    <Border BackgroundColor="{x:StaticResource Gray900}" Stroke="{x:StaticResource Gray900}" StrokeShape="RoundRectangle 20" Padding="10">
+<ContentView
+    x:Class="Fitly.Cards.PostCard"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="postCardRoot"
+    Margin="15"
+    HeightRequest="250">
+    <Border
+        Padding="10"
+        BackgroundColor="{x:StaticResource Gray900}"
+        Stroke="{x:StaticResource Gray900}"
+        StrokeShape="RoundRectangle 20">
         <Grid RowDefinitions="*,*,*,*">
-            <Label Text="Title" x:Name="title_LBL"/>
-            <Label Text="Szerző" Grid.Row="1" x:Name="author_LBL"/>
-            <Label Text="Leírás féklsdnf flsdkhfbds fsdkléfhjdsklé flésdjk fsdkk fsd lkjdskgsd" Grid.Row="2" x:Name="content_LBL"/>
+            <Label
+                x:Name="title_LBL"
+                Grid.Row="0"
+                Text="{Binding Title}"
+                TextColor="White"/>
+            <Label
+                x:Name="author_LBL"
+                Grid.Row="1"
+                Text="{Binding User}" />
+            <Label
+                x:Name="description_LBL"
+                Grid.Row="2"
+                Text="{Binding Content}" />
         </Grid>
     </Border>
 </ContentView>

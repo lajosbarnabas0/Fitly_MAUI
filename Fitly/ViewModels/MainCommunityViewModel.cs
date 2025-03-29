@@ -9,5 +9,6 @@ namespace Fitly.ViewModels
 {
     public partial class MainCommunityViewModel : ObservableObject
     {
+
     }
 }

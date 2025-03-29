@@ -22,15 +22,15 @@ public partial class MainCommunityPage : ContentPage
     {
         this.ShowPopup(new NavigationPopUp());
     }
+    private void posts_BDR_Tapped(object sender, TappedEventArgs e)
+    {
+        Shell.Current.GoToAsync("//PostListPage");
+    }
 
     private void recipes_BDR_Tapped(object sender, TappedEventArgs e)
     {
         return;
     }
 
-    private void posts_BDR_Tapped(Object sender, TappedEventArgs e)
-    {
-        return;
-    }
 
 }
