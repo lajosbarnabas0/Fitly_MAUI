@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Fitly.Models
 {
-    public class Post
+    public class Post 
     {
         public int id { get; set; }
         public int user_id { get; set; }
@@ -16,5 +18,12 @@ namespace Fitly.Models
         public DateTime created_at { get; set; }
         public DateTime updated_at { get; set; }
         public User? User { get; set; }
+
+        private string _author;
+        public string Author
+        {
+            get => User?.Name ?? _author;
+            set => _author = value;
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace Fitly.API
 
             using var response = await client.SendAsync(request).ConfigureAwait(false);
 
-            if (response.IsSuccessStatusCode)
+           if (response.IsSuccessStatusCode)
             {
                 string resultString = await response.Content.ReadAsStringAsync();
                 return JsonSerializer.Deserialize<T>(resultString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });

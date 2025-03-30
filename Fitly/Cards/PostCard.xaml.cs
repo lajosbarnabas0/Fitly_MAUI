@@ -10,7 +10,7 @@ public partial class PostCard : ContentView
         BindableProperty.Create(nameof(Title), typeof(string), typeof(PostCard), defaultValue: "");
 
     public static readonly BindableProperty AuthorProperty =
-        BindableProperty.Create(nameof(User.Name), typeof(string), typeof(PostCard), defaultValue: "");
+        BindableProperty.Create(nameof(Author), typeof(string), typeof(PostCard), defaultValue: "");
 
     public static readonly BindableProperty ContentProperty =
         BindableProperty.Create(nameof(Content), typeof(string), typeof(PostCard), defaultValue: "");

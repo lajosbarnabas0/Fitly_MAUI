@@ -5,26 +5,63 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Name="postCardRoot"
     Margin="15"
-    HeightRequest="250">
+    MinimumHeightRequest="200">
     <Border
         Padding="10"
         BackgroundColor="{x:StaticResource Gray900}"
         Stroke="{x:StaticResource Gray900}"
         StrokeShape="RoundRectangle 20">
         <Grid RowDefinitions="*,*,*,*">
-            <Label
-                x:Name="title_LBL"
+            <Border
                 Grid.Row="0"
-                Text="{Binding Title}"
-                TextColor="White"/>
-            <Label
-                x:Name="author_LBL"
+                BackgroundColor="{x:StaticResource Gray700}"
+                Stroke="{x:StaticResource Gray700}"
+                StrokeShape="RoundRectangle 15"
+                Margin="0,0,0,10">
+                <StackLayout Orientation="Horizontal">
+                    <Label
+                        x:Name="title_LBL"
+                        Grid.Row="0"
+                        Padding="7"
+                        FontSize="16"
+                        LineBreakMode="WordWrap"
+                        Text="{Binding Title}"
+                        TextColor="White"
+                        VerticalTextAlignment="Start" />
+
+                    <Label
+                        x:Name="author_LBL"
+                        Grid.Row="1"
+                        Padding="7"
+                        FontSize="14"
+                        HorizontalOptions="EndAndExpand"
+                        LineBreakMode="TailTruncation"
+                        Text="{Binding Author}"
+                        TextColor="LightGray"
+                        VerticalTextAlignment="End" />
+                </StackLayout>
+
+            </Border>
+            <Border
                 Grid.Row="1"
-                Text="{Binding User}" />
-            <Label
-                x:Name="description_LBL"
-                Grid.Row="2"
-                Text="{Binding Content}" />
+                Grid.RowSpan="3"
+                BackgroundColor="{x:StaticResource Gray700}"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill"
+                Stroke="{x:StaticResource Gray700}"
+                StrokeShape="RoundRectangle 15">
+                <Label
+                    x:Name="description_LBL"
+                    Padding="7"
+                    FontSize="14"
+                    VerticalOptions="Start"
+                    HorizontalOptions="StartAndExpand"
+                    HorizontalTextAlignment="Start"
+                    VerticalTextAlignment="Start"
+                    LineBreakMode="CharacterWrap"
+                    Text="{Binding Content}"
+                    TextColor="LightGray" />
+            </Border>
         </Grid>
     </Border>
 </ContentView>

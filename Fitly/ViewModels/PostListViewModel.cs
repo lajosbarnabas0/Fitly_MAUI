@@ -4,7 +4,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.Maui.Core.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Fitly.API;
 using Fitly.Models;
 
 namespace Fitly.ViewModels
@@ -13,38 +16,29 @@ namespace Fitly.ViewModels
     {
         public ObservableCollection<Post> Posts { get; set; } = new ObservableCollection<Post>();
 
-        [ObservableProperty]
-        User user;
-
-        [ObservableProperty]
-        string title;
-
-        [ObservableProperty]
-        string content;
-
-        public PostListViewModel()
+        [RelayCommand]
+        async Task Appearing()
         {
-            // Példa adatok helyes inicializálása
-            Posts.Add(new Post
+            try
             {
-                Title = "Szép tájkép",
-                User = new User { Name = "John Doe" },
-                Content = "Ez egy szép tájkép leírása."
-            });
+                string apiUrl = "https://bgs.jedlik.eu/hm/backend/public/api/posts"; 
+                var postsFromApi = await HTTPRequest<List<Post>>.Get(apiUrl);
 
-            Posts.Add(new Post
+                if (postsFromApi != null)
+                {
+                    Posts.Clear();
+                    foreach (var post in postsFromApi)
+                    {
+                        Posts.Add(post);
+                    }
+                }
+            }
+            catch (Exception ex)
             {
-                Title = "Naplemente",
-                User = new User { Name = "Jane Smith" },
-                Content = "Egy gyönyörű naplemente képe."
-            });
-
-            Posts.Add(new Post
-            {
-                Title = "Hegyek",
-                User = new User { Name = "Alice Brown" },
-                Content = "Hegyek és völgyek csodálatos látványa."
-            });
+                Console.WriteLine($"Hiba a postok letöltésekor: {ex.Message}");
+            }
         }
+
+        
     }
 }
