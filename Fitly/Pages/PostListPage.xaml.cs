@@ -7,10 +7,10 @@ namespace Fitly.Pages;
 
 public partial class PostListPage : ContentPage
 {
-	public PostListPage()
+	public PostListPage(PostListViewModel vm)
 	{
 		InitializeComponent();
-        BindingContext = new PostListViewModel();
+        this.BindingContext = vm;
     }
 
     private async void ContentPage_Loaded(object sender, EventArgs e)

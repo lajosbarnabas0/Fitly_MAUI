@@ -37,6 +37,5 @@ public partial class PostCard : ContentView
     {
         InitializeComponent();
         BindingContext = this;
-        
     }
 }

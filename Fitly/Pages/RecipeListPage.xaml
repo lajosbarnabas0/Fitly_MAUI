@@ -1,12 +1,56 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Fitly.Pages.RecipeListPage"
-             Title="RecipeListPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    x:Class="Fitly.Pages.PostListPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cards="clr-namespace:Fitly.Cards"
+    xmlns:models="clr-namespace:Fitly.Models"
+    xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+    BackgroundColor="{x:StaticResource fitly_darkgray}"
+    Loaded="ContentPage_Loaded "
+    Shell.NavBarIsVisible="False">
+
+    <ContentPage.Behaviors>
+        <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+
+    <Grid RowDefinitions="0.2*,1.5*">
+        <Border HorizontalOptions="Center" Stroke="{x:StaticResource fitly_darkgray}">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="expand_more_24.png" WidthRequest="50" />
+                <Label
+                    FontSize="25"
+                    HorizontalOptions="Center"
+                    Text="Menü"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+            </StackLayout>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="NavMenu_Tapped" />
+            </Border.GestureRecognizers>
+        </Border>
+
+        <Grid Grid.Row="1" RowDefinitions="0.2*,1.6*">
+            <Label
+                Grid.Row="0"
+                Margin="15"
+                FontSize="24"
+                Text="Receptek"
+                TextColor="White" />
+            <CollectionView
+                Grid.Row="1"
+                HorizontalOptions="Fill"
+                ItemsSource="{Binding Recipes}"
+                VerticalOptions="Fill">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <cards:RecipeCard
+                            Title="{Binding Title}"
+                            Author="szerző"
+                            Content="leírás"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </Grid>
 </ContentPage>
