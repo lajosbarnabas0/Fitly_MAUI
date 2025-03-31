@@ -34,6 +34,8 @@ namespace Fitly
             builder.Services.AddSingleton<MainCommunityViewModel>();
             builder.Services.AddSingleton<PostListPage>();
             builder.Services.AddSingleton<PostListViewModel>();
+            builder.Services.AddSingleton<RecipeListPage>();
+            builder.Services.AddSingleton<RecipeListViewModel>();
 
             Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping(nameof(Entry), (handler, view) =>
             {

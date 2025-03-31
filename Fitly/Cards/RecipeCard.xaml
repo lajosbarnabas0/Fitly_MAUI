@@ -13,10 +13,10 @@
         <Grid RowDefinitions="*,*,*,*">
             <Border
                 Grid.Row="0"
-                Margin="0,0,0,10"
                 BackgroundColor="{x:StaticResource Gray700}"
                 Stroke="{x:StaticResource Gray700}"
-                StrokeShape="RoundRectangle 15">
+                StrokeShape="RoundRectangle 15"
+                Margin="0,0,0,10">
                 <StackLayout Orientation="Horizontal">
                     <Label
                         x:Name="title_LBL"
@@ -46,20 +46,20 @@
                 Grid.RowSpan="3"
                 BackgroundColor="{x:StaticResource Gray700}"
                 HorizontalOptions="Fill"
+                VerticalOptions="Fill"
                 Stroke="{x:StaticResource Gray700}"
-                StrokeShape="RoundRectangle 15"
-                VerticalOptions="Fill">
+                StrokeShape="RoundRectangle 15">
                 <Label
                     x:Name="description_LBL"
                     Padding="7"
                     FontSize="14"
+                    VerticalOptions="Start"
                     HorizontalOptions="StartAndExpand"
                     HorizontalTextAlignment="Start"
+                    VerticalTextAlignment="Start"
                     LineBreakMode="CharacterWrap"
                     Text="{Binding Content}"
-                    TextColor="LightGray"
-                    VerticalOptions="Start"
-                    VerticalTextAlignment="Start" />
+                    TextColor="LightGray" />
             </Border>
         </Grid>
     </Border>

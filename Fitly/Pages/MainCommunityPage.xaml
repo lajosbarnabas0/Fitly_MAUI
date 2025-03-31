@@ -29,9 +29,9 @@
                 BackgroundColor="{x:StaticResource Gray900}"
                 HeightRequest="100"
                 HorizontalOptions="Center"
-                StyleId="posts_BRD"
                 Stroke="{x:StaticResource Gray900}"
                 StrokeShape="RoundRectangle 15"
+                StyleId="posts_BRD"
                 VerticalOptions="Center"
                 WidthRequest="300">
                 <Border.GestureRecognizers>
@@ -66,8 +66,8 @@
                 HorizontalOptions="Center"
                 Stroke="{x:StaticResource Gray900}"
                 StrokeShape="RoundRectangle 15"
-                VerticalOptions="Center"
                 StyleId="recipes_BRD"
+                VerticalOptions="Center"
                 WidthRequest="300">
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Tapped="recipes_BDR_Tapped" />
@@ -82,7 +82,6 @@
                         FontSize="18"
                         HorizontalTextAlignment="Center"
                         LineBreakMode="WordWrap"
-                        
                         Text="Közösségi receptek"
                         TextColor="White"
                         VerticalTextAlignment="Center" />
