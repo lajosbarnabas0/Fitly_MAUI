@@ -35,4 +35,8 @@
         Title="PostList"
         ContentTemplate="{DataTemplate pages:PostListPage}"
         Route="PostListPage" />
+    <ShellContent
+        Title="RecipeList"
+        ContentTemplate="{DataTemplate pages:RecipeListPage}"
+        Route="RecipeListPage" />
 </Shell>

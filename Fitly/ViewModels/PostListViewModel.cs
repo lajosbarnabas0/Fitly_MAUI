@@ -38,7 +38,5 @@ namespace Fitly.ViewModels
                 Console.WriteLine($"Hiba a postok letöltésekor: {ex.Message}");
             }
         }
-
-        
     }
 }

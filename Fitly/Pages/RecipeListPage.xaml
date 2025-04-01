@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="Fitly.Pages.PostListPage"
+    x:Class="Fitly.Pages.RecipeListPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:cards="clr-namespace:Fitly.Cards"
     xmlns:models="clr-namespace:Fitly.Models"
     xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
     BackgroundColor="{x:StaticResource fitly_darkgray}"
-    Loaded="ContentPage_Loaded "
+    Loaded="ContentPage_Loaded"
     Shell.NavBarIsVisible="False">
 
     <ContentPage.Behaviors>
@@ -47,7 +47,7 @@
                         <cards:RecipeCard
                             Title="{Binding Title}"
                             Author="szerző"
-                            Content="leírás"/>
+                            Description="leírás"/>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

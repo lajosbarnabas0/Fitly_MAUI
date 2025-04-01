@@ -29,8 +29,6 @@ public partial class MainCommunityPage : ContentPage
 
     private void recipes_BDR_Tapped(object sender, TappedEventArgs e)
     {
-        return;
+        Shell.Current.GoToAsync("//RecipeListPage");
     }
-
-
 }
