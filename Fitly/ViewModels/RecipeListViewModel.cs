@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -14,6 +15,11 @@ namespace Fitly.ViewModels
     public partial class RecipeListViewModel : ObservableObject
     {
         public ObservableCollection<Recipe> Recipes { get; set; } = new ObservableCollection<Recipe>();
+
+        public RecipeListViewModel()
+        {
+
+        }
 
         [RelayCommand]
         async Task Appearing()
@@ -37,6 +43,5 @@ namespace Fitly.ViewModels
                 Console.WriteLine($"Hiba a receptek letöltésekor: {ex.Message}");
             }
         }
-
     }
 }

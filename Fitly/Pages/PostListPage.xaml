@@ -44,10 +44,7 @@
                 VerticalOptions="Fill">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <cards:PostCard
-                            Title="{Binding Title}"
-                            Author="{Binding Author}"
-                            Content="{Binding Content}" />
+                        <cards:PostCard />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

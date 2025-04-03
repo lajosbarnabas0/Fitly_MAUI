@@ -10,7 +10,7 @@ public partial class RecipeListPage : ContentPage
 	public RecipeListPage(RecipeListViewModel vm)
 	{
 		InitializeComponent();
-		this.BindingContext = vm;
+        BindingContext = vm;
 	}
 
     private async void ContentPage_Loaded(object sender, EventArgs e)

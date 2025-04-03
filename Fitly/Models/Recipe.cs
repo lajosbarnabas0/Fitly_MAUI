@@ -10,10 +10,10 @@ namespace Fitly.Models
     {
         public int id { get; set; }
         public string Title { get; set; }
-        public string[] image_paths { get; set; }
-        public string ingredients { get; set; }
-        public string description { get; set; }
-        public string avg_time { get; set; }
+        public string[] Image_paths { get; set; }
+        public string Ingredients { get; set; }
+        public string Description { get; set; }
+        public string Avg_Time { get; set; }
         public int user_id { get; set; }
         public DateTime created_at { get; set; }
         public DateTime updated_at { get; set; }

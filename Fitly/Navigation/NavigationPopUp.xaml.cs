@@ -16,7 +16,7 @@ public partial class NavigationPopUp : Popup
         Close();
     }
     
-    private void MakeAChangePage_Tapped(object sender, TappedEventArgs e)
+    private async void MakeAChangePage_Tapped(object sender, TappedEventArgs e)
     {
         return;
     }

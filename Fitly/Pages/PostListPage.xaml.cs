@@ -1,4 +1,4 @@
-using CommunityToolkit.Maui.Views;
+ using CommunityToolkit.Maui.Views;
 using Fitly.Helper;
 using Fitly.Navigation;
 using Fitly.ViewModels;

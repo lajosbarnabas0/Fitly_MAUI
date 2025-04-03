@@ -39,4 +39,5 @@
         Title="RecipeList"
         ContentTemplate="{DataTemplate pages:RecipeListPage}"
         Route="RecipeListPage" />
+
 </Shell>
