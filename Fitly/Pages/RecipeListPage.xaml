@@ -3,8 +3,8 @@
     x:Class="Fitly.Pages.RecipeListPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
     xmlns:cards="clr-namespace:Fitly.Cards"
+    xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
     BackgroundColor="{x:StaticResource fitly_darkgray}"
     Loaded="ContentPage_Loaded"
     Shell.NavBarIsVisible="False">
@@ -19,11 +19,11 @@
             <StackLayout Orientation="Horizontal">
                 <Image Source="expand_more_24.png" WidthRequest="50" />
                 <Label
-                FontSize="25"
-                HorizontalOptions="Center"
-                Text="Menü"
-                TextColor="White"
-                VerticalOptions="Center" />
+                    FontSize="25"
+                    HorizontalOptions="Center"
+                    Text="Menü"
+                    TextColor="White"
+                    VerticalOptions="Center" />
             </StackLayout>
             <Border.GestureRecognizers>
                 <TapGestureRecognizer Tapped="NavMenu_Tapped" />
@@ -32,19 +32,123 @@
 
         <Grid Grid.Row="1" RowDefinitions="0.2*,1.6*">
             <Label
-            Grid.Row="0"
-            Margin="15"
-            FontSize="24"
-            Text="Receptek"
-            TextColor="White" />
+                Grid.Row="0"
+                Margin="15"
+                FontSize="24"
+                Text="Receptek"
+                TextColor="White" />
             <CollectionView
-            Grid.Row="1"
-            HorizontalOptions="Fill"
-            ItemsSource="{Binding Recipes}"
-            VerticalOptions="Fill">
+                Grid.Row="1"
+                HorizontalOptions="Fill"
+                ItemsSource="{Binding Recipes}"
+                VerticalOptions="Fill">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <cards:RecipeCard/>
+                        <Border
+                            Margin="10"
+                            Padding="10"
+                            BackgroundColor="{x:StaticResource Gray900}"
+                            InputTransparent="False"
+                            Stroke="{x:StaticResource Gray900}"
+                            StrokeShape="RoundRectangle 20">
+
+                            <Grid RowDefinitions="*,*,*,*">
+                                <Border
+                                    Grid.Row="0"
+                                    Margin="0,0,0,10"
+                                    BackgroundColor="{x:StaticResource Gray700}"
+                                    Stroke="{x:StaticResource Gray700}"
+                                    StrokeShape="RoundRectangle 15">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label
+                                            x:Name="title_LBL"
+                                            Padding="7"
+                                            FontSize="16"
+                                            Text="{Binding Title}"
+                                            TextColor="White"
+                                            VerticalTextAlignment="Start" />
+
+                                        <Image Source="{Binding Image_paths}" />
+
+                                        <Label
+                                            x:Name="author_LBL"
+                                            Padding="7"
+                                            FontSize="16"
+                                            HorizontalOptions="EndAndExpand"
+                                            Text="Szerző"
+                                            TextColor="LightGray"
+                                            VerticalTextAlignment="Center" />
+                                    </StackLayout>
+                                </Border>
+
+                                <Border
+                                    Grid.Row="1"
+                                    Margin="5"
+                                    Padding="5"
+                                    BackgroundColor="{x:StaticResource Gray700}"
+                                    HorizontalOptions="Fill"
+                                    Stroke="{x:StaticResource Gray700}"
+                                    StrokeShape="RoundRectangle 15"
+                                    VerticalOptions="Fill">
+                                    <Label
+                                        x:Name="description_LBL"
+                                        Padding="7"
+                                        FontSize="14"
+                                        HorizontalOptions="StartAndExpand"
+                                        HorizontalTextAlignment="Start"
+                                        LineBreakMode="CharacterWrap"
+                                        Text="{Binding Description}"
+                                        TextColor="White"
+                                        VerticalOptions="Start"
+                                        VerticalTextAlignment="Start" />
+                                </Border>
+
+                                <Border
+                                    Grid.Row="2"
+                                    Margin="5"
+                                    Padding="5"
+                                    BackgroundColor="{x:StaticResource Gray700}"
+                                    HorizontalOptions="Fill"
+                                    Stroke="{x:StaticResource Gray700}"
+                                    StrokeShape="RoundRectangle 15"
+                                    VerticalOptions="Fill">
+                                    <Label
+                                        x:Name="ingredients_LBL"
+                                        Padding="7"
+                                        FontSize="14"
+                                        HorizontalOptions="StartAndExpand"
+                                        HorizontalTextAlignment="Start"
+                                        LineBreakMode="CharacterWrap"
+                                        Text="{Binding Ingredients, StringFormat='Összetevők: {0}'}"
+                                        TextColor="White"
+                                        VerticalOptions="Start"
+                                        VerticalTextAlignment="Start" />
+                                </Border>
+
+                                <Border
+                                    Grid.Row="3"
+                                    Margin="5"
+                                    Padding="5"
+                                    BackgroundColor="{x:StaticResource Gray700}"
+                                    HorizontalOptions="Fill"
+                                    Stroke="{x:StaticResource Gray700}"
+                                    StrokeShape="RoundRectangle 15"
+                                    VerticalOptions="Fill">
+                                    <Label
+                                        x:Name="avgTime_LBL"
+                                        Padding="7"
+                                        FontSize="14"
+                                        HorizontalOptions="StartAndExpand"
+                                        HorizontalTextAlignment="Start"
+                                        LineBreakMode="CharacterWrap"
+                                        Text="{Binding Avg_Time, StringFormat='Elkészítési idő: {0}'}"
+                                        TextColor="White"
+                                        VerticalOptions="Start"
+                                        VerticalTextAlignment="Start" />
+                                </Border>
+
+                            </Grid>
+                        </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
