@@ -142,7 +142,7 @@
                                 BackgroundColor="{x:StaticResource Gray900}"
                                 Stroke="{x:StaticResource Gray900}"
                                 StrokeShape="RoundRectangle 10">
-                                <DatePicker Date="{Binding Birthday}" TextColor="LightGray" />
+                                <DatePicker Date="{Binding Birthday}" TextColor="LightGray"/>
                             </Border>
                         </StackLayout>
                         <StackLayout WidthRequest="160">

@@ -3,9 +3,10 @@
     x:Class="Fitly.Pages.PostListPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:cards="clr-namespace:Fitly.Cards"
     xmlns:models="clr-namespace:Fitly.Models"
     xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+    xmlns:viewmodels="clr-namespace:Fitly.ViewModels"
+    x:DataType="viewmodels:PostListViewModel"
     BackgroundColor="{x:StaticResource fitly_darkgray}"
     Loaded="ContentPage_Loaded"
     Shell.NavBarIsVisible="False">
@@ -13,6 +14,10 @@
     <ContentPage.Behaviors>
         <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
+
+    <ContentPage.BindingContext>
+        <viewmodels:PostListViewModel />
+    </ContentPage.BindingContext>
 
     <Grid RowDefinitions="0.2*,1.5*">
         <Border HorizontalOptions="Center" Stroke="{x:StaticResource fitly_darkgray}">
@@ -41,17 +46,18 @@
                 Grid.Row="1"
                 HorizontalOptions="Fill"
                 ItemsSource="{Binding Posts}"
+                SelectedItem="{Binding SelectedPost}"
                 VerticalOptions="Fill">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="models:Post">
                         <Border
-                            MinimumHeightRequest="200"
-                            Padding="10"
                             Margin="10"
+                            Padding="10"
                             BackgroundColor="{x:StaticResource Gray900}"
+                            MinimumHeightRequest="250"
                             Stroke="{x:StaticResource Gray900}"
                             StrokeShape="RoundRectangle 20">
-                            <Grid RowDefinitions="*,*,*,*">
+                            <Grid RowDefinitions="*,*,*,*,*">
                                 <Border
                                     Grid.Row="0"
                                     Margin="0,0,0,10"
@@ -79,6 +85,7 @@
                                             Text="{Binding Author}"
                                             TextColor="LightGray"
                                             VerticalTextAlignment="End" />
+
                                     </StackLayout>
 
                                 </Border>
@@ -102,6 +109,18 @@
                                         VerticalOptions="Start"
                                         VerticalTextAlignment="Start" />
                                 </Border>
+
+                                <Button
+                                    Grid.Row="4"
+                                    Margin="5"
+                                    BackgroundColor="{x:StaticResource fitly_darkgreen}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DetailButtonPressedCommand}"
+                                    CommandParameter="{Binding .}"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="További részletek"
+                                    VerticalOptions="CenterAndExpand" />
+
+
                             </Grid>
                         </Border>
                     </DataTemplate>

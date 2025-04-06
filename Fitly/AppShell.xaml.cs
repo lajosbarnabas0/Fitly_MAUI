@@ -7,6 +7,9 @@ namespace Fitly
         public AppShell()
         {
             InitializeComponent();
+
+            Routing.RegisterRoute("RecipeDetailPage", typeof(RecipeDetailPage));
+            //Routing.RegisterRoute("PostListPage", typeof(PostListPage));
         }
     }
 }

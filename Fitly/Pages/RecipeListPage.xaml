@@ -3,7 +3,6 @@
     x:Class="Fitly.Pages.RecipeListPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:cards="clr-namespace:Fitly.Cards"
     xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
     BackgroundColor="{x:StaticResource fitly_darkgray}"
     Loaded="ContentPage_Loaded"
@@ -41,6 +40,7 @@
                 Grid.Row="1"
                 HorizontalOptions="Fill"
                 ItemsSource="{Binding Recipes}"
+                SelectedItem="{Binding SelectedRecipe}"
                 VerticalOptions="Fill">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

@@ -7,7 +7,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Fitly.ViewModels
 {
-    public partial class PostCardViewModel : ObservableObject
+    public partial class PostDetailViewModel : ObservableObject
     {
     }
 }

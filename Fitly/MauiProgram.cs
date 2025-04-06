@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Maui;
-using Fitly.Cards;
 using Fitly.Pages;
 using Fitly.ViewModels;
 using Microsoft.Extensions.Logging;
@@ -35,11 +34,10 @@ namespace Fitly
             builder.Services.AddSingleton<MainCommunityViewModel>();
             builder.Services.AddSingleton<PostListPage>();
             builder.Services.AddSingleton<PostListViewModel>();
-            builder.Services.AddSingleton<PostCard>();
-            builder.Services.AddSingleton<PostCardViewModel>();
             builder.Services.AddSingleton<RecipeListPage>();
             builder.Services.AddSingleton<RecipeListViewModel>();
-            builder.Services.AddSingleton<RecipeCard>();
+            builder.Services.AddSingleton<RecipeDetailPage>();
+            builder.Services.AddSingleton<RecipeDetailViewModel>();
 
 
             Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping(nameof(Entry), (handler, view) =>

@@ -14,6 +14,9 @@ namespace Fitly.ViewModels
 {
     public partial class PostListViewModel : ObservableObject
     {
+        [ObservableProperty]
+        Post selectedPost;
+
         public ObservableCollection<Post> Posts { get; set; } = new ObservableCollection<Post>();
 
         [RelayCommand]
@@ -37,6 +40,12 @@ namespace Fitly.ViewModels
             {
                 Console.WriteLine($"Hiba a postok letöltésekor: {ex.Message}");
             }
+        }
+
+        [RelayCommand]
+        async Task DetailButtonPressed(Post )
+        {
+            Shell.Current.GoToAsync("RecipeDetailPage");
         }
     }
 }

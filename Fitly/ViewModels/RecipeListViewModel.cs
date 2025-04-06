@@ -21,6 +21,9 @@ namespace Fitly.ViewModels
 
         }
 
+        [ObservableProperty]
+        Recipe selectedRecipe;
+
         [RelayCommand]
         async Task Appearing()
         {
@@ -42,6 +45,12 @@ namespace Fitly.ViewModels
             {
                 Console.WriteLine($"Hiba a receptek letöltésekor: {ex.Message}");
             }
+        }
+
+        [RelayCommand]
+        async Task DetailButtonClicked()
+        {
+
         }
     }
 }
