@@ -31,7 +31,7 @@
                     FontAttributes="Bold"
                     FontSize="18"
                     HorizontalOptions="CenterAndExpand"
-                    Text="Fazekas Bálint receptje"
+                    Text="{Binding SelectedRecipe.Author, StringFormat='{0} receptje'}"
                     VerticalOptions="StartAndExpand" />
                 <Line
                     Grid.Row="1"
@@ -89,11 +89,9 @@
                         <CarouselView.ItemTemplate>
                             <DataTemplate>
                                 <Image
-                                    HeightRequest="50"
                                     HorizontalOptions="CenterAndExpand"
                                     Source="{Binding .}"
-                                    VerticalOptions="CenterAndExpand"
-                                    WidthRequest="50" />
+                                    VerticalOptions="CenterAndExpand" />
                             </DataTemplate>
                         </CarouselView.ItemTemplate>
                     </CarouselView>

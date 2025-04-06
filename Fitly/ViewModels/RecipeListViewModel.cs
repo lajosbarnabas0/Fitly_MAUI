@@ -25,6 +25,9 @@ namespace Fitly.ViewModels
         [ObservableProperty]
         Recipe selectedRecipe;
 
+        [ObservableProperty]
+        bool isVisible = false;
+
         [RelayCommand]
         async Task Appearing()
         {

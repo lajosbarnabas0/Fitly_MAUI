@@ -18,7 +18,13 @@ namespace Fitly.Models
         public int user_id { get; set; }
         public DateTime created_at { get; set; }
         public DateTime updated_at { get; set; }
+        public User User { get; set; }
 
+        private string _author;
+        public string Author
+        {
+            get => User?.Name ?? _author;
+            set => _author = value;
+        }
     }
-
 }

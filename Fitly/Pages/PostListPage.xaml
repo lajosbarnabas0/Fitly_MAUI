@@ -36,12 +36,14 @@
         </Border>
 
         <Grid Grid.Row="1" RowDefinitions="0.2*,1.6*">
-            <Label
-                Grid.Row="0"
-                Margin="15"
-                FontSize="24"
-                Text="Bejegyzések"
-                TextColor="White" />
+            <StackLayout Grid.Row="0" Orientation="Horizontal">
+                <Label
+                    Margin="15"
+                    FontSize="24"
+                    Text="Bejegyzések"
+                    TextColor="White" />
+                <Button Text="Új bejegyzés" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="10" BackgroundColor="{x:StaticResource fitly_darkgreen}" IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:PostListPage}}, Path=BindingContext.IsVisible}"/>
+            </StackLayout>
             <CollectionView
                 Grid.Row="1"
                 HorizontalOptions="Fill"
