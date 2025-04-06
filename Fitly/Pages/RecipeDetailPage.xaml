@@ -3,13 +3,110 @@
     x:Class="Fitly.Pages.RecipeDetailPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="RecipeDetailPage">
-    <VerticalStackLayout>
-        <Label
-            HorizontalOptions="Center"
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" />
+    xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+    BackgroundColor="{x:StaticResource fitly_darkgray}">
 
-        <Button Command="{Binding BackButtonCommand}" Text="vissza" />
-    </VerticalStackLayout>
+    <ContentPage.Behaviors>
+        <tool:StatusBarBehavior StatusBarColor="{x:StaticResource fitly_darkgray}" />
+        <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontFamily" Value="Montserrat" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <Border
+            Margin="10"
+            Padding="10"
+            BackgroundColor="{x:StaticResource Gray900}"
+            Stroke="{x:StaticResource Gray900}"
+            StrokeShape="RoundRectangle 10">
+            <Grid RowDefinitions="0.2*,0.1*,0.2*,0.2*,0.2*,0.5*,*,*">
+                <Label
+                    Grid.Row="0"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Fazekas Bálint receptje"
+                    VerticalOptions="StartAndExpand" />
+                <Line
+                    Grid.Row="1"
+                    HorizontalOptions="Center"
+                    Stroke="White"
+                    StrokeThickness="1"
+                    X1="200" />
+                <Label
+                    Grid.Row="2"
+                    FontSize="16"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="{Binding SelectedRecipe.Title}"
+                    VerticalOptions="StartAndExpand" />
+                <Label
+                    Grid.Row="3"
+                    FontAttributes="Italic"
+                    FontSize="16"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="{Binding SelectedRecipe.Avg_Time, StringFormat='Elkészítési idő: {0}'}"
+                    VerticalOptions="StartAndExpand" />
+                <Line
+                    Grid.Row="4"
+                    HorizontalOptions="Center"
+                    Stroke="White"
+                    StrokeThickness="1"
+                    X1="300" />
+                <StackLayout
+                    Grid.Row="5"
+                    HorizontalOptions="CenterAndExpand"
+                    Orientation="Vertical"
+                    VerticalOptions="StartAndExpand">
+                    <Label
+                        FontSize="16"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Összetevők:" />
+                    <Label
+                        FontSize="14"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="{Binding SelectedRecipe.Ingredients}"
+                        VerticalOptions="StartAndExpand" />
+                </StackLayout>
+                <Label
+                    Grid.Row="6"
+                    FontAttributes="Italic"
+                    FontSize="16"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="{Binding SelectedRecipe.Description}"
+                    VerticalOptions="StartAndExpand" />
+
+                <Grid Grid.Row="7" RowDefinitions="*,0.3*">
+                    <CarouselView
+                        Grid.Row="0"
+                        IndicatorView="indicatorView"
+                        ItemsSource="{Binding Image_paths}">
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <Image
+                                    HeightRequest="50"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Source="{Binding .}"
+                                    VerticalOptions="CenterAndExpand"
+                                    WidthRequest="50" />
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                    <IndicatorView
+                        x:Name="indicatorView"
+                        Grid.Row="1"
+                        HorizontalOptions="Center"
+                        IndicatorColor="White"
+                        IndicatorsShape="Circle"
+                        SelectedIndicatorColor="Gray"
+                        VerticalOptions="Center" />
+                </Grid>
+            </Grid>
+        </Border>
+    </ScrollView>
 </ContentPage>

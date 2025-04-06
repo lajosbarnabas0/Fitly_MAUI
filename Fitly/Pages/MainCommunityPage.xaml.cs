@@ -24,11 +24,11 @@ public partial class MainCommunityPage : ContentPage
     }
     private void posts_BDR_Tapped(object sender, TappedEventArgs e)
     {
-        Shell.Current.GoToAsync("//PostListPage");
+        Shell.Current.GoToAsync("PostListPage");
     }
 
     private void recipes_BDR_Tapped(object sender, TappedEventArgs e)
     {
-        Shell.Current.GoToAsync("//RecipeListPage");
+        Shell.Current.GoToAsync("RecipeListPage");
     }
 }

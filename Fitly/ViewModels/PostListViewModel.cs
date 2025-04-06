@@ -50,7 +50,6 @@ namespace Fitly.ViewModels
 
             if (post == null)
             {
-                Console.WriteLine("Null az érték");
                 return;
             }
 

@@ -27,13 +27,13 @@
                 HorizontalOptions="Center"
                 Stroke="{x:StaticResource fitly_darkgray}">
                 <StackLayout Orientation="Horizontal">
-                    <Image Source="expand_more_24.png" WidthRequest="50" />
                     <Label
                         FontSize="25"
                         HorizontalOptions="Center"
                         Text="Menü"
                         TextColor="White"
                         VerticalOptions="Center" />
+                    <Image Source="expand_more_24.png" WidthRequest="50" />
                 </StackLayout>
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Tapped="NavMenu_Tapped" />
@@ -152,9 +152,10 @@
                         WidthRequest="140">
                         <Picker
                             x:Name="lose_or_gain_PCKR"
+                            HorizontalTextAlignment="Center"
                             IsEnabled="{Binding IsPickerEnabled}"
                             SelectedItem="{Binding SelectedUser.lose_or_gain, Mode=TwoWay}"
-                            HorizontalTextAlignment="Center" TextColor="White">
+                            TextColor="White">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Fogyás</x:String>

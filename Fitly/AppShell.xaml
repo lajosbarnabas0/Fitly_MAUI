@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Fitly"
     xmlns:pages="clr-namespace:Fitly.Pages"
-    Title="Fitly">
+    Shell.BackgroundColor="{x:StaticResource fitly_darkgray}"
+    Shell.ForegroundColor="White">
 
     <ShellContent
         Title="Home"
@@ -31,13 +32,5 @@
         Title="MainCommunity"
         ContentTemplate="{DataTemplate pages:MainCommunityPage}"
         Route="MainCommunityPage" />
-    <ShellContent
-        Title="PostList"
-        ContentTemplate="{DataTemplate pages:PostListPage}"
-        Route="PostListPage" />
-    <ShellContent
-        Title="RecipeList"
-        ContentTemplate="{DataTemplate pages:RecipeListPage}"
-        Route="RecipeListPage" />
 
 </Shell>

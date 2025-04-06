@@ -9,6 +9,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Fitly.API;
 using Fitly.Models;
+using Fitly.Pages;
 
 namespace Fitly.ViewModels
 {
@@ -48,9 +49,17 @@ namespace Fitly.ViewModels
         }
 
         [RelayCommand]
-        async Task NavigateToRecipeDetail()
+        async Task NavigateToRecipeDetail(Recipe recipe)
         {
+            if (recipe == null)
+            {
+                return;
+            }
 
+            await Shell.Current.GoToAsync(nameof(RecipeDetailPage) , new Dictionary<string, object>
+            {
+                { "Recipe", recipe }
+            });
         }
     }
 }

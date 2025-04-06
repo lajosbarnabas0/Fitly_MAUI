@@ -3,26 +3,28 @@
     x:Class="Fitly.Pages.RecipeListPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Fitly.Pages"
     xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
     BackgroundColor="{x:StaticResource fitly_darkgray}"
     Loaded="ContentPage_Loaded"
-    Shell.NavBarIsVisible="False">
+    Shell.NavBarIsVisible="True">
+
 
     <ContentPage.Behaviors>
         <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
 
 
-    <Grid RowDefinitions="0.2*,1.5*">
+    <Grid RowDefinitions="0.1*,1.5*">
         <Border HorizontalOptions="Center" Stroke="{x:StaticResource fitly_darkgray}">
             <StackLayout Orientation="Horizontal">
-                <Image Source="expand_more_24.png" WidthRequest="50" />
                 <Label
                     FontSize="25"
                     HorizontalOptions="Center"
                     Text="Menü"
                     TextColor="White"
                     VerticalOptions="Center" />
+                <Image Source="expand_more_24.png" WidthRequest="50" />
             </StackLayout>
             <Border.GestureRecognizers>
                 <TapGestureRecognizer Tapped="NavMenu_Tapped" />
@@ -67,8 +69,6 @@
                                             Text="{Binding Title}"
                                             TextColor="White"
                                             VerticalTextAlignment="Start" />
-
-                                        <Image Source="{Binding Image_paths}" />
 
                                         <Label
                                             x:Name="author_LBL"
@@ -148,8 +148,12 @@
                                 </Border>
 
                                 <Button
+                                    Grid.Row="4"
+                                    Margin="0,10,0,5"
+                                    BackgroundColor="{x:StaticResource fitly_green}"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipeListPage}}, Path=BindingContext.NavigateToRecipeDetailCommand}"
                                     CommandParameter="{Binding .}"
+                                    FontAttributes="Bold"
                                     HorizontalOptions="CenterAndExpand"
                                     Text="További részletek"
                                     VerticalOptions="CenterAndExpand" />

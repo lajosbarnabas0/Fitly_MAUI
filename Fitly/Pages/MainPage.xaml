@@ -17,7 +17,6 @@
         <Grid RowDefinitions="0.2*,1.5*">
             <Border HorizontalOptions="Center" Stroke="{x:StaticResource fitly_darkgray}">
                 <StackLayout Orientation="Horizontal">
-                    <Image Source="expand_more_24.png" WidthRequest="50" />
                     <Label
                         FontAutoScalingEnabled="True"
                         FontSize="25"
@@ -25,6 +24,7 @@
                         Text="Menü"
                         TextColor="White"
                         VerticalOptions="Center" />
+                    <Image Source="expand_more_24.png" WidthRequest="50" />
                 </StackLayout>
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Tapped="NavMenu_Tapped" />

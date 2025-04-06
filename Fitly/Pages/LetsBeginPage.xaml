@@ -15,13 +15,13 @@
         <Grid RowDefinitions="0.2*,1.5*">
             <Border HorizontalOptions="Center" Stroke="{x:StaticResource fitly_darkgray}">
                 <StackLayout Orientation="Horizontal">
-                    <Image Source="expand_more_24.png" WidthRequest="50" />
                     <Label
                         FontSize="25"
                         HorizontalOptions="Center"
                         Text="Menü"
                         TextColor="White"
                         VerticalOptions="Center" />
+                    <Image Source="expand_more_24.png" WidthRequest="50" />
                 </StackLayout>
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Tapped="NavMenu_Tapped" />
@@ -75,16 +75,19 @@
                         <Label
                             FontAutoScalingEnabled="True"
                             FontSize="18"
+                            HorizontalOptions="CenterAndExpand"
                             HorizontalTextAlignment="Center"
                             Text="Amennyiben már regisztráltál,"
                             TextColor="{x:StaticResource fitly_white}"
-                            WidthRequest="300" />
+                            VerticalOptions="CenterAndExpand" />
                         <Label
                             FontAutoScalingEnabled="True"
                             FontSize="18"
+                            HorizontalOptions="CenterAndExpand"
                             HorizontalTextAlignment="Center"
                             Text="jelentkezz be!"
-                            TextColor="{x:StaticResource fitly_white}" />
+                            TextColor="{x:StaticResource fitly_white}"
+                            VerticalOptions="CenterAndExpand" />
                     </StackLayout>
 
                     <Button
@@ -93,9 +96,10 @@
                         Command="{Binding LoginClickedCommand}"
                         FontSize="16"
                         HeightRequest="50"
+                        HorizontalOptions="CenterAndExpand"
                         StyleId="Login_Button"
                         Text="Belépés"
-                        VerticalOptions="Start"
+                        VerticalOptions="StartAndExpand"
                         WidthRequest="160" />
                 </StackLayout>
             </Grid>
