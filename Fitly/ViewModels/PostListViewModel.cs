@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.InteropServices.ObjectiveC;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Maui.Core.Extensions;
@@ -9,13 +10,14 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Fitly.API;
 using Fitly.Models;
+using Fitly.Pages;
 
 namespace Fitly.ViewModels
 {
     public partial class PostListViewModel : ObservableObject
     {
         [ObservableProperty]
-        Post selectedPost;
+        public Post selectedPost;
 
         public ObservableCollection<Post> Posts { get; set; } = new ObservableCollection<Post>();
 
@@ -43,9 +45,19 @@ namespace Fitly.ViewModels
         }
 
         [RelayCommand]
-        async Task DetailButtonPressed(Post )
+        private async Task NavigateToPostDetail(Post post)
         {
-            Shell.Current.GoToAsync("RecipeDetailPage");
+
+            if (post == null)
+            {
+                Console.WriteLine("Null az érték");
+                return;
+            }
+
+            await Shell.Current.GoToAsync("PostDetailPage", new Dictionary<string, object>
+            {
+                { "Post", post }
+            });
         }
     }
 }

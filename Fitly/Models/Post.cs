@@ -14,7 +14,7 @@ namespace Fitly.Models
         public int user_id { get; set; }
         public string? Title { get; set; }
         public string? Content { get; set; }
-        public object? image_path { get; set; }
+        public string[]? image_path { get; set; }
         public DateTime created_at { get; set; }
         public DateTime updated_at { get; set; }
         public User? User { get; set; }

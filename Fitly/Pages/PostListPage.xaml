@@ -6,6 +6,7 @@
     xmlns:models="clr-namespace:Fitly.Models"
     xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
     xmlns:viewmodels="clr-namespace:Fitly.ViewModels"
+    xmlns:local="clr-namespace:Fitly.Pages"
     x:DataType="viewmodels:PostListViewModel"
     BackgroundColor="{x:StaticResource fitly_darkgray}"
     Loaded="ContentPage_Loaded"
@@ -14,10 +15,6 @@
     <ContentPage.Behaviors>
         <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
-
-    <ContentPage.BindingContext>
-        <viewmodels:PostListViewModel />
-    </ContentPage.BindingContext>
 
     <Grid RowDefinitions="0.2*,1.5*">
         <Border HorizontalOptions="Center" Stroke="{x:StaticResource fitly_darkgray}">
@@ -46,14 +43,15 @@
                 Grid.Row="1"
                 HorizontalOptions="Fill"
                 ItemsSource="{Binding Posts}"
-                SelectedItem="{Binding SelectedPost}"
                 VerticalOptions="Fill">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Post">
                         <Border
+                            x:Name="postBorder"
                             Margin="10"
                             Padding="10"
                             BackgroundColor="{x:StaticResource Gray900}"
+                            BindingContext="{Binding .}"
                             MinimumHeightRequest="250"
                             Stroke="{x:StaticResource Gray900}"
                             StrokeShape="RoundRectangle 20">
@@ -114,11 +112,10 @@
                                     Grid.Row="4"
                                     Margin="5"
                                     BackgroundColor="{x:StaticResource fitly_darkgreen}"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DetailButtonPressedCommand}"
-                                    CommandParameter="{Binding .}"
                                     HorizontalOptions="CenterAndExpand"
                                     Text="További részletek"
-                                    VerticalOptions="CenterAndExpand" />
+                                    VerticalOptions="CenterAndExpand"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:PostListPage}}, Path=BindingContext.NavigateToPostDetailCommand}" CommandParameter="{Binding .}" />
 
 
                             </Grid>

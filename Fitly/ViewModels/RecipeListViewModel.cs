@@ -48,7 +48,7 @@ namespace Fitly.ViewModels
         }
 
         [RelayCommand]
-        async Task DetailButtonClicked()
+        async Task NavigateToRecipeDetail()
         {
 
         }

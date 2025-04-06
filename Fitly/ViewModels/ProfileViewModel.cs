@@ -102,7 +102,7 @@ namespace Fitly.ViewModels
                     goal_weight = SelectedUser.goal_weight
                 };
 
-                var response = await GetData.UpdateProfile(url, requestData);
+                var response = await SendData.UpdateProfile(url, requestData);
 
                 if (response != null)
                 {

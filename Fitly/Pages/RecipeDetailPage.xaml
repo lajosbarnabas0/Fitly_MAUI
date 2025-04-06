@@ -10,6 +10,6 @@
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" />
 
-        <Button Command="{Binding BackButtonCommand}" Text="vissza"/>
+        <Button Command="{Binding BackButtonCommand}" Text="vissza" />
     </VerticalStackLayout>
 </ContentPage>

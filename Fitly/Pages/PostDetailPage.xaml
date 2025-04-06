@@ -1,12 +1,95 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Fitly.Pages.PostDetailPage"
-             Title="PostDetailPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    x:Class="Fitly.Pages.PostDetailPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="{x:StaticResource fitly_darkgray}"
+    Loaded="ContentPage_Loaded"
+    Shell.NavBarIsVisible="True">
+
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontFamily" Value="Montserrat" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <Border
+            Margin="10"
+            BackgroundColor="{x:StaticResource Gray900}"
+            Stroke="{x:StaticResource Gray900}"
+            StrokeShape="RoundRectangle 10">
+            <Grid Margin="10" RowDefinitions="0.3*,0.3*,0.1*,*,*,*">
+                <Label
+                    Grid.Row="0"
+                    FontSize="20"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="{Binding SelectedPost.Author, StringFormat='{0} bejegyzése'}"
+                    VerticalOptions="StartAndExpand" />
+                <Label
+                    Grid.Row="1"
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    Text="{Binding SelectedPost.Title}"
+                    VerticalOptions="StartAndExpand" />
+                <Line
+                    Grid.Row="2"
+                    HorizontalOptions="Center"
+                    Stroke="White"
+                    StrokeThickness="1"
+                    X1="300" />
+                <Label
+                    Grid.Row="3"
+                    FontSize="16"
+                    Text="{Binding SelectedPost.Content}" />
+                <Grid Grid.Row="4" RowDefinitions="*,0.3*">
+                    <CarouselView
+                        Grid.Row="0"
+                        IndicatorView="indicatorView"
+                        ItemsSource="{Binding Image_paths}">
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <Image
+                                    HorizontalOptions="CenterAndExpand"
+                                    Source="{Binding .}"
+                                    VerticalOptions="CenterAndExpand" />
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                    <IndicatorView
+                        x:Name="indicatorView"
+                        Grid.Row="1"
+                        HorizontalOptions="Center"
+                        IndicatorColor="White"
+                        IndicatorsShape="Circle"
+                        SelectedIndicatorColor="Gray"
+                        VerticalOptions="Center" />
+                </Grid>
+                
+                <Border
+                    Grid.Row="5"
+                    BackgroundColor="{x:StaticResource Gray700}"
+                    Stroke="{x:StaticResource Gray700}"
+                    StrokeShape="RoundRectangle 15"
+                    VerticalOptions="StartAndExpand">
+                    <Entry
+                        x:Name="comment_ENT"
+                        Margin="5"
+                        IsEnabled="{Binding commentEnabled}"
+                        Text="Komment entry" />
+                </Border>
+
+                <CollectionView ItemsSource="{Binding Comments}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding .}"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </Border>
+
+
+    </ScrollView>
 </ContentPage>
