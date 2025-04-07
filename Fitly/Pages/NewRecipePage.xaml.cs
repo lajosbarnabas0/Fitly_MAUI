@@ -9,4 +9,9 @@ public partial class NewRecipePage : ContentPage
 		InitializeComponent();
 		BindingContext = vm;
 	}
+
+    private void ContentPage_Loaded(object sender, EventArgs e)
+    {
+
+    }
 }

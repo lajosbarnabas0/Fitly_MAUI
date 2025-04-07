@@ -29,6 +29,7 @@ namespace Fitly.ViewModels
         {
             try
             {
+                string? isLoginSet = SecureStorage.Default.GetAsync("LoginToken").Result;
                 string apiUrl = "https://bgs.jedlik.eu/hm/backend/public/api/posts"; 
                 var postsFromApi = await HTTPRequest<List<Post>>.Get(apiUrl);
 
@@ -39,6 +40,11 @@ namespace Fitly.ViewModels
                     {
                         Posts.Add(post);
                     }
+                }
+
+                if(isLoginSet != null)
+                {
+                    IsVisible = true;
                 }
             }
             catch (Exception ex)
