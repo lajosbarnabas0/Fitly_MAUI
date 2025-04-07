@@ -11,7 +11,7 @@ namespace Fitly.Models
     {
         public int id { get; set; }
         public string Title { get; set; }
-        public string[] Image_paths { get; set; }
+        public string[]? Image_paths { get; set; }
         public string Ingredients { get; set; }
         public string Description { get; set; }
         public string Avg_Time { get; set; }

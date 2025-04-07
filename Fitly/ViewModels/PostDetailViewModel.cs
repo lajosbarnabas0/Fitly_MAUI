@@ -24,11 +24,23 @@ namespace Fitly.ViewModels
         [ObservableProperty]
         public Post selectedPost;
 
-        public ObservableCollection<string> Image_paths { get; set; } =
-        [
-            "https://www.kreactivity.hu/img/23190/G00176/264x264,r/Kis-tigris-festes-es-gyemantszemes-kreativ-hibrid-kep.webp?time=1715340732",
-            "https://macska-nevek.hu/wp-content/uploads/2024/04/1-1024x576.jpg"
-        ];
+        public ObservableCollection<string> Image_paths { get; set; }
+        //[
+        //    "https://www.kreactivity.hu/img/23190/G00176/264x264,r/Kis-tigris-festes-es-gyemantszemes-kreativ-hibrid-kep.webp?time=1715340732",
+        //    "https://macska-nevek.hu/wp-content/uploads/2024/04/1-1024x576.jpg"
+        //];
+
+        partial void OnSelectedPostChanged(Post value)
+        {
+            if (SelectedPost.image_path != null)
+            {
+                foreach (var item in SelectedPost.image_path)
+                {
+                    Image_paths.Add($"https://bgs.jedlik.eu/hm/backend/public/storage/" + item);
+                }
+            }
+        }
+
 
         [RelayCommand]
         async Task Appearing()

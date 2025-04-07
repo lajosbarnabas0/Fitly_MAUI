@@ -33,9 +33,12 @@ namespace Fitly.ViewModels
 
         partial void OnSelectedRecipeChanged(Recipe value)
         {
-            foreach (var item in SelectedRecipe.Image_paths)
+            if(SelectedRecipe.Image_paths != null)
             {
-                Image_paths.Add($"https://bgs.jedlik.eu/hm/backend/public/storage/" + item);
+                foreach (var item in SelectedRecipe.Image_paths)
+                {
+                    Image_paths.Add($"https://bgs.jedlik.eu/hm/backend/public/storage/" + item);
+                }
             }
         }
 
