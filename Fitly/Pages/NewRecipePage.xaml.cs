@@ -1,3 +1,4 @@
+using Fitly.Helper;
 using Fitly.ViewModels;
 
 namespace Fitly.Pages;
@@ -10,8 +11,8 @@ public partial class NewRecipePage : ContentPage
 		BindingContext = vm;
 	}
 
-    private void ContentPage_Loaded(object sender, EventArgs e)
+    private async void ContentPage_Loaded(object sender, EventArgs e)
     {
-
+        await LoadedAnimation.AnimateElementsOnPage(this);
     }
 }
