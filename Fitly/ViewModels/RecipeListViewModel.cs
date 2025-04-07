@@ -29,6 +29,12 @@ namespace Fitly.ViewModels
         bool isVisible = false;
 
         [RelayCommand]
+        async Task AddNewRecipe()
+        {
+            await Shell.Current.GoToAsync(nameof(NewRecipePage));
+        }
+
+        [RelayCommand]
         async Task Appearing()
         {
             try

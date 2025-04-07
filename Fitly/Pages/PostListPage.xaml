@@ -42,7 +42,13 @@
                     FontSize="24"
                     Text="Bejegyzések"
                     TextColor="White" />
-                <Button Text="Új bejegyzés" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="10" BackgroundColor="{x:StaticResource fitly_darkgreen}" IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:PostListPage}}, Path=BindingContext.IsVisible}"/>
+                <Button
+                    Margin="10"
+                    BackgroundColor="{x:StaticResource fitly_darkgreen}"
+                    HorizontalOptions="EndAndExpand"
+                    IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:PostListPage}}, Path=BindingContext.IsVisible}"
+                    Text="Új bejegyzés"
+                    VerticalOptions="CenterAndExpand" />
             </StackLayout>
             <CollectionView
                 Grid.Row="1"
