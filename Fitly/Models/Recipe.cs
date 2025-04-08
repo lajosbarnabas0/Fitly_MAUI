@@ -16,15 +16,15 @@ namespace Fitly.Models
         public string ingredients { get; set; }
         public string description { get; set; }
         public string avg_time { get; set; }
-        public int user_id { get; set; }
-        public DateTime created_at { get; set; }
-        public DateTime updated_at { get; set; }
+        public int? user_id { get; set; }
+        public DateTime? created_at { get; set; }
+        public DateTime? updated_at { get; set; }
         public string[]? image_urls { get; set; }
 
-        public User user { get; set; }
+        public User? user { get; set; }
 
-        private string _author;
-        public string Author
+        private string? _author;
+        public string? Author
         {
             get => user?.Name ?? _author;
             set => _author = value;
