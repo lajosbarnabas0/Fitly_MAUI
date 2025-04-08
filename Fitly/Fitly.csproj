@@ -77,6 +77,12 @@
 	  <MauiXaml Update="Navigation\NavigationPopUp.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\CaloriePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\ChangePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\LetsBeginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

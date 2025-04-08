@@ -24,7 +24,7 @@
             </Border.GestureRecognizers>
         </Border>
 
-        <Grid Grid.Row="1" RowDefinitions="*,*">
+        <Grid Grid.Row="1" RowDefinitions="*,*">s
             <Border
                 BackgroundColor="{x:StaticResource Gray900}"
                 HeightRequest="100"

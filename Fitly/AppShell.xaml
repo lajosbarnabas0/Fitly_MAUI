@@ -32,5 +32,9 @@
         Title="MainCommunity"
         ContentTemplate="{DataTemplate pages:MainCommunityPage}"
         Route="MainCommunityPage" />
+    <ShellContent
+        Title="ChangePage"
+        ContentTemplate="{DataTemplate pages:ChangePage}"
+        Route="ChangePage" />
 
 </Shell>
