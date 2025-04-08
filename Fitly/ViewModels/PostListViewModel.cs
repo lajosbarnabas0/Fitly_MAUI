@@ -25,6 +25,12 @@ namespace Fitly.ViewModels
         public ObservableCollection<Post> Posts { get; set; } = new ObservableCollection<Post>();
 
         [RelayCommand]
+        async Task AddNewPost()
+        {
+            await Shell.Current.GoToAsync(nameof(NewPostPage));
+        }
+
+        [RelayCommand]
         async Task Appearing()
         {
             try
