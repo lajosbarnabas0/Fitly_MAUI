@@ -43,7 +43,7 @@
                         Placeholder="Cím"
                         PlaceholderColor="LightGray"
                         ReturnType="Done"
-                        Text="{Binding NewRecipe.Title}"
+                        Text="{Binding NewRecipe.title}"
                         TextColor="White" />
                 </Border>
             </StackLayout>
@@ -66,7 +66,7 @@
                         Placeholder="Összetevők"
                         PlaceholderColor="LightGray"
                         ReturnType="Done"
-                        Text="{Binding Password}"
+                        Text="{Binding NewRecipe.ingredients}"
                         TextColor="White" />
                 </Border>
             </StackLayout>
@@ -89,7 +89,7 @@
                         Placeholder="Leírás"
                         PlaceholderColor="LightGray"
                         ReturnType="Done"
-                        Text="{Binding Password}"
+                        Text="{Binding NewRecipe.description}"
                         TextColor="White" />
                 </Border>
             </StackLayout>
@@ -112,7 +112,7 @@
                         Placeholder="Elkészítési idő"
                         PlaceholderColor="LightGray"
                         ReturnType="Done"
-                        Text="{Binding Password}"
+                        Text="{Binding NewRecipe.avg_time}"
                         TextColor="White" />
                 </Border>
             </StackLayout>

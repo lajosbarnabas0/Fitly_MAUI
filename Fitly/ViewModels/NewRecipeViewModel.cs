@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -15,29 +17,32 @@ namespace Fitly.ViewModels
     public partial class NewRecipeViewModel : ObservableObject
     {
         [ObservableProperty]
-        Recipe newRecipe;
+        Recipe newRecipe = new Recipe();
+
+        public List<FileResult> SelectedImageFiles { get; private set; } = new();
 
         [RelayCommand]
         public async Task AddImagesAsync()
         {
             try
             {
-                var result = await FilePicker.PickMultipleAsync(new PickOptions
+                var files = await FilePicker.PickMultipleAsync(new PickOptions
                 {
-                    PickerTitle = "Válassz képeket",
-                    FileTypes = FilePickerFileType.Images // Csak képek engedélyezése
+                    FileTypes = FilePickerFileType.Images,
+                    PickerTitle = "Válassz képeket a recepthez"
                 });
 
-                if (result != null)
-                {
-                    var imagePaths = result.Select(file => file.FullPath).ToString();
-                    NewRecipe.image_paths = imagePaths; // A kiválasztott képek útvonalainak mentése
-                }
+                if (files is null || !files.Any())
+                    return;
+
+                SelectedImageFiles = files.ToList();
+
+                // image_paths most sima string -> pl. fájlnevek vesszővel elválasztva
+                NewRecipe.image_paths = string.Join(",", files.Select(f => f.FileName));
             }
             catch (Exception ex)
             {
-                // Hibakezelés
-                Console.WriteLine($"Hiba történt: {ex.Message}");
+                Console.WriteLine($"Hiba kép kiválasztásnál: {ex.Message}");
             }
         }
 
@@ -45,33 +50,38 @@ namespace Fitly.ViewModels
         async Task SaveRecipe()
         {
             string url = "https://bgs.jedlik.eu/hm/backend/public/api/recipes";
-            var requestData = new Recipe
+            using var client = new HttpClient();
+            using var form = new MultipartFormDataContent();
+
+            form.Add(new StringContent(NewRecipe.title), "title");
+            form.Add(new StringContent(NewRecipe.description), "description");
+            form.Add(new StringContent(NewRecipe.ingredients), "ingredients");
+            form.Add(new StringContent(NewRecipe.avg_time), "avg_time");
+
+            foreach (var file in SelectedImageFiles)
             {
-                title = NewRecipe.title,
-                avg_time = NewRecipe.avg_time,
-                image_paths = NewRecipe.image_paths,
-                description = NewRecipe.description,
-                ingredients = NewRecipe.ingredients
+                using var stream = await file.OpenReadAsync();
+                using var ms = new MemoryStream();
+                await stream.CopyToAsync(ms);
+                var bytes = ms.ToArray();
 
-            };
+                var fileContent = new ByteArrayContent(bytes);
+                fileContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+                form.Add(fileContent, "image_paths[]", file.FileName);
+            }
 
-            var response = await SendData.SendRecipe(url, requestData);
+            var response = await client.PostAsync(url, form);
 
-            if (response != null)
+            if (response.IsSuccessStatusCode)
             {
-                if (response != null)
-                {
-                    await Shell.Current.GoToAsync(nameof(RecipeListPage));
-                    await Shell.Current.DisplayAlert("Információ", "Recept sikeresen elmentve!", "Ok");
-                }
-                else
-                {
-                    await Shell.Current.DisplayAlert("Hiba", "Sikertelen regisztráció", "Ok");
-                }
+                await Shell.Current.DisplayAlert("Siker", "Recept sikeresen mentve!", "ok");
+                await Shell.Current.GoToAsync(nameof(RecipeListPage));
             }
             else
             {
-                await Shell.Current.DisplayAlert("Hiba", "Kérlek add meg az adataid!", "Ok");
+                var errorContent = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Hiba: {response.StatusCode} - {errorContent}");
+                await Shell.Current.DisplayAlert("Hiba", $"Sikertelen mentés: {response.StatusCode}", "Ok");
             }
         }
     }

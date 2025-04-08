@@ -8,10 +8,10 @@ namespace Fitly.Models
 {
     public class RecipeResponse
     {
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string[] Image_paths { get; set; }
-        public string Description { get; set; }
-        public string Ingredients { get; set; }
+        public string avg_time { get; set; }
+        public string title { get; set; }
+        public string? image_paths { get; set; }
+        public string description { get; set; }
+        public string ingredients { get; set; }
     }
 }
