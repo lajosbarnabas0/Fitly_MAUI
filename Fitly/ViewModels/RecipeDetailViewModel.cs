@@ -62,5 +62,8 @@ namespace Fitly.ViewModels
                 return;
             }
         }
+
+        
+
     }
 }
