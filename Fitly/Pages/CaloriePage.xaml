@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fitly.Pages.CaloriePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+    Title="CaloriePage"
+    BackgroundColor="{x:StaticResource fitly_darkgray}"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="0.2*,1.5*">
+        <Border HorizontalOptions="Center" Stroke="{x:StaticResource fitly_darkgray}">
+            <StackLayout Orientation="Horizontal">
+                <Label
+                    FontSize="25"
+                    HorizontalOptions="Center"
+                    Text="Menü"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+                <Image Source="expand_more_24.png" WidthRequest="50" />
+            </StackLayout>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="NavMenu_Tapped" />
+            </Border.GestureRecognizers>
+        </Border>
+        
+        <Grid
+            Grid.Row="1"
+            Padding="20"
+            RowSpacing="20">
+            <VerticalStackLayout Spacing="20" VerticalOptions="CenterAndExpand">
+
+                <!--  Napi kalórialimit  -->
+                <Label
+                    x:Name="CalorieLimitLabel"
+                    FontSize="30"
+                    HorizontalOptions="Center"
+                    Text="2500 kcal"
+                    TextColor="White" />
+
+                <!--  Kalória progressbar  -->
+                <ProgressBar
+                    x:Name="CalorieProgressBar"
+                    BackgroundColor="Gray"
+                    HeightRequest="20"
+                    Progress="0"
+                    ProgressColor="Green" />
+
+                <!--  Ételválasztó  -->
+                <Picker
+                    x:Name="FoodPicker"
+                    Title="Mit ettél?"
+                    BackgroundColor="White"
+                    TextColor="Black">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Csirkemell</x:String>
+                            <x:String>Rizs</x:String>
+                            <x:String>Tojás</x:String>
+                            <x:String>Alma</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <!--  Mennyiség megadása  -->
+                <HorizontalStackLayout Spacing="10">
+                    <Label
+                        Text="Gramm:"
+                        TextColor="White"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="GramsEntry"
+                        Keyboard="Numeric"
+                        Placeholder="Pl. 150"
+                        WidthRequest="100" />
+                </HorizontalStackLayout>
+
+                <!--  Hozzáadás gomb  -->
+                <Button
+                    BackgroundColor="Green"
+                    Text="Hozzáadás"
+                    TextColor="White" />
+
+
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+
+</ContentPage>

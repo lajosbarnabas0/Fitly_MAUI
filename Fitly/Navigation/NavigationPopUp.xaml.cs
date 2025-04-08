@@ -18,13 +18,14 @@ public partial class NavigationPopUp : Popup
     
     private async void MakeAChangePage_Tapped(object sender, TappedEventArgs e)
     {
-        return;
+        await Shell.Current.GoToAsync("//ChangePage");
+        Close();
     }
-    
+
     private async void SocialPage_Tapped(object sender, TappedEventArgs e)
     {
         await Shell.Current.GoToAsync("//MainCommunityPage");
-        Close(); ;
+        Close();
     }
     
     private async void ProfilePage_Tapped(object sender, TappedEventArgs e)
@@ -41,4 +42,5 @@ public partial class NavigationPopUp : Popup
             Close();
         }
     }
+
 }
