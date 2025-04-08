@@ -36,14 +36,16 @@
                 <Label
                     Margin="15"
                     FontSize="24"
-                    Text="Bejegyzések"
+                    Text="Receptek"
                     TextColor="White" />
                 <Button
                     Margin="10"
                     BackgroundColor="{x:StaticResource fitly_darkgreen}"
                     HorizontalOptions="EndAndExpand"
                     IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:RecipeListPage}}, Path=BindingContext.IsVisible}"
-                    Text="Új bejegyzés"
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:RecipeListPage}}, Path=BindingContext.AddNewRecipeCommand}"
+                    CommandParameter="{Binding .}"
+                    Text="Új recept"
                     VerticalOptions="CenterAndExpand" />
             </StackLayout>
             <CollectionView
@@ -74,7 +76,7 @@
                                             x:Name="title_LBL"
                                             Padding="7"
                                             FontSize="16"
-                                            Text="{Binding Title}"
+                                            Text="{Binding title}"
                                             TextColor="White"
                                             VerticalTextAlignment="Start" />
 
@@ -105,7 +107,7 @@
                                         HorizontalOptions="StartAndExpand"
                                         HorizontalTextAlignment="Start"
                                         LineBreakMode="CharacterWrap"
-                                        Text="{Binding Description}"
+                                        Text="{Binding description}"
                                         TextColor="White"
                                         VerticalOptions="Start"
                                         VerticalTextAlignment="Start" />
@@ -127,7 +129,7 @@
                                         HorizontalOptions="StartAndExpand"
                                         HorizontalTextAlignment="Start"
                                         LineBreakMode="CharacterWrap"
-                                        Text="{Binding Ingredients, StringFormat='Összetevők: {0}'}"
+                                        Text="{Binding ingredients, StringFormat='Összetevők: {0}'}"
                                         TextColor="White"
                                         VerticalOptions="Start"
                                         VerticalTextAlignment="Start" />
@@ -149,7 +151,7 @@
                                         HorizontalOptions="StartAndExpand"
                                         HorizontalTextAlignment="Start"
                                         LineBreakMode="CharacterWrap"
-                                        Text="{Binding Avg_Time, StringFormat='Elkészítési idő: {0}'}"
+                                        Text="{Binding avg_time, StringFormat='Elkészítési idő: {0}'}"
                                         TextColor="White"
                                         VerticalOptions="Start"
                                         VerticalTextAlignment="Start" />

@@ -15,7 +15,7 @@ namespace Fitly.API
         public static async Task<T?> Get(string url)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, url);
-
+            request.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
             // Authorization fejléc hozzáadása, ha van token
             if (loginToken != null)
             {

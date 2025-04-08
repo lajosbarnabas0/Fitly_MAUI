@@ -13,5 +13,10 @@ namespace Fitly.API
         {
             return await HTTPRequest<UpdateProfileResponse>.Put(url, data);
         }
+
+        public static async Task<Recipe> SendRecipe(string url, object data)
+        {
+            return await HTTPRequest<Recipe>.Post(url, data);
+        }
     }
 }

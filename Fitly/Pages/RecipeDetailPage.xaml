@@ -31,7 +31,7 @@
                     FontAttributes="Bold"
                     FontSize="18"
                     HorizontalOptions="CenterAndExpand"
-                    Text="{Binding SelectedRecipe.Author, StringFormat='{0} receptje'}"
+                    Text="{Binding UserName, StringFormat='{0} receptje'}"
                     VerticalOptions="StartAndExpand" />
                 <Line
                     Grid.Row="1"
@@ -43,14 +43,14 @@
                     Grid.Row="2"
                     FontSize="16"
                     HorizontalOptions="CenterAndExpand"
-                    Text="{Binding SelectedRecipe.Title}"
+                    Text="{Binding SelectedRecipe.title}"
                     VerticalOptions="StartAndExpand" />
                 <Label
                     Grid.Row="3"
                     FontAttributes="Italic"
                     FontSize="16"
                     HorizontalOptions="CenterAndExpand"
-                    Text="{Binding SelectedRecipe.Avg_Time, StringFormat='Elkészítési idő: {0}'}"
+                    Text="{Binding SelectedRecipe.avg_time, StringFormat='Elkészítési idő: {0}'}"
                     VerticalOptions="StartAndExpand" />
                 <Line
                     Grid.Row="4"
@@ -70,7 +70,7 @@
                     <Label
                         FontSize="14"
                         HorizontalOptions="CenterAndExpand"
-                        Text="{Binding SelectedRecipe.Ingredients}"
+                        Text="{Binding SelectedRecipe.ingredients}"
                         VerticalOptions="StartAndExpand" />
                 </StackLayout>
                 <Label
@@ -78,14 +78,15 @@
                     FontAttributes="Italic"
                     FontSize="16"
                     HorizontalOptions="CenterAndExpand"
-                    Text="{Binding SelectedRecipe.Description}"
+                    Text="{Binding SelectedRecipe.description}"
                     VerticalOptions="StartAndExpand" />
 
                 <Grid Grid.Row="7" RowDefinitions="*,0.3*">
                     <CarouselView
                         Grid.Row="0"
                         IndicatorView="indicatorView"
-                        ItemsSource="{Binding Image_paths}">
+                        ItemsSource="{Binding SelectedRecipe.image_urls}"
+                        IsSwipeEnabled="{Binding SwipeEnabled}">
                         <CarouselView.ItemTemplate>
                             <DataTemplate>
                                 <Image

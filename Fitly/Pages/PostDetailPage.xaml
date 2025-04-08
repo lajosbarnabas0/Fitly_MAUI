@@ -23,8 +23,8 @@
             <Grid Margin="10" RowDefinitions="0.3*,0.3*,0.1*,*,*,*">
                 <Label
                     Grid.Row="0"
-                    FontSize="20"
                     FontAttributes="Bold"
+                    FontSize="20"
                     HorizontalOptions="CenterAndExpand"
                     Text="{Binding SelectedPost.Author, StringFormat='{0} bejegyzése'}"
                     VerticalOptions="StartAndExpand" />
@@ -42,9 +42,9 @@
                     X1="300" />
                 <Label
                     Grid.Row="3"
+                    Margin="0,0,0,10"
                     FontSize="16"
-                    Text="{Binding SelectedPost.Content}"
-                    Margin="0,0,0,10"/>
+                    Text="{Binding SelectedPost.Content}" />
                 <Grid Grid.Row="4" RowDefinitions="*,0.3*">
                     <CarouselView
                         Grid.Row="0"
@@ -68,7 +68,7 @@
                         SelectedIndicatorColor="White"
                         VerticalOptions="Center" />
                 </Grid>
-                
+
                 <Border
                     Grid.Row="5"
                     BackgroundColor="{x:StaticResource Gray700}"
@@ -85,7 +85,7 @@
                 <CollectionView ItemsSource="{Binding Comments}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Label Text="{Binding .}"/>
+                            <Label Text="{Binding .}" />
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

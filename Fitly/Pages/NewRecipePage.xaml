@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fitly.Pages.NewRecipePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Fitly.Pages"
+    xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+    BackgroundColor="{x:StaticResource fitly_darkgray}"
+    Loaded="ContentPage_Loaded"
+    Shell.NavBarIsVisible="True">
+
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontFamily" Value="Montserrat" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <Grid RowDefinitions="0.4*,*,*,*,*,*,*">
+            <Label
+                FontSize="22"
+                HorizontalOptions="CenterAndExpand"
+                LineBreakMode="TailTruncation"
+                Text="Új recept hozzáadása"
+                VerticalOptions="StartAndExpand" />
+
+            <StackLayout
+                Grid.Row="1"
+                Orientation="Vertical"
+                VerticalOptions="StartAndExpand">
+                <Label
+                    Margin="10"
+                    FontSize="16"
+                    Text="Recept címe" />
+                <Border
+                    Margin="20,0,20,20"
+                    BackgroundColor="{x:StaticResource Gray900}"
+                    Stroke="{x:StaticResource Gray900}"
+                    StrokeShape="RoundRectangle 10">
+                    <Entry
+                        HorizontalOptions="CenterAndExpand"
+                        Placeholder="Cím"
+                        PlaceholderColor="LightGray"
+                        ReturnType="Done"
+                        Text="{Binding NewRecipe.Title}"
+                        TextColor="White" />
+                </Border>
+            </StackLayout>
+
+            <StackLayout
+                Grid.Row="2"
+                Orientation="Vertical"
+                VerticalOptions="StartAndExpand">
+                <Label
+                    Margin="10"
+                    FontSize="16"
+                    Text="Összetevők" />
+                <Border
+                    Margin="20,0,20,20"
+                    BackgroundColor="{x:StaticResource Gray900}"
+                    Stroke="{x:StaticResource Gray900}"
+                    StrokeShape="RoundRectangle 10">
+                    <Entry
+                        HorizontalOptions="CenterAndExpand"
+                        Placeholder="Összetevők"
+                        PlaceholderColor="LightGray"
+                        ReturnType="Done"
+                        Text="{Binding Password}"
+                        TextColor="White" />
+                </Border>
+            </StackLayout>
+
+            <StackLayout
+                Grid.Row="3"
+                Orientation="Vertical"
+                VerticalOptions="StartAndExpand">
+                <Label
+                    Margin="10"
+                    FontSize="16"
+                    Text="Leírás" />
+                <Border
+                    Margin="20,0,20,20"
+                    BackgroundColor="{x:StaticResource Gray900}"
+                    Stroke="{x:StaticResource Gray900}"
+                    StrokeShape="RoundRectangle 10">
+                    <Entry
+                        HorizontalOptions="CenterAndExpand"
+                        Placeholder="Leírás"
+                        PlaceholderColor="LightGray"
+                        ReturnType="Done"
+                        Text="{Binding Password}"
+                        TextColor="White" />
+                </Border>
+            </StackLayout>
+
+            <StackLayout
+                Grid.Row="4"
+                Orientation="Vertical"
+                VerticalOptions="StartAndExpand">
+                <Label
+                    Margin="10"
+                    FontSize="16"
+                    Text="Elkészítési idő" />
+                <Border
+                    Margin="20,0,20,20"
+                    BackgroundColor="{x:StaticResource Gray900}"
+                    Stroke="{x:StaticResource Gray900}"
+                    StrokeShape="RoundRectangle 10">
+                    <Entry
+                        HorizontalOptions="CenterAndExpand"
+                        Placeholder="Elkészítési idő"
+                        PlaceholderColor="LightGray"
+                        ReturnType="Done"
+                        Text="{Binding Password}"
+                        TextColor="White" />
+                </Border>
+            </StackLayout>
+
+            <Button
+                Grid.Row="5"
+                Margin="20"
+                Padding="15"
+                BackgroundColor="{x:StaticResource fitly_darkgreen}"
+                Command="{Binding Source={RelativeSource AncestorType={x:Type local:NewRecipePage}}, Path=BindingContext.AddImagesCommand}"
+                CommandParameter="{Binding .}"
+                FontAttributes="Bold"
+                HorizontalOptions="CenterAndExpand"
+                Text="Kép(ek) feltöltése"
+                TextColor="White"
+                VerticalOptions="CenterAndExpand" />
+
+            <Button
+                Grid.Row="6"
+                Margin="20"
+                Padding="20"
+                BackgroundColor="{x:StaticResource fitly_green}"
+                Command="{Binding Source={RelativeSource AncestorType={x:Type local:NewRecipePage}}, Path=BindingContext.SaveRecipeCommand}"
+                CommandParameter="{Binding .}"
+                FontAttributes="Bold"
+                FontSize="16"
+                HorizontalOptions="CenterAndExpand"
+                Text="Recept mentése"
+                VerticalOptions="CenterAndExpand" />
+
+        </Grid>
+    </ScrollView>
+</ContentPage>
