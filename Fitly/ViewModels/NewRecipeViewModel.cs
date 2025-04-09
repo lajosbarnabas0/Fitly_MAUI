@@ -19,26 +19,19 @@ namespace Fitly.ViewModels
         [ObservableProperty]
         Recipe newRecipe = new Recipe();
 
-        public List<FileResult> SelectedImageFiles { get; private set; } = new();
+        public FileResult SelectedImageFile { get; private set; }
 
         [RelayCommand]
         public async Task AddImagesAsync()
         {
             try
             {
-                var files = await FilePicker.PickMultipleAsync(new PickOptions
+                var result = await MediaPicker.PickPhotoAsync();
+                if (result != null)
                 {
-                    FileTypes = FilePickerFileType.Images,
-                    PickerTitle = "Válassz képeket a recepthez"
-                });
-
-                if (files is null || !files.Any())
-                    return;
-
-                SelectedImageFiles = files.ToList();
-
-                // image_paths most sima string -> pl. fájlnevek vesszővel elválasztva
-                NewRecipe.image_paths = string.Join(",", files.Select(f => f.FileName));
+                    SelectedImageFile = result;
+                    Shell.Current?.DisplayAlert("Feltöltés", "A kép feltöltése sikeres!", "Ok");
+                }
             }
             catch (Exception ex)
             {
@@ -49,40 +42,62 @@ namespace Fitly.ViewModels
         [RelayCommand]
         async Task SaveRecipe()
         {
-            string url = "https://bgs.jedlik.eu/hm/backend/public/api/recipes";
-            using var client = new HttpClient();
-            using var form = new MultipartFormDataContent();
-
-            form.Add(new StringContent(NewRecipe.title), "title");
-            form.Add(new StringContent(NewRecipe.description), "description");
-            form.Add(new StringContent(NewRecipe.ingredients), "ingredients");
-            form.Add(new StringContent(NewRecipe.avg_time), "avg_time");
-
-            foreach (var file in SelectedImageFiles)
+            try
             {
-                using var stream = await file.OpenReadAsync();
-                using var ms = new MemoryStream();
-                await stream.CopyToAsync(ms);
-                var bytes = ms.ToArray();
+                if (SelectedImageFile == null)
+                {
+                    Console.WriteLine("Nincs kiválasztott fájl.");
+                    return;
+                }
 
-                var fileContent = new ByteArrayContent(bytes);
-                fileContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
-                form.Add(fileContent, "image_paths[]", file.FileName);
+                // Létrehozzuk a HttpClient példányt
+                using var httpClient = new HttpClient();
+
+                // Hozzáadjuk a szükséges headereket
+                httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
+                var token = await SecureStorage.Default.GetAsync("LoginToken");
+                if (!string.IsNullOrEmpty(token))
+                {
+                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                }
+
+                // Létrehozzuk a MultipartFormDataContent-et
+                using var formData = new MultipartFormDataContent();
+
+                // Fájl hozzáadása form-data-hoz
+                var fileStream = await SelectedImageFile.OpenReadAsync();
+                var streamContent = new StreamContent(fileStream);
+                streamContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+                formData.Add(streamContent, "image_paths[]", SelectedImageFile.FileName);
+
+                // Egyéb mezők hozzáadása
+                formData.Add(new StringContent(NewRecipe.title), "title");
+                formData.Add(new StringContent(NewRecipe.ingredients), "ingredients");
+                formData.Add(new StringContent(NewRecipe.description), "description");
+                formData.Add(new StringContent(NewRecipe.avg_time), "avg_time");
+
+                // Küldés az API végpontra
+                var url = "https://bgs.jedlik.eu/hm/backend/public/api/recipes";
+                var response = await httpClient.PostAsync(url, formData);
+
+                // Ellenőrizzük a választ
+                if (response.IsSuccessStatusCode)
+                {
+                    Shell.Current?.DisplayAlert("Siker", "A recept mentése sikeres volt!", "Ok");
+                    Console.WriteLine("Fájl sikeresen feltöltve!");
+                }
+                else
+                {
+                    Console.WriteLine($"Hiba történt: {response.StatusCode}");
+                    var errorMessage = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Hibaüzenet: {errorMessage}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Hiba fájlfeltöltés közben: {ex.Message}");
             }
 
-            var response = await client.PostAsync(url, form);
-
-            if (response.IsSuccessStatusCode)
-            {
-                await Shell.Current.DisplayAlert("Siker", "Recept sikeresen mentve!", "ok");
-                await Shell.Current.GoToAsync(nameof(RecipeListPage));
-            }
-            else
-            {
-                var errorContent = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"Hiba: {response.StatusCode} - {errorContent}");
-                await Shell.Current.DisplayAlert("Hiba", $"Sikertelen mentés: {response.StatusCode}", "Ok");
-            }
         }
     }
 }
