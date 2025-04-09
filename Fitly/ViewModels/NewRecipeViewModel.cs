@@ -22,7 +22,7 @@ namespace Fitly.ViewModels
         public FileResult SelectedImageFile { get; private set; }
 
         [RelayCommand]
-        public async Task AddImagesAsync()
+        public async Task AddImages()
         {
             try
             {
