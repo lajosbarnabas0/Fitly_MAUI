@@ -43,7 +43,7 @@
                         Placeholder="Cím"
                         PlaceholderColor="LightGray"
                         ReturnType="Done"
-                        Text="{Binding NewPost.title}"
+                        Text="{Binding NewPost.Title}"
                         TextColor="White"
                         VerticalOptions="CenterAndExpand" />
                 </Border>
@@ -67,7 +67,7 @@
                         Placeholder="Leírás"
                         PlaceholderColor="LightGray"
                         ReturnType="Done"
-                        Text="{Binding NewRecipe.description}"
+                        Text="{Binding NewPost.Content}"
                         TextColor="White" />
                 </Border>
             </StackLayout>
@@ -77,7 +77,7 @@
                 Margin="20"
                 Padding="15"
                 BackgroundColor="{x:StaticResource fitly_darkgreen}"
-                Command="{Binding Source={RelativeSource AncestorType={x:Type local:NewRecipePage}}, Path=BindingContext.AddImagesCommand}"
+                Command="{Binding Source={RelativeSource AncestorType={x:Type local:NewPostPage}}, Path=BindingContext.AddImagesCommand}"
                 CommandParameter="{Binding .}"
                 FontAttributes="Bold"
                 HorizontalOptions="CenterAndExpand"
@@ -90,12 +90,12 @@
                 Margin="20"
                 Padding="20"
                 BackgroundColor="{x:StaticResource fitly_green}"
-                Command="{Binding Source={RelativeSource AncestorType={x:Type local:NewRecipePage}}, Path=BindingContext.SaveRecipeCommand}"
+                Command="{Binding Source={RelativeSource AncestorType={x:Type local:NewPostPage}}, Path=BindingContext.SavePostCommand}"
                 CommandParameter="{Binding .}"
                 FontAttributes="Bold"
                 FontSize="16"
                 HorizontalOptions="CenterAndExpand"
-                Text="Recept mentése"
+                Text="Bejegyzés mentése"
                 VerticalOptions="CenterAndExpand" />
 
         </Grid>

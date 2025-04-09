@@ -35,7 +35,7 @@ namespace Fitly.ViewModels
         async Task Appearing()
         {
             string url = "https://bgs.jedlik.eu/hm/backend/public/api/users";
-            int userID = SelectedRecipe.user_id;
+            int? userID = SelectedRecipe.user_id;
             try
             {
                 User? user = await GetData.GetUserById($"{url}/{userID}");
