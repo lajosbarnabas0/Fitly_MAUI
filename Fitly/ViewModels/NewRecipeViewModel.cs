@@ -26,19 +26,22 @@ namespace Fitly.ViewModels
         {
             try
             {
-                var files = await FilePicker.PickMultipleAsync(new PickOptions
+                var result = await FilePicker.PickAsync(new PickOptions
                 {
                     FileTypes = FilePickerFileType.Images,
-                    PickerTitle = "Válassz képeket a recepthez"
+                    PickerTitle = "Válassz egy képet"
                 });
 
-                if (files is null || !files.Any())
-                    return;
+                if (result != null)
+                {
+                    using var stream = await result.OpenReadAsync();
+                    var content = new StreamContent(stream);
+                    content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/jpeg");
 
-                SelectedImageFiles = files.ToList();
-
-                // image_paths most sima string -> pl. fájlnevek vesszővel elválasztva
-                NewRecipe.image_paths = string.Join(",", files.Select(f => f.FileName));
+                    var httpClient = new HttpClient();
+                    var formData = new MultipartFormDataContent();
+                    formData.Add(content, "image_paths[]", result.FileName);
+                }
             }
             catch (Exception ex)
             {
@@ -57,18 +60,6 @@ namespace Fitly.ViewModels
             form.Add(new StringContent(NewRecipe.description), "description");
             form.Add(new StringContent(NewRecipe.ingredients), "ingredients");
             form.Add(new StringContent(NewRecipe.avg_time), "avg_time");
-
-            foreach (var file in SelectedImageFiles)
-            {
-                using var stream = await file.OpenReadAsync();
-                using var ms = new MemoryStream();
-                await stream.CopyToAsync(ms);
-                var bytes = ms.ToArray();
-
-                var fileContent = new ByteArrayContent(bytes);
-                fileContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
-                form.Add(fileContent, "image_paths[]", file.FileName);
-            }
 
             var response = await client.PostAsync(url, form);
 
