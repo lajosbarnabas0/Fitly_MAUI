@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -10,7 +11,6 @@ using CommunityToolkit.Mvvm.Input;
 using Fitly.API;
 using Fitly.Models;
 using Fitly.Pages;
-using static System.Net.WebRequestMethods;
 
 namespace Fitly.ViewModels
 {
@@ -22,10 +22,87 @@ namespace Fitly.ViewModels
         [ObservableProperty]
         List<Meal>? meals;
 
+        [ObservableProperty]
+        public Meal selectedMeal;
+
+        private Dictionary<Meal, double> mealGrams = new();
+        public Meal Meal { get; set; }
+        public string Grams { get; set; }
+
+        [ObservableProperty]
+        public ObservableCollection<Meal> selectedMeals;
+
+        public double Progress => SelectedUser != null && SelectedUser.recommended_calories > 0
+            ? Math.Min(1.0, TotalCalories / SelectedUser.recommended_calories.Value)
+            : 0;
+
+        public Color ProgressColor => Progress >= 1.0 ? Colors.Red : Colors.Green;
+
+        public string CalorieSummary => SelectedUser != null && SelectedUser.recommended_calories.HasValue
+            ? $"{SelectedUser.recommended_calories.Value} / {Math.Round(TotalCalories)}"
+            : $"0 / {Math.Round(TotalCalories)}";
+
+        public double RemainingCalories => SelectedUser != null
+            ? Math.Max(0, (int)(SelectedUser.recommended_calories - TotalCalories))
+            : 0;
+
+        public double TotalCalories => SelectedMeals.Sum(meal =>
+        {
+            if (mealGrams.TryGetValue(meal, out double grams))
+            {
+                return (meal.kcal / 100.0) * grams;
+            }
+            return 0;
+        });
+
+
+        public CalorieViewModel()
+        {
+            SelectedMeals = new ObservableCollection<Meal>();
+            SelectedMeals.CollectionChanged += (s, e) =>
+            {
+                OnPropertyChanged(nameof(TotalCalories));
+                OnPropertyChanged(nameof(RemainingCalories));
+                OnPropertyChanged(nameof(Progress));
+                OnPropertyChanged(nameof(ProgressColor));
+                OnPropertyChanged(nameof(CalorieSummary));
+                OnPropertyChanged(nameof(TotalCalories));    // Frissítjük a kalóriát
+                OnPropertyChanged(nameof(TotalFatFormatted));         // Frissítjük a zsírt
+                OnPropertyChanged(nameof(TotalCarbsFormatted));       // Frissítjük a szénhidrátot
+                OnPropertyChanged(nameof(TotalProteinFormatted));     // Frissítjük a fehérjét
+                OnPropertyChanged(nameof(TotalSaltFormatted));        // Frissítjük a sót
+                OnPropertyChanged(nameof(TotalSugarFormatted));
+            };
+        }
+
+        [RelayCommand]
+        public void AddMeal()
+        {
+            if (SelectedMeal != null && double.TryParse(Grams, out double gramValue) && gramValue > 0)
+            {
+                if (!SelectedMeals.Contains(SelectedMeal))
+                {
+                    SelectedMeals.Add(SelectedMeal);
+                }
+
+                mealGrams[SelectedMeal] = gramValue;
+                Grams = "";
+            }
+        }
+
+        [RelayCommand]
+        public void RemoveMeal(Meal meal)
+        {
+            if (meal != null && SelectedMeals.Contains(meal))
+            {
+                SelectedMeals.Remove(meal);
+            }
+        }
+
         [RelayCommand]
         async Task Appearing()
         {
-            string? userID = SecureStorage.Default.GetAsync("UserId").Result;
+            string? userID = await SecureStorage.Default.GetAsync("UserId");
             var isLoginSet = await SecureStorage.Default.GetAsync("LoginToken");
 
             if (isLoginSet != null)
@@ -43,17 +120,20 @@ namespace Fitly.ViewModels
                     }
                     else
                     {
+                        Console.WriteLine("Hiba történt");
                         return;
                     }
                 }
                 catch (Exception ex)
                 {
+                    Debug.WriteLine($"Hiba történt az Appearing parancsban: {ex.Message}");
+                    Debug.WriteLine($"StackTrace: {ex.StackTrace}");
                     return;
                 }
             }
             else
             {
-                await Shell.Current?.DisplayAlert("Figyelmeztetés", "Ahhoz, hogy tudjunk ajánlott kalóriát számolni, be kell jelentkeznie!", "Ok");
+                await Shell.Current.DisplayAlert("Figyelmeztetés", "Ahhoz, hogy tudjunk ajánlott kalóriát számolni, be kell jelentkeznie!", "Ok");
                 await Shell.Current.GoToAsync("//LoginPage");
             }
         }
@@ -67,84 +147,21 @@ namespace Fitly.ViewModels
                 Shell.Current?.GoToAsync(nameof(ProfilePage));
                 return;
             }
-            CalculateRecommendedCalorie();
         }
 
-        private async void CalculateRecommendedCalorie()
-        {
-            // Ellenőrizzük, hogy a szükséges adatok elérhetők-e
-            if (string.IsNullOrWhiteSpace(SelectedUser.birthday) ||
-                SelectedUser.height == null || SelectedUser.weight == null)
-            {
-                SelectedUser.recommended_calories = null;
-                return;
-            }
+        // Kiszámítja az összesített zsírtartalmat
+        public string TotalFatFormatted => $"{SelectedMeals.Sum(meal => meal.fat).ToString("F2")} g";
 
-            // Próbáljuk meg parse-olni a születési dátumot
-            if (!DateTime.TryParse(SelectedUser.birthday, out DateTime birthDate))
-            {
-                SelectedUser.recommended_calories = null;
-                return;
-            }
+        // Kiszámítja az összesített szénhidrátot
+        public string TotalCarbsFormatted => $"{SelectedMeals.Sum(meal => meal.carb).ToString("F2")} g";
 
-            int age = DateTime.Now.Year - birthDate.Year;
-            if (DateTime.Now < birthDate.AddYears(age))
-                age--;
+        // Kiszámítja az összesített fehérjét
+        public string TotalProteinFormatted => $"{SelectedMeals.Sum(meal => meal.protein).ToString("F2")} g";
 
-            double bmr;
+        // Kiszámítja az összesített sótartalmat
+        public string TotalSaltFormatted => $"{SelectedMeals.Sum(meal => meal.salt).ToString("F2")} g";
 
-            switch (SelectedUser.GenderEnum)
-            {
-                case Gender.male:
-                    bmr = 88.362 + (13.397 * SelectedUser.weight.Value) + (4.799 * SelectedUser.height.Value) - (5.677 * age);
-                    break;
-                case Gender.female:
-                    bmr = 447.593 + (9.247 * SelectedUser.weight.Value) + (3.098 * SelectedUser.height.Value) - (4.330 * age);
-                    break;
-                default:
-                    SelectedUser.recommended_calories = null;
-                    return;
-            }
-
-            SelectedUser.recommended_calories = Math.Round(bmr);
-            
-
-            try
-            {
-                string url = "https://bgs.jedlik.eu/hm/backend/public/api/users/profile";
-                var requestData = new User
-                {
-                    recommended_calories = SelectedUser.recommended_calories,
-                    weight = SelectedUser.weight,
-                    height = SelectedUser.height,
-                    lose_or_gain = SelectedUser.lose_or_gain,
-                    goal_weight = SelectedUser.goal_weight,
-                    birthday = SelectedUser.birthday,
-                };
-
-                var response = await SendData.UpdateProfile(url, requestData);
-
-                if (response != null)
-                {
-                    if (response != null)
-                    {
-                        Console.WriteLine(response.message);
-                    }
-                    else
-                    {
-                        await Shell.Current.DisplayAlert("Hiba", "Sikertelen küldés", "Ok");
-                    }
-                }
-                else
-                {
-                    await Shell.Current.DisplayAlert("Hiba", "Hiba történt!", "Ok");
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
+        // Kiszámítja az összesített cukortartalmat
+        public string TotalSugarFormatted => $"{SelectedMeals.Sum(meal => meal.sugar).ToString("F2")} g";
     }
 }

@@ -85,8 +85,8 @@
                     <CarouselView
                         Grid.Row="0"
                         IndicatorView="indicatorView"
-                        ItemsSource="{Binding SelectedRecipe.image_urls}"
-                        IsSwipeEnabled="{Binding SwipeEnabled}">
+                        IsSwipeEnabled="{Binding SwipeEnabled}"
+                        ItemsSource="{Binding SelectedRecipe.image_urls}">
                         <CarouselView.ItemTemplate>
                             <DataTemplate>
                                 <Image

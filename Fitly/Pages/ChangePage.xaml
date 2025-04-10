@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
-             x:Class="Fitly.Pages.ChangePage"
-             BackgroundColor="{x:StaticResource fitly_darkgray}"
-             Shell.NavBarIsVisible="False"
-             Title="ChangePage">
-
+<ContentPage
+    x:Class="Fitly.Pages.ChangePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+    Title="ChangePage"
+    BackgroundColor="{x:StaticResource fitly_darkgray}"
+    Shell.NavBarIsVisible="False">
 
     <Grid RowDefinitions="0.2*,1.5*">
         <Border HorizontalOptions="Center" Stroke="{x:StaticResource fitly_darkgray}">
@@ -26,70 +26,70 @@
 
         <Grid Grid.Row="1" RowDefinitions="*,*">
             <Border
-            BackgroundColor="{x:StaticResource Gray900}"
-            HeightRequest="100"
-            HorizontalOptions="Center"
-            Stroke="{x:StaticResource Gray900}"
-            StrokeShape="RoundRectangle 15"
-            StyleId="CaloriePage"
-            VerticalOptions="Center"
-            WidthRequest="300">
+                BackgroundColor="{x:StaticResource Gray900}"
+                HeightRequest="100"
+                HorizontalOptions="Center"
+                Stroke="{x:StaticResource Gray900}"
+                StrokeShape="RoundRectangle 15"
+                StyleId="CaloriePage"
+                VerticalOptions="Center"
+                WidthRequest="300">
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Tapped="CaloriePage_Tapped" />
                 </Border.GestureRecognizers>
                 <StackLayout
-                Padding="10"
-                Orientation="Horizontal"
-                Spacing="20">
-                    <Label
                     Padding="10"
-                    FontAutoScalingEnabled="True"
-                    FontSize="18"
-                    HorizontalTextAlignment="Center"
-                    LineBreakMode="WordWrap"
-                    Text="Kalória számlálás"
-                    TextColor="White"
-                    VerticalTextAlignment="Center" />
+                    Orientation="Horizontal"
+                    Spacing="20">
+                    <Label
+                        Padding="10"
+                        FontAutoScalingEnabled="True"
+                        FontSize="18"
+                        HorizontalTextAlignment="Center"
+                        LineBreakMode="WordWrap"
+                        Text="Kalória számlálás"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
 
                     <Image
-                    HeightRequest="20"
-                    Source="right_arrow_24"
-                    WidthRequest="20" />
+                        HeightRequest="20"
+                        Source="right_arrow_24"
+                        WidthRequest="20" />
                 </StackLayout>
             </Border>
 
             <Border
-            x:Name="recipes_BRD"
-            Grid.Row="1"
-            BackgroundColor="{x:StaticResource Gray900}"
-            HeightRequest="100"
-            HorizontalOptions="Center"
-            Stroke="{x:StaticResource Gray900}"
-            StrokeShape="RoundRectangle 15"
-            StyleId="recipes_BRD"
-            VerticalOptions="Center"
-            WidthRequest="300">
+                x:Name="recipes_BRD"
+                Grid.Row="1"
+                BackgroundColor="{x:StaticResource Gray900}"
+                HeightRequest="100"
+                HorizontalOptions="Center"
+                Stroke="{x:StaticResource Gray900}"
+                StrokeShape="RoundRectangle 15"
+                StyleId="recipes_BRD"
+                VerticalOptions="Center"
+                WidthRequest="300">
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer />
                 </Border.GestureRecognizers>
                 <StackLayout
-                Padding="10"
-                Orientation="Horizontal"
-                Spacing="20">
-                    <Label
                     Padding="10"
-                    FontAutoScalingEnabled="True"
-                    FontSize="18"
-                    HorizontalTextAlignment="Center"
-                    LineBreakMode="WordWrap"
-                    Text="Edzés indítása"
-                    TextColor="White"
-                    VerticalTextAlignment="Center" />
+                    Orientation="Horizontal"
+                    Spacing="20">
+                    <Label
+                        Padding="10"
+                        FontAutoScalingEnabled="True"
+                        FontSize="18"
+                        HorizontalTextAlignment="Center"
+                        LineBreakMode="WordWrap"
+                        Text="Edzés indítása"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
 
                     <Image
-                    HeightRequest="20"
-                    Source="right_arrow_24"
-                    WidthRequest="20" />
+                        HeightRequest="20"
+                        Source="right_arrow_24"
+                        WidthRequest="20" />
                 </StackLayout>
             </Border>
         </Grid>

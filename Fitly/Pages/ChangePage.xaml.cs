@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using CommunityToolkit.Maui.Views;
 using Fitly.Navigation;
 using Fitly.ViewModels;
@@ -18,6 +19,13 @@ public partial class ChangePage : ContentPage
 
     private void CaloriePage_Tapped(object sender, TappedEventArgs e)
     {
-        Shell.Current.GoToAsync("CaloriePage");
-    }
-}
+		try
+		{
+			Shell.Current.GoToAsync("CaloriePage");
+		}
+		catch (Exception ex)
+		{
+            Debug.WriteLine($"Navigációs hiba: {ex.Message}");
+            Debug.WriteLine($"Részletek: {ex.StackTrace}");
+        }
+    }}
