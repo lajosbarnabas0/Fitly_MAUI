@@ -31,10 +31,10 @@ namespace Fitly.Models
         public Gender GenderEnum { get; private set; }
         public string birthday { get; set; }
         public TimeSpan? email_verified_at { get; set; }
-        public float? height { get; set; }
+        public double? height { get; set; }
         public double? weight { get; set; }
         public double? recommended_calories { get; set; }
-        public double? lose_or_gain { get; set; }
+        public bool? lose_or_gain { get; set; }
         public double? goal_weight { get; set; }
         public bool? admin { get; set; }
 

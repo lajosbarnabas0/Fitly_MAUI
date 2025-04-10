@@ -14,5 +14,10 @@ namespace Fitly.API
             return await HTTPRequest<User>.Get(url);
         }
 
+        public static async Task<Meal> GetMeals(string url)
+        {
+            return await HTTPRequest<Meal>.Get(url);
+        }
+
     }
 }
