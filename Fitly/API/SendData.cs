@@ -11,6 +11,7 @@ namespace Fitly.API
     {
         public static async Task<UpdateProfileResponse> UpdateProfile(string url, object data)
         {
+            // Explicit típusmegadás
             return await HTTPRequest<UpdateProfileResponse>.Put(url, data);
         }
 

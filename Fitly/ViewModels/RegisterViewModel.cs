@@ -45,7 +45,6 @@ namespace Fitly.ViewModels
             {
                 "Férfi" => "male",
                 "Nő" => "female",
-                "Egyéb" => "other",
             };
         }
 
@@ -79,6 +78,7 @@ namespace Fitly.ViewModels
             {
                 if (response != null)
                 {
+                    await Shell.Current.DisplayAlert("Információ", "Sikeres regisztráció!", "Ok");
                     await Shell.Current.GoToAsync("//LoginPage");
                     ResetFields();
                 }

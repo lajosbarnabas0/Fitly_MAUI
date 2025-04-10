@@ -8,6 +8,10 @@
     BackgroundColor="{x:StaticResource fitly_darkgray}"
     Shell.NavBarIsVisible="False">
 
+    <ContentPage.Behaviors>
+        <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing"/>
+    </ContentPage.Behaviors>
+
     <Grid RowDefinitions="0.3*,1.3*">
         <Border HorizontalOptions="Center" Stroke="{x:StaticResource fitly_darkgray}">
             <StackLayout Orientation="Horizontal">
@@ -51,15 +55,9 @@
                     x:Name="FoodPicker"
                     Title="Mit ettél?"
                     BackgroundColor="White"
-                    TextColor="Black">
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Csirkemell</x:String>
-                            <x:String>Rizs</x:String>
-                            <x:String>Tojás</x:String>
-                            <x:String>Alma</x:String>
-                        </x:Array>
-                    </Picker.ItemsSource>
+                    TextColor="Black"
+                    ItemsSource="{Binding Meals}"
+                    ItemDisplayBinding="{Binding name}">
                 </Picker>
 
                 <!--  Mennyiség megadása  -->
@@ -78,8 +76,9 @@
                 <!--  Hozzáadás gomb  -->
                 <Button
                     BackgroundColor="Green"
-                    Text="Hozzáadás"
-                    TextColor="White" />
+                    Text="Számol"
+                    TextColor="White"
+                    Command="{Binding CalculateCalorieCommand}"/>
 
 
             </VerticalStackLayout>

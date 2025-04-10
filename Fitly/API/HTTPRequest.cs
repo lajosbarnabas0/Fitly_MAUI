@@ -8,16 +8,16 @@ using static System.Net.WebRequestMethods;
 
 namespace Fitly.API
 {
-    public class HTTPRequest<T> where T : class
+    public static class HTTPRequest<T> where T : class
     {
         private static readonly HttpClient client = new();
 
-        private static string? loginToken = SecureStorage.Default.GetAsync("LoginToken").Result;
 
         public static async Task<T?> Get(string url)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, url);
             request.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
+            var loginToken = await SecureStorage.Default.GetAsync("LoginToken");
             // Authorization fejléc hozzáadása, ha van token
             if (loginToken != null)
             {
@@ -26,7 +26,7 @@ namespace Fitly.API
 
             using var response = await client.SendAsync(request).ConfigureAwait(false);
 
-           if (response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
             {
                 string resultString = await response.Content.ReadAsStringAsync();
                 return JsonSerializer.Deserialize<T>(resultString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
@@ -43,7 +43,7 @@ namespace Fitly.API
                 var content = new StringContent(JsonSerializer.Serialize(data), Encoding.UTF8, "application/json");
                 var request = new HttpRequestMessage(HttpMethod.Post, url) { Content = content };
                 request.Headers.Add("Accept", "application/json");
-         
+                var loginToken = await SecureStorage.Default.GetAsync("LoginToken");
                 if (loginToken != null)
                 {
                     request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", loginToken);
@@ -75,7 +75,7 @@ namespace Fitly.API
                 var content = new StringContent(JsonSerializer.Serialize(data), Encoding.UTF8, "application/json");
                 var request = new HttpRequestMessage(HttpMethod.Put, url) { Content = content };
                 request.Headers.Add("Accept", "application/json");
-
+                var loginToken = await SecureStorage.Default.GetAsync("LoginToken");
                 // Authorization fejléc hozzáadása, ha van token
                 if (loginToken != null)
                 {
@@ -98,6 +98,50 @@ namespace Fitly.API
                 });
             }
             return null;
+        }
+
+        public static async Task<T?> Patch(string url, object data)
+        {
+            try
+            {
+                using var client = new HttpClient();
+
+                // Kérés törzsének létrehozása JSON formátumban
+                var content = new StringContent(JsonSerializer.Serialize(data), Encoding.UTF8, "application/json");
+
+                // PATCH kérés létrehozása
+                var request = new HttpRequestMessage(new HttpMethod("PATCH"), url)
+                {
+                    Content = content
+                };
+
+                request.Headers.Add("Accept", "application/json");
+
+                // Token beállítása (ha elérhető)
+                var loginToken = await SecureStorage.Default.GetAsync("LoginToken");
+                if (loginToken != null)
+                {
+                    request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", loginToken);
+                }
+
+                using var response = await client.SendAsync(request).ConfigureAwait(false);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    // Sikeres válasz feldolgozása
+                    string resultString = await response.Content.ReadAsStringAsync();
+                    return JsonSerializer.Deserialize<T>(resultString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                }
+            }
+            catch (Exception ex)
+            {
+                await MainThread.InvokeOnMainThreadAsync(async () =>
+                {
+                    await Shell.Current.DisplayAlert("Hiba", $"Hiba történt a PATCH kérés során: {ex.Message}", "OK");
+                });
+            }
+
+            return default;
         }
     }
 }

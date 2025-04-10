@@ -38,7 +38,7 @@ namespace Fitly.ViewModels
                 return;
             }
         }
-
+         
         [RelayCommand]
         async Task SavePost()
         {

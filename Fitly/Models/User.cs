@@ -34,7 +34,26 @@ namespace Fitly.Models
         public double? height { get; set; }
         public double? weight { get; set; }
         public double? recommended_calories { get; set; }
-        public bool? lose_or_gain { get; set; }
+
+        private string _loseOrGain;
+
+        public string lose_or_gain
+        {
+            get => _loseOrGain;
+            set
+            {
+                if (Enum.TryParse(value, true, out LoseOrGain parsedValue))
+                    LoseOrGainEnum = parsedValue;
+                _loseOrGain = value;
+            }
+        }
+
+        [JsonIgnore]
+        public LoseOrGain LoseOrGainEnum
+        {
+            get => lose_or_gain == "lose" ? LoseOrGain.Fogyás : LoseOrGain.Hízás;
+            set => lose_or_gain = value == LoseOrGain.Fogyás ? "lose" : "gain";
+        }
         public double? goal_weight { get; set; }
         public bool? admin { get; set; }
 
@@ -46,9 +65,15 @@ namespace Fitly.Models
 
         [EnumMember(Value = "male")]
         male,
+    }
 
-        [EnumMember(Value = "other")]
-        other
+    public enum LoseOrGain
+    {
+        [EnumMember(Value = "lose")]
+        Fogyás,
+
+        [EnumMember(Value = "gain")]
+        Hízás
     }
 
 }
