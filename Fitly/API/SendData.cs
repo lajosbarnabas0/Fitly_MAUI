@@ -14,6 +14,17 @@ namespace Fitly.API
             // Explicit típusmegadás
             return await HTTPRequest<UpdateProfileResponse>.Put(url, data);
         }
-
+        
+        public static async Task<Meal> SendMeal(string url, object data)
+        {
+            // Explicit típusmegadás
+            return await HTTPRequest<Meal>.Post(url, data);
+        }
+        
+        public static async Task<CommentRequest> SendComment(string url, object data)
+        {
+            // Explicit típusmegadás
+            return await HTTPRequest<CommentRequest>.Post(url, data);
+        }
     }
 }

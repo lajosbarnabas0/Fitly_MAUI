@@ -44,7 +44,8 @@
                         PlaceholderColor="LightGray"
                         ReturnType="Done"
                         Text="{Binding NewRecipe.title}"
-                        TextColor="White" />
+                        TextColor="White"
+                        VerticalOptions="CenterAndExpand" />
                 </Border>
             </StackLayout>
 

@@ -3,9 +3,16 @@
     x:Class="Fitly.Pages.PostDetailPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:Fitly.Models"
+    xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
     BackgroundColor="{x:StaticResource fitly_darkgray}"
     Loaded="ContentPage_Loaded"
     Shell.NavBarIsVisible="True">
+
+    <ContentPage.Behaviors>
+        <tool:StatusBarBehavior StatusBarColor="{x:StaticResource fitly_darkgray}" />
+        <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
 
     <ContentPage.Resources>
         <Style TargetType="Label">
@@ -20,7 +27,7 @@
             BackgroundColor="{x:StaticResource Gray900}"
             Stroke="{x:StaticResource Gray900}"
             StrokeShape="RoundRectangle 10">
-            <Grid Margin="10" RowDefinitions="0.3*,0.3*,0.1*,*,*,*">
+            <Grid Margin="10" RowDefinitions="0.3*,0.3*,0.1*,*,*,0.3*,*,*">
                 <Label
                     Grid.Row="0"
                     FontAttributes="Bold"
@@ -69,23 +76,53 @@
                         VerticalOptions="Center" />
                 </Grid>
 
-                <Border
+                <Label
                     Grid.Row="5"
-                    BackgroundColor="{x:StaticResource Gray700}"
-                    Stroke="{x:StaticResource Gray700}"
-                    StrokeShape="RoundRectangle 15"
-                    VerticalOptions="StartAndExpand">
-                    <Entry
-                        x:Name="comment_ENT"
-                        Margin="5"
-                        IsEnabled="{Binding commentEnabled}"
-                        Text="Komment entry" />
-                </Border>
+                    FontSize="20"
+                    Text="Kommentek:" />
 
-                <CollectionView ItemsSource="{Binding Comments}">
+                <StackLayout
+                    Grid.Row="6"
+                    HorizontalOptions="CenterAndExpand"
+                    Orientation="Horizontal"
+                    WidthRequest="300">
+                    <Border
+                        Grid.Row="5"
+                        BackgroundColor="{x:StaticResource Gray700}"
+                        HorizontalOptions="CenterAndExpand"
+                        Stroke="{x:StaticResource Gray700}"
+                        StrokeShape="RoundRectangle 15"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="180">
+                        <Entry
+                            x:Name="comment_ENT"
+                            Margin="5"
+                            FontAutoScalingEnabled="True"
+                            IsEnabled="{Binding CommentEnabled}"
+                            Placeholder="Írjon hozzászólást..."
+                            PlaceholderColor="White"
+                            Text="{Binding Comment}" />
+                    </Border>
+
+                    <Button
+                        BackgroundColor="{x:StaticResource fitly_green}"
+                        Command="{Binding SendCommentCommand}"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Küldés"
+                        VerticalOptions="CenterAndExpand" />
+                </StackLayout>
+
+
+                <CollectionView Grid.Row="7" ItemsSource="{Binding Comments}">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Label Text="{Binding .}" />
+                        <DataTemplate x:DataType="models:Comment">
+                            <Border
+                                Padding="5"
+                                BackgroundColor="{x:StaticResource Gray700}"
+                                Stroke="{x:StaticResource Gray700}"
+                                StrokeShape="RoundRectangle 5">
+                                <Label Text="{Binding content}" />
+                            </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

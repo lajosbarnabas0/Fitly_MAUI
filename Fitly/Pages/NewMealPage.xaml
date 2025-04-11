@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fitly.Pages.NewMealPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+    BackgroundColor="{x:StaticResource fitly_darkgray}">
+
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontFamily" Value="Montserrat" />
+        </Style>
+        <Style TargetType="Entry">
+            <Setter Property="TextColor" Value="White" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <Grid RowDefinitions="*,*,*,*,*,*,*,*,*">
+            <Label
+                FontSize="22"
+                HorizontalOptions="CenterAndExpand"
+                Text="Új étel hozzáadása"
+                VerticalOptions="StartAndExpand" />
+            <StackLayout
+                Grid.Row="1"
+                HorizontalOptions="CenterAndExpand"
+                Orientation="Horizontal"
+                Spacing="20"
+                VerticalOptions="StartAndExpand">
+                <Label
+                    Margin="10"
+                    FontSize="16"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Étel neve"
+                    VerticalOptions="CenterAndExpand" />
+                <Border
+                    BackgroundColor="{x:StaticResource Gray900}"
+                    HorizontalOptions="CenterAndExpand"
+                    Stroke="{x:StaticResource Gray900}"
+                    StrokeShape="RoundRectangle 10"
+                    VerticalOptions="CenterAndExpand">
+                    <Entry
+                        Text="{Binding NewMeal.name}"
+                        VerticalOptions="CenterAndExpand"
+                        VerticalTextAlignment="Center"
+                        WidthRequest="120" />
+                </Border>
+            </StackLayout>
+
+            <StackLayout
+                Grid.Row="2"
+                HorizontalOptions="CenterAndExpand"
+                Orientation="Horizontal"
+                Spacing="20"
+                VerticalOptions="StartAndExpand">
+                <Label
+                    Margin="10"
+                    FontSize="16"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Kalória érték"
+                    VerticalOptions="CenterAndExpand" />
+                <Border
+                    BackgroundColor="{x:StaticResource Gray900}"
+                    HorizontalOptions="CenterAndExpand"
+                    Stroke="{x:StaticResource Gray900}"
+                    StrokeShape="RoundRectangle 10"
+                    VerticalOptions="CenterAndExpand">
+                    <Entry
+                        Text="{Binding NewMeal.kcal}"
+                        VerticalOptions="CenterAndExpand"
+                        VerticalTextAlignment="Center"
+                        WidthRequest="120" />
+                </Border>
+            </StackLayout>
+
+            <StackLayout
+                Grid.Row="3"
+                HorizontalOptions="CenterAndExpand"
+                Orientation="Horizontal"
+                Spacing="20"
+                VerticalOptions="StartAndExpand">
+                <Label
+                    Margin="10"
+                    FontSize="16"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Zsír érték"
+                    VerticalOptions="CenterAndExpand" />
+                <Border
+                    BackgroundColor="{x:StaticResource Gray900}"
+                    HorizontalOptions="CenterAndExpand"
+                    Stroke="{x:StaticResource Gray900}"
+                    StrokeShape="RoundRectangle 10"
+                    VerticalOptions="CenterAndExpand">
+                    <Entry
+                        Text="{Binding NewMeal.fat}"
+                        VerticalOptions="CenterAndExpand"
+                        VerticalTextAlignment="Center"
+                        WidthRequest="120" />
+                </Border>
+            </StackLayout>
+
+            <StackLayout
+                Grid.Row="4"
+                HorizontalOptions="CenterAndExpand"
+                Orientation="Horizontal"
+                Spacing="20"
+                VerticalOptions="StartAndExpand">
+                <Label
+                    Margin="10"
+                    FontSize="16"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Szénhidrát érték"
+                    VerticalOptions="CenterAndExpand" />
+                <Border
+                    BackgroundColor="{x:StaticResource Gray900}"
+                    HorizontalOptions="CenterAndExpand"
+                    Stroke="{x:StaticResource Gray900}"
+                    StrokeShape="RoundRectangle 10"
+                    VerticalOptions="CenterAndExpand">
+                    <Entry
+                        Text="{Binding NewMeal.carb}"
+                        VerticalOptions="CenterAndExpand"
+                        VerticalTextAlignment="Center"
+                        WidthRequest="120" />
+                </Border>
+            </StackLayout>
+
+            <StackLayout
+                Grid.Row="5"
+                HorizontalOptions="CenterAndExpand"
+                Orientation="Horizontal"
+                Spacing="20"
+                VerticalOptions="StartAndExpand">
+                <Label
+                    Margin="10"
+                    FontSize="16"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Fehérje érték"
+                    VerticalOptions="CenterAndExpand" />
+                <Border
+                    BackgroundColor="{x:StaticResource Gray900}"
+                    HorizontalOptions="CenterAndExpand"
+                    Stroke="{x:StaticResource Gray900}"
+                    StrokeShape="RoundRectangle 10"
+                    VerticalOptions="CenterAndExpand">
+                    <Entry
+                        Text="{Binding NewMeal.protein}"
+                        VerticalOptions="CenterAndExpand"
+                        VerticalTextAlignment="Center"
+                        WidthRequest="120" />
+                </Border>
+            </StackLayout>
+
+            <StackLayout
+                Grid.Row="6"
+                HorizontalOptions="CenterAndExpand"
+                Orientation="Horizontal"
+                Spacing="20"
+                VerticalOptions="StartAndExpand">
+                <Label
+                    Margin="10"
+                    FontSize="16"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Cukor mennyiség"
+                    VerticalOptions="CenterAndExpand" />
+                <Border
+                    BackgroundColor="{x:StaticResource Gray900}"
+                    HorizontalOptions="CenterAndExpand"
+                    Stroke="{x:StaticResource Gray900}"
+                    StrokeShape="RoundRectangle 10"
+                    VerticalOptions="CenterAndExpand">
+                    <Entry
+                        Text="{Binding NewMeal.sugar}"
+                        VerticalOptions="CenterAndExpand"
+                        VerticalTextAlignment="Center"
+                        WidthRequest="120" />
+                </Border>
+            </StackLayout>
+
+            <StackLayout
+                Grid.Row="7"
+                HorizontalOptions="CenterAndExpand"
+                Orientation="Horizontal"
+                Spacing="20"
+                VerticalOptions="StartAndExpand">
+                <Label
+                    Margin="10"
+                    FontSize="16"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Só mennyiség"
+                    VerticalOptions="CenterAndExpand" />
+                <Border
+                    BackgroundColor="{x:StaticResource Gray900}"
+                    HorizontalOptions="CenterAndExpand"
+                    Stroke="{x:StaticResource Gray900}"
+                    StrokeShape="RoundRectangle 10"
+                    VerticalOptions="CenterAndExpand">
+                    <Entry
+                        Text="{Binding NewMeal.salt}"
+                        VerticalOptions="CenterAndExpand"
+                        VerticalTextAlignment="Center"
+                        WidthRequest="120" />
+                </Border>
+            </StackLayout>
+
+            <Button
+                Grid.Row="8"
+                Padding="40,20,40,20"
+                Command="{Binding SaveMealCommand}"
+                HorizontalOptions="CenterAndExpand"
+                Text="Mentés"
+                VerticalOptions="CenterAndExpand" />
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

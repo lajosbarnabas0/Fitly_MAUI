@@ -66,11 +66,11 @@ namespace Fitly.ViewModels
                 OnPropertyChanged(nameof(Progress));
                 OnPropertyChanged(nameof(ProgressColor));
                 OnPropertyChanged(nameof(CalorieSummary));
-                OnPropertyChanged(nameof(TotalCalories));    // Frissítjük a kalóriát
-                OnPropertyChanged(nameof(TotalFatFormatted));         // Frissítjük a zsírt
-                OnPropertyChanged(nameof(TotalCarbsFormatted));       // Frissítjük a szénhidrátot
-                OnPropertyChanged(nameof(TotalProteinFormatted));     // Frissítjük a fehérjét
-                OnPropertyChanged(nameof(TotalSaltFormatted));        // Frissítjük a sót
+                OnPropertyChanged(nameof(TotalCalories));
+                OnPropertyChanged(nameof(TotalFatFormatted));
+                OnPropertyChanged(nameof(TotalCarbsFormatted));
+                OnPropertyChanged(nameof(TotalProteinFormatted));
+                OnPropertyChanged(nameof(TotalSaltFormatted));
                 OnPropertyChanged(nameof(TotalSugarFormatted));
             };
         }
@@ -97,6 +97,12 @@ namespace Fitly.ViewModels
             {
                 SelectedMeals.Remove(meal);
             }
+        }
+
+        [RelayCommand]
+        async Task NewMeal()
+        {
+            await Shell.Current.GoToAsync(nameof(NewMealPage));
         }
 
         [RelayCommand]

@@ -20,5 +20,12 @@ namespace Fitly.API
             return await HTTPRequest<List<Meal>>.Get(url);
         }
 
+        public static async Task<List<Comment>?> GetComment(string url)
+        {
+            var root = await HTTPRequest<CommentRoot>.Get(url);
+
+            return root?.Comments;
+        }
+
     }
 }

@@ -88,6 +88,7 @@
                             ItemsSource="{Binding Meals}"
                             SelectedItem="{Binding SelectedMeal}"
                             TextColor="White"
+                            TitleColor="White"
                             VerticalOptions="CenterAndExpand" />
                     </Border>
 
@@ -114,6 +115,7 @@
                             HorizontalOptions="CenterAndExpand"
                             Keyboard="Numeric"
                             Placeholder="Pl. 150"
+                            PlaceholderColor="White"
                             Text="{Binding Grams}"
                             VerticalOptions="CenterAndExpand" />
 
@@ -121,26 +123,46 @@
                 </HorizontalStackLayout>
 
                 <!--  Hozzáadás gomb  -->
-                <Button
-                    Grid.Row="5"
-                    Padding="40,20,40,20"
-                    BackgroundColor="{x:StaticResource fitly_green}"
-                    Command="{Binding AddMealCommand}"
-                    FontAttributes="Bold"
-                    Margin="10"
-                    FontSize="16"
-                    HorizontalOptions="CenterAndExpand"
-                    Text="Számol"
-                    TextColor="White"
-                    VerticalOptions="CenterAndExpand" />
 
-                <Grid Grid.Row="6" RowDefinitions="*,*,*,*,*" RowSpacing="15">
+                <StackLayout Grid.Row="5" Orientation="Horizontal">
+                    <Button
+                        Grid.Row="5"
+                        Margin="10"
+                        Padding="40,20,40,20"
+                        BackgroundColor="{x:StaticResource fitly_green}"
+                        Command="{Binding AddMealCommand}"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Számítás"
+                        TextColor="White"
+                        VerticalOptions="CenterAndExpand" />
+
+                    <Button
+                        Grid.Row="5"
+                        Margin="10"
+                        Padding="40,20,40,20"
+                        BackgroundColor="{x:StaticResource fitly_green}"
+                        Command="{Binding NewMealCommand}"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Új étel"
+                        TextColor="White"
+                        VerticalOptions="CenterAndExpand" />
+
+                </StackLayout>
+
+                <Grid
+                    Grid.Row="6"
+                    RowDefinitions="*,*,*,*,*"
+                    RowSpacing="15">
                     <Border
                         Grid.Row="0"
+                        Padding="10"
                         BackgroundColor="{x:StaticResource Gray900}"
                         HorizontalOptions="CenterAndExpand"
                         Stroke="{x:StaticResource Gray900}"
-                        Padding="10"
                         StrokeShape="RoundRectangle 10"
                         VerticalOptions="CenterAndExpand">
                         <Label
@@ -152,10 +174,10 @@
 
                     <Border
                         Grid.Row="1"
+                        Padding="10"
                         BackgroundColor="{x:StaticResource Gray900}"
                         HorizontalOptions="CenterAndExpand"
                         Stroke="{x:StaticResource Gray900}"
-                        Padding="10"
                         StrokeShape="RoundRectangle 10"
                         VerticalOptions="CenterAndExpand">
                         <Label
@@ -167,10 +189,10 @@
 
                     <Border
                         Grid.Row="2"
+                        Padding="10"
                         BackgroundColor="{x:StaticResource Gray900}"
                         HorizontalOptions="CenterAndExpand"
                         Stroke="{x:StaticResource Gray900}"
-                        Padding="10"
                         StrokeShape="RoundRectangle 10"
                         VerticalOptions="CenterAndExpand">
                         <Label
@@ -182,9 +204,9 @@
 
                     <Border
                         Grid.Row="3"
+                        Padding="10"
                         BackgroundColor="{x:StaticResource Gray900}"
                         HorizontalOptions="CenterAndExpand"
-                        Padding="10"
                         Stroke="{x:StaticResource Gray900}"
                         StrokeShape="RoundRectangle 10"
                         VerticalOptions="CenterAndExpand">
@@ -197,11 +219,11 @@
 
                     <Border
                         Grid.Row="4"
+                        Padding="10"
                         BackgroundColor="{x:StaticResource Gray900}"
                         HorizontalOptions="CenterAndExpand"
                         Stroke="{x:StaticResource Gray900}"
                         StrokeShape="RoundRectangle 10"
-                        Padding="10"
                         VerticalOptions="CenterAndExpand">
                         <Label
                             FontSize="16"

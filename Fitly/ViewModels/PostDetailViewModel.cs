@@ -16,10 +16,14 @@ namespace Fitly.ViewModels
     [QueryProperty(nameof(SelectedPost), "Post")]
     public partial class PostDetailViewModel : ObservableObject
     {
-        bool commentEnabled;
+        [ObservableProperty]
+        bool commentEnabled = false;
 
         [ObservableProperty]
-        string comments;
+        CommentRequest comment;
+
+        [ObservableProperty]
+        List<Comment> comments = new List<Comment>();
 
         [ObservableProperty]
         public Post selectedPost;
@@ -30,70 +34,73 @@ namespace Fitly.ViewModels
         //    "https://macska-nevek.hu/wp-content/uploads/2024/04/1-1024x576.jpg"
         //];
 
-        partial void OnSelectedPostChanged(Post value)
-        {
-            if (SelectedPost.image_path != null)
-            {
-                foreach (var item in SelectedPost.image_path)
-                {
-                    Image_paths.Add($"https://bgs.jedlik.eu/hm/backend/public/storage/" + item);
-                }
-            }
-        }
-
 
         [RelayCommand]
         async Task Appearing()
         {
-            string? isLoginSet = SecureStorage.Default.GetAsync("LoginToken").Result;
-
-            if (isLoginSet != null)
+            try
             {
-                try
+                string? isLoginSet = SecureStorage.Default.GetAsync("LoginToken").Result;
+                string url = $"https://bgs.jedlik.eu/hm/backend/public/api/posts/{SelectedPost.id}/comments";
+                var commentsFromApi = await GetData.GetComment(url);
+
+                if (isLoginSet != null)
                 {
                     commentEnabled = true;
+
                 }
-                catch (Exception ex)
+                else 
                 {
-                    return;
+                    commentEnabled = false;
+                }
+
+                if(commentsFromApi != null)
+                {
+                    Comments.Clear();
+                    foreach(var comment in commentsFromApi)
+                    {
+                        Comments.Add(comment);
+                    }
                 }
             }
-            else 
+            catch (Exception ex)
             {
-                commentEnabled = false;
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                return;
             }
         }
 
-        //[RelayCommand]
-        //async Task SendComment()
-        //{
-        //    string url = $"https://bgs.jedlik.eu/hm/backend/public/api/posts/{SelectedPost.id}/comments";
-        //    var requestData = new LoginUserRequest
-        //    {
-                
-        //    };
+        [RelayCommand]
+        async Task SendComment()
+        {
+            string url = $"https://bgs.jedlik.eu/hm/backend/public/api/posts/{SelectedPost.id}/comments";
+            var requestData = new CommentRequest
+            {
+                content = Selected
+            };
 
-        //    var response = await AuthData.LoginUser(url, requestData);
+            var response = await AuthData.LoginUser(url, requestData);
 
-        //    if (response != null)
-        //    {
-        //        if (response.token != null)
-        //        {
-        //            await SecureStorage.Default.SetAsync("LoginToken", response.token);
-        //            await SecureStorage.Default.SetAsync("UserId", response.user.id.ToString());
-        //            await Shell.Current.GoToAsync("//ProfilePage");
+            if (response != null)
+            {
+                if (response.token != null)
+                {
+                    await SecureStorage.Default.SetAsync("LoginToken", response.token);
+                    await SecureStorage.Default.SetAsync("UserId", response.user.id.ToString());
+                    await Shell.Current.GoToAsync("//ProfilePage");
 
-        //        }
-        //        else
-        //        {
-        //            await Shell.Current.DisplayAlert("Hiba", "Sikertelen bejelentkezés", "Ok");
-        //        }
-        //    }
-        //    else
-        //    {
-        //        await Shell.Current.DisplayAlert("Hiba", "Kérlek add meg az adataid!", "Ok");
-        //    }
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Hiba", "Sikertelen bejelentkezés", "Ok");
+                }
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Hiba", "Kérlek add meg az adataid!", "Ok");
+            }
 
-        //}
+        }
     }
 }

@@ -92,6 +92,9 @@
 	  <MauiXaml Update="Pages\MainCommunityPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\NewMealPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\NewPostPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

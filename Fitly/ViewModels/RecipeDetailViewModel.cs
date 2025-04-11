@@ -34,6 +34,11 @@ namespace Fitly.ViewModels
         [RelayCommand]
         async Task Appearing()
         {
+            if(SelectedRecipe.image_urls == null)
+            {
+                await Shell.Current.DisplayAlert("Hiba", "Hiba történt a recept betöltésekor!", "Ok");
+                return;
+            }
             string url = "https://bgs.jedlik.eu/hm/backend/public/api/users";
             int? userID = SelectedRecipe.user_id;
             try
