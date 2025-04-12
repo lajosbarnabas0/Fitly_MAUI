@@ -68,6 +68,7 @@
                     StrokeShape="RoundRectangle 10"
                     VerticalOptions="CenterAndExpand">
                     <Entry
+                        Keyboard="Numeric"
                         Text="{Binding NewMeal.kcal}"
                         VerticalOptions="CenterAndExpand"
                         VerticalTextAlignment="Center"
@@ -94,6 +95,7 @@
                     StrokeShape="RoundRectangle 10"
                     VerticalOptions="CenterAndExpand">
                     <Entry
+                        Keyboard="Numeric"
                         Text="{Binding NewMeal.fat}"
                         VerticalOptions="CenterAndExpand"
                         VerticalTextAlignment="Center"
@@ -120,6 +122,7 @@
                     StrokeShape="RoundRectangle 10"
                     VerticalOptions="CenterAndExpand">
                     <Entry
+                        Keyboard="Numeric"
                         Text="{Binding NewMeal.carb}"
                         VerticalOptions="CenterAndExpand"
                         VerticalTextAlignment="Center"
@@ -146,6 +149,7 @@
                     StrokeShape="RoundRectangle 10"
                     VerticalOptions="CenterAndExpand">
                     <Entry
+                        Keyboard="Numeric"
                         Text="{Binding NewMeal.protein}"
                         VerticalOptions="CenterAndExpand"
                         VerticalTextAlignment="Center"
@@ -172,6 +176,7 @@
                     StrokeShape="RoundRectangle 10"
                     VerticalOptions="CenterAndExpand">
                     <Entry
+                        Keyboard="Numeric"
                         Text="{Binding NewMeal.sugar}"
                         VerticalOptions="CenterAndExpand"
                         VerticalTextAlignment="Center"
@@ -198,6 +203,7 @@
                     StrokeShape="RoundRectangle 10"
                     VerticalOptions="CenterAndExpand">
                     <Entry
+                        Keyboard="Numeric"
                         Text="{Binding NewMeal.salt}"
                         VerticalOptions="CenterAndExpand"
                         VerticalTextAlignment="Center"
@@ -208,6 +214,7 @@
             <Button
                 Grid.Row="8"
                 Padding="40,20,40,20"
+                BackgroundColor="{x:StaticResource fitly_green}"
                 Command="{Binding SaveMealCommand}"
                 HorizontalOptions="CenterAndExpand"
                 Text="Mentés"

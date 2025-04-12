@@ -10,11 +10,11 @@ namespace Fitly.Models
     {
         public int id { get; set; }
         public string name { get; set; }
-        public float kcal { get; set; }
-        public float fat { get; set; }
-        public float carb { get; set; }
-        public float protein { get; set; }
-        public float salt { get; set; }
-        public float sugar { get; set; }
+        public float? kcal { get; set; }
+        public float? fat { get; set; }
+        public float? carb { get; set; }
+        public float? protein { get; set; }
+        public float? salt { get; set; }
+        public float? sugar { get; set; }
     }
 }

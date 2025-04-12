@@ -15,9 +15,9 @@ namespace Fitly.API
             return await HTTPRequest<User>.Get(url);
         }
 
-        public static async Task<List<Meal>?> GetMeals(string url)
+        public static async Task<ObservableCollection<Meal>?> GetMeals(string url)
         {
-            return await HTTPRequest<List<Meal>>.Get(url);
+            return await HTTPRequest<ObservableCollection<Meal>>.Get(url);
         }
 
         public static async Task<ObservableCollection<Comment>?> GetComment(string url)

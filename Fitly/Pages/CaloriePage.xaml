@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:Fitly.Models"
+    xmlns:pages="clr-namespace:Fitly.Pages"
     xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
     BackgroundColor="{x:StaticResource fitly_darkgray}"
     Shell.NavBarIsVisible="True">
@@ -15,6 +16,12 @@
     <ContentPage.Resources>
         <Style TargetType="Label">
             <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontFamily" Value="Montserrat" />
+        </Style>
+        <Style TargetType="Picker">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="TitleColor" Value="White" />
+            <Setter Property="Title" Value="White" />
             <Setter Property="FontFamily" Value="Montserrat" />
         </Style>
     </ContentPage.Resources>
@@ -38,7 +45,7 @@
             <Grid
                 Grid.Row="1"
                 Padding="20"
-                RowDefinitions="0.5*,0.5*,0.5*,0.5*,0.5*,0.5*,2*"
+                RowDefinitions="0.5*,0.5*,0.5*,0.5*,0.5*,0.5*,0.5*,2*,*"
                 RowSpacing="20">
 
                 <Label
@@ -117,6 +124,7 @@
                             Placeholder="Pl. 150"
                             PlaceholderColor="White"
                             Text="{Binding Grams}"
+                            TextColor="White"
                             VerticalOptions="CenterAndExpand" />
 
                     </Border>
@@ -124,11 +132,12 @@
 
                 <!--  Hozzáadás gomb  -->
 
+
                 <StackLayout Grid.Row="5" Orientation="Horizontal">
                     <Button
                         Grid.Row="5"
                         Margin="10"
-                        Padding="40,20,40,20"
+                        Padding="30,15,30,15"
                         BackgroundColor="{x:StaticResource fitly_green}"
                         Command="{Binding AddMealCommand}"
                         FontAttributes="Bold"
@@ -141,7 +150,7 @@
                     <Button
                         Grid.Row="5"
                         Margin="10"
-                        Padding="40,20,40,20"
+                        Padding="30,15,30,15"
                         BackgroundColor="{x:StaticResource fitly_green}"
                         Command="{Binding NewMealCommand}"
                         FontAttributes="Bold"
@@ -153,8 +162,19 @@
 
                 </StackLayout>
 
-                <Grid
+                <Button
                     Grid.Row="6"
+                    Padding="30,15,30,15"
+                    BackgroundColor="{x:StaticResource fitly_green}"
+                    Command="{Binding ResetMealsCommand}"
+                    FontAttributes="Bold"
+                    FontSize="16"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Lista törlése"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Grid
+                    Grid.Row="7"
                     RowDefinitions="*,*,*,*,*"
                     RowSpacing="15">
                     <Border
@@ -233,6 +253,32 @@
                     </Border>
 
                 </Grid>
+
+                <CollectionView Grid.Row="8" ItemsSource="{Binding SelectedMeals}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Meal">
+                            <Border  BackgroundColor="{x:StaticResource Gray700}" Stroke="{x:StaticResource Gray700}" StrokeShape="RoundRectangle 10" Padding="10">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label
+                                        Grid.Row="0"
+                                        HorizontalOptions="CenterAndExpand"
+                                        Text="{Binding name}"
+                                        VerticalOptions="CenterAndExpand" />
+                                    <Button
+                                        Grid.Row="1"
+                                        Padding="20,5,20,5"
+                                        BackgroundColor="{x:StaticResource fitly_red}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type pages:CaloriePage}}, Path=BindingContext.RemoveMealCommand}"
+                                        CommandParameter="{Binding .}"
+                                        FontAttributes="Bold"
+                                        HorizontalOptions="CenterAndExpand"
+                                        Text="Törlés"
+                                        VerticalOptions="CenterAndExpand" />
+                                </StackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </Grid>
         </Grid>
     </ScrollView>

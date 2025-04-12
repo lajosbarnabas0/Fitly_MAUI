@@ -41,7 +41,7 @@ namespace Fitly.ViewModels
             {
                 string? isLoginSet = SecureStorage.Default.GetAsync("LoginToken").Result;
                 string apiUrl = "https://bgs.jedlik.eu/hm/backend/public/api/recipes";
-                var recipesFromApi = await HTTPRequest<List<Recipe>>.Get(apiUrl);
+                var recipesFromApi = await HTTPRequest<ObservableCollection<Recipe>>.Get(apiUrl);
 
                 if (recipesFromApi != null)
                 {

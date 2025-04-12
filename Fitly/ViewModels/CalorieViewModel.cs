@@ -20,7 +20,7 @@ namespace Fitly.ViewModels
         User selectedUser;
 
         [ObservableProperty]
-        List<Meal>? meals;
+        ObservableCollection<Meal>? meals;
 
         [ObservableProperty]
         public Meal selectedMeal;
@@ -32,21 +32,16 @@ namespace Fitly.ViewModels
         [ObservableProperty]
         public ObservableCollection<Meal> selectedMeals;
 
-        public double Progress => SelectedUser != null && SelectedUser.recommended_calories > 0
-            ? Math.Min(1.0, TotalCalories / SelectedUser.recommended_calories.Value)
+        public string CalorieSummary => $"{SelectedUser?.recommended_calories ?? 0} / {Math.Round((double)TotalCalories)}";
+
+
+        public double? Progress => SelectedUser != null && SelectedUser.recommended_calories > 0
+            ? Math.Min(1.0, (double)TotalCalories / SelectedUser.recommended_calories.Value)
             : 0;
 
         public Color ProgressColor => Progress >= 1.0 ? Colors.Red : Colors.Green;
 
-        public string CalorieSummary => SelectedUser != null && SelectedUser.recommended_calories.HasValue
-            ? $"{SelectedUser.recommended_calories.Value} / {Math.Round(TotalCalories)}"
-            : $"0 / {Math.Round(TotalCalories)}";
-
-        public double RemainingCalories => SelectedUser != null
-            ? Math.Max(0, (int)(SelectedUser.recommended_calories - TotalCalories))
-            : 0;
-
-        public double TotalCalories => SelectedMeals.Sum(meal =>
+        public double? TotalCalories => SelectedMeals.Sum(meal =>
         {
             if (mealGrams.TryGetValue(meal, out double grams))
             {
@@ -66,8 +61,19 @@ namespace Fitly.ViewModels
         }
 
         [RelayCommand]
-        public void AddMeal()
+        async Task ResetMeals() 
         {
+            SelectedMeals.Clear();
+        }
+
+        [RelayCommand]
+        public async Task AddMeal()
+        {
+            if(Grams == null)
+            {
+                await Shell.Current.DisplayAlert("Hiba", "Kérjük adja meg a gramm értéket!", "Ok");
+                return;
+            }
             if (SelectedMeal != null && double.TryParse(Grams, out double gramValue) && gramValue > 0)
             {
                 if (!SelectedMeals.Contains(SelectedMeal))
@@ -146,25 +152,59 @@ namespace Fitly.ViewModels
             }
         }
 
-        // Kiszámítja az összesített zsírtartalmat
-        public string TotalFatFormatted => $"{SelectedMeals.Sum(meal => meal.fat).ToString("F2")} g";
+        // Kiszámítja az összesített zsírtartalmat, figyelembe véve a grammokat
+        public string TotalFatFormatted => $"{SelectedMeals.Sum(meal =>
+        {
+            if (mealGrams.TryGetValue(meal, out double grams))
+            {
+                return (meal.fat / 100.0) * grams; // Száz grammra vetített érték
+            }
+            return 0;
+        }):F2} g";
 
-        // Kiszámítja az összesített szénhidrátot
-        public string TotalCarbsFormatted => $"{SelectedMeals.Sum(meal => meal.carb).ToString("F2")} g";
+        // Kiszámítja az összesített szénhidrátot, figyelembe véve a grammokat
+        public string TotalCarbsFormatted => $"{SelectedMeals.Sum(meal =>
+        {
+            if (mealGrams.TryGetValue(meal, out double grams))
+            {
+                return (meal.carb / 100.0) * grams;
+            }
+            return 0;
+        }):F2} g";
 
-        // Kiszámítja az összesített fehérjét
-        public string TotalProteinFormatted => $"{SelectedMeals.Sum(meal => meal.protein).ToString("F2")} g";
+        // Kiszámítja az összesített fehérjét, figyelembe véve a grammokat
+        public string TotalProteinFormatted => $"{SelectedMeals.Sum(meal =>
+        {
+            if (mealGrams.TryGetValue(meal, out double grams))
+            {
+                return (meal.protein / 100.0) * grams;
+            }
+            return 0;
+        }):F2} g";
 
-        // Kiszámítja az összesített sótartalmat
-        public string TotalSaltFormatted => $"{SelectedMeals.Sum(meal => meal.salt).ToString("F2")} g";
+        // Kiszámítja az összesített sótartalmat, figyelembe véve a grammokat
+        public string TotalSaltFormatted => $"{SelectedMeals.Sum(meal =>
+        {
+            if (mealGrams.TryGetValue(meal, out double grams))
+            {
+                return (meal.salt / 100.0) * grams;
+            }
+            return 0;
+        }):F2} g";
 
-        // Kiszámítja az összesített cukortartalmat
-        public string TotalSugarFormatted => $"{SelectedMeals.Sum(meal => meal.sugar).ToString("F2")} g";
+        // Kiszámítja az összesített cukortartalmat, figyelembe véve a grammokat
+        public string TotalSugarFormatted => $"{SelectedMeals.Sum(meal =>
+        {
+            if (mealGrams.TryGetValue(meal, out double grams))
+            {
+                return (meal.sugar / 100.0) * grams;
+            }
+            return 0;
+        }):F2} g";
 
         private void UpdateValues()
         {
             OnPropertyChanged(nameof(TotalCalories));
-            OnPropertyChanged(nameof(RemainingCalories));
             OnPropertyChanged(nameof(Progress));
             OnPropertyChanged(nameof(ProgressColor));
             OnPropertyChanged(nameof(CalorieSummary));
@@ -174,6 +214,11 @@ namespace Fitly.ViewModels
             OnPropertyChanged(nameof(TotalProteinFormatted));
             OnPropertyChanged(nameof(TotalSaltFormatted));
             OnPropertyChanged(nameof(TotalSugarFormatted));
+        }
+
+        partial void OnSelectedUserChanged(User value)
+        {
+            UpdateValues();
         }
     }
 }

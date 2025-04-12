@@ -14,7 +14,7 @@ namespace Fitly.ViewModels
     {
 
         [ObservableProperty]
-        Meal newMeal;
+        Meal newMeal = new Meal();
 
         [RelayCommand]
         async Task SaveMeal()
@@ -39,6 +39,7 @@ namespace Fitly.ViewModels
                 if (response != null)
                 {
                     await Shell.Current.DisplayAlert("Információ", "Sikeres mentés", "Ok");
+                    newMeal = new();
                 }
                 else
                 {
