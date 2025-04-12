@@ -257,7 +257,11 @@
                 <CollectionView Grid.Row="8" ItemsSource="{Binding SelectedMeals}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Meal">
-                            <Border  BackgroundColor="{x:StaticResource Gray700}" Stroke="{x:StaticResource Gray700}" StrokeShape="RoundRectangle 10" Padding="10">
+                            <Border
+                                Padding="10"
+                                BackgroundColor="{x:StaticResource Gray700}"
+                                Stroke="{x:StaticResource Gray700}"
+                                StrokeShape="RoundRectangle 10">
                                 <StackLayout Orientation="Horizontal">
                                     <Label
                                         Grid.Row="0"

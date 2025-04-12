@@ -29,10 +29,6 @@ namespace Fitly.ViewModels
         public Post selectedPost;
 
         public ObservableCollection<string> Image_paths { get; set; }
-        //[
-        //    "https://www.kreactivity.hu/img/23190/G00176/264x264,r/Kis-tigris-festes-es-gyemantszemes-kreativ-hibrid-kep.webp?time=1715340732",
-        //    "https://macska-nevek.hu/wp-content/uploads/2024/04/1-1024x576.jpg"
-        //];
 
 
         [RelayCommand]
@@ -57,7 +53,6 @@ namespace Fitly.ViewModels
                         Comments.Add(comment);
                     }
                 }
-                OnPropertyChanged(nameof(Comments));
             }
             catch (Exception ex)
             {
@@ -83,9 +78,14 @@ namespace Fitly.ViewModels
             {
                 if (response != null)
                 {
+                    Comments.Add(new Comment
+                    {
+                        content = requestData.content,
+                        user_id = requestData.user_id,
+                        post_id = SelectedPost.id,
+                    });
+                    Comment = new CommentRequest();
                     await Shell.Current.DisplayAlert("Információ", "Sikeres komment küldés!", "Ok");
-                    OnPropertyChanged(nameof(Comments));
-                    Comment.content = "";
                 }
                 else
                 {

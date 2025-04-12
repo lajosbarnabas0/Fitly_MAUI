@@ -152,17 +152,15 @@ namespace Fitly.ViewModels
             }
         }
 
-        // Kiszámítja az összesített zsírtartalmat, figyelembe véve a grammokat
         public string TotalFatFormatted => $"{SelectedMeals.Sum(meal =>
         {
             if (mealGrams.TryGetValue(meal, out double grams))
             {
-                return (meal.fat / 100.0) * grams; // Száz grammra vetített érték
+                return (meal.fat / 100.0) * grams; 
             }
             return 0;
         }):F2} g";
 
-        // Kiszámítja az összesített szénhidrátot, figyelembe véve a grammokat
         public string TotalCarbsFormatted => $"{SelectedMeals.Sum(meal =>
         {
             if (mealGrams.TryGetValue(meal, out double grams))
@@ -172,7 +170,6 @@ namespace Fitly.ViewModels
             return 0;
         }):F2} g";
 
-        // Kiszámítja az összesített fehérjét, figyelembe véve a grammokat
         public string TotalProteinFormatted => $"{SelectedMeals.Sum(meal =>
         {
             if (mealGrams.TryGetValue(meal, out double grams))
@@ -182,7 +179,6 @@ namespace Fitly.ViewModels
             return 0;
         }):F2} g";
 
-        // Kiszámítja az összesített sótartalmat, figyelembe véve a grammokat
         public string TotalSaltFormatted => $"{SelectedMeals.Sum(meal =>
         {
             if (mealGrams.TryGetValue(meal, out double grams))
@@ -192,7 +188,6 @@ namespace Fitly.ViewModels
             return 0;
         }):F2} g";
 
-        // Kiszámítja az összesített cukortartalmat, figyelembe véve a grammokat
         public string TotalSugarFormatted => $"{SelectedMeals.Sum(meal =>
         {
             if (mealGrams.TryGetValue(meal, out double grams))

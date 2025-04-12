@@ -10,8 +10,8 @@ namespace Fitly.Models
 {
     public class Post 
     {
-        public int? id { get; set; }
-        public int? user_id { get; set; }
+        public int id { get; set; }
+        public int user_id { get; set; }
         public string? Title { get; set; }
         public string? Content { get; set; }
         public string? image_path { get; set; }
