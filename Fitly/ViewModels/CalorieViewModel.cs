@@ -61,17 +61,7 @@ namespace Fitly.ViewModels
             SelectedMeals = new ObservableCollection<Meal>();
             SelectedMeals.CollectionChanged += (s, e) =>
             {
-                OnPropertyChanged(nameof(TotalCalories));
-                OnPropertyChanged(nameof(RemainingCalories));
-                OnPropertyChanged(nameof(Progress));
-                OnPropertyChanged(nameof(ProgressColor));
-                OnPropertyChanged(nameof(CalorieSummary));
-                OnPropertyChanged(nameof(TotalCalories));
-                OnPropertyChanged(nameof(TotalFatFormatted));
-                OnPropertyChanged(nameof(TotalCarbsFormatted));
-                OnPropertyChanged(nameof(TotalProteinFormatted));
-                OnPropertyChanged(nameof(TotalSaltFormatted));
-                OnPropertyChanged(nameof(TotalSugarFormatted));
+                UpdateValues();
             };
         }
 
@@ -87,6 +77,7 @@ namespace Fitly.ViewModels
 
                 mealGrams[SelectedMeal] = gramValue;
                 Grams = "";
+                UpdateValues();
             }
         }
 
@@ -169,5 +160,20 @@ namespace Fitly.ViewModels
 
         // Kiszámítja az összesített cukortartalmat
         public string TotalSugarFormatted => $"{SelectedMeals.Sum(meal => meal.sugar).ToString("F2")} g";
+
+        private void UpdateValues()
+        {
+            OnPropertyChanged(nameof(TotalCalories));
+            OnPropertyChanged(nameof(RemainingCalories));
+            OnPropertyChanged(nameof(Progress));
+            OnPropertyChanged(nameof(ProgressColor));
+            OnPropertyChanged(nameof(CalorieSummary));
+            OnPropertyChanged(nameof(TotalCalories));
+            OnPropertyChanged(nameof(TotalFatFormatted));
+            OnPropertyChanged(nameof(TotalCarbsFormatted));
+            OnPropertyChanged(nameof(TotalProteinFormatted));
+            OnPropertyChanged(nameof(TotalSaltFormatted));
+            OnPropertyChanged(nameof(TotalSugarFormatted));
+        }
     }
 }

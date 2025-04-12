@@ -20,7 +20,7 @@ namespace Fitly.API
             return await HTTPRequest<List<Meal>>.Get(url);
         }
 
-        public static async Task<List<Comment>?> GetComment(string url)
+        public static async Task<ObservableCollection<Comment>?> GetComment(string url)
         {
             var root = await HTTPRequest<CommentRoot>.Get(url);
 

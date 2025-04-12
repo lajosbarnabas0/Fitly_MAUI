@@ -20,10 +20,10 @@ namespace Fitly.ViewModels
         bool commentEnabled = false;
 
         [ObservableProperty]
-        CommentRequest comment;
+        CommentRequest comment = new CommentRequest();
 
         [ObservableProperty]
-        List<Comment> comments = new List<Comment>();
+        ObservableCollection<Comment> comments = new ObservableCollection<Comment>();
 
         [ObservableProperty]
         public Post selectedPost;
@@ -46,12 +46,7 @@ namespace Fitly.ViewModels
 
                 if (isLoginSet != null)
                 {
-                    commentEnabled = true;
-
-                }
-                else 
-                {
-                    commentEnabled = false;
+                    CommentEnabled = true;
                 }
 
                 if(commentsFromApi != null)
@@ -62,6 +57,7 @@ namespace Fitly.ViewModels
                         Comments.Add(comment);
                     }
                 }
+                OnPropertyChanged(nameof(Comments));
             }
             catch (Exception ex)
             {
@@ -77,28 +73,30 @@ namespace Fitly.ViewModels
             string url = $"https://bgs.jedlik.eu/hm/backend/public/api/posts/{SelectedPost.id}/comments";
             var requestData = new CommentRequest
             {
-                content = Selected
+                content = Comment.content,
+                user_id = SelectedPost.user_id
             };
 
-            var response = await AuthData.LoginUser(url, requestData);
+            var response = await SendData.SendComment(url, requestData);
 
             if (response != null)
             {
-                if (response.token != null)
+                if (response != null)
                 {
-                    await SecureStorage.Default.SetAsync("LoginToken", response.token);
-                    await SecureStorage.Default.SetAsync("UserId", response.user.id.ToString());
-                    await Shell.Current.GoToAsync("//ProfilePage");
-
+                    await Shell.Current.DisplayAlert("Információ", "Sikeres komment küldés!", "Ok");
+                    OnPropertyChanged(nameof(Comments));
+                    Comment.content = "";
                 }
                 else
                 {
-                    await Shell.Current.DisplayAlert("Hiba", "Sikertelen bejelentkezés", "Ok");
+                    await Shell.Current.DisplayAlert("Hiba", "Sikertelen küldés!", "Ok");
+                    return;
                 }
             }
             else
             {
-                await Shell.Current.DisplayAlert("Hiba", "Kérlek add meg az adataid!", "Ok");
+                await Shell.Current.DisplayAlert("Hiba", "Hiba történt!", "Ok");
+                return;
             }
 
         }

@@ -19,6 +19,10 @@
             <Setter Property="TextColor" Value="White" />
             <Setter Property="FontFamily" Value="Montserrat" />
         </Style>
+        <Style TargetType="Entry">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontFamily" Value="Montserrat" />
+        </Style>
     </ContentPage.Resources>
 
     <ScrollView>
@@ -98,10 +102,9 @@
                             x:Name="comment_ENT"
                             Margin="5"
                             FontAutoScalingEnabled="True"
-                            IsEnabled="{Binding CommentEnabled}"
                             Placeholder="Írjon hozzászólást..."
                             PlaceholderColor="White"
-                            Text="{Binding Comment}" />
+                            Text="{Binding Comment.content}" />
                     </Border>
 
                     <Button
