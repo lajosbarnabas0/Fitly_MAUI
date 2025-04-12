@@ -26,5 +26,10 @@ namespace Fitly.API
             // Explicit típusmegadás
             return await HTTPRequest<CommentRequest>.Post(url, data);
         }
+
+        public static async Task<DeleteResponse> DeletePost(string url)
+        {
+            return await HTTPRequest<DeleteResponse>.Delete(url);
+        }
     }
 }

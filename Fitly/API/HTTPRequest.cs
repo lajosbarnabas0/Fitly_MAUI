@@ -100,48 +100,29 @@ namespace Fitly.API
             return null;
         }
 
-        public static async Task<T?> Patch(string url, object data)
+        public static async Task<T?> Delete(string url)
         {
-            try
+            var request = new HttpRequestMessage(HttpMethod.Delete, url);
+            request.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
+            var loginToken = await SecureStorage.Default.GetAsync("LoginToken");
+
+            // Authorization fejléc hozzáadása, ha van token
+            if (loginToken != null)
             {
-                using var client = new HttpClient();
-
-                // Kérés törzsének létrehozása JSON formátumban
-                var content = new StringContent(JsonSerializer.Serialize(data), Encoding.UTF8, "application/json");
-
-                // PATCH kérés létrehozása
-                var request = new HttpRequestMessage(new HttpMethod("PATCH"), url)
-                {
-                    Content = content
-                };
-
-                request.Headers.Add("Accept", "application/json");
-
-                // Token beállítása (ha elérhető)
-                var loginToken = await SecureStorage.Default.GetAsync("LoginToken");
-                if (loginToken != null)
-                {
-                    request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", loginToken);
-                }
-
-                using var response = await client.SendAsync(request).ConfigureAwait(false);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    // Sikeres válasz feldolgozása
-                    string resultString = await response.Content.ReadAsStringAsync();
-                    return JsonSerializer.Deserialize<T>(resultString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                }
-            }
-            catch (Exception ex)
-            {
-                await MainThread.InvokeOnMainThreadAsync(async () =>
-                {
-                    await Shell.Current.DisplayAlert("Hiba", $"Hiba történt a PATCH kérés során: {ex.Message}", "OK");
-                });
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", loginToken);
             }
 
-            return default;
+            using var response = await client.SendAsync(request).ConfigureAwait(false);
+
+            // Ellenőrizzük, hogy sikeres volt-e a kérés
+            if (response.IsSuccessStatusCode)
+            {
+                string resultString = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<T>(resultString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            }
+
+            Console.WriteLine($"Hiba a DELETE kérés során: {response.StatusCode}");
+            return null; // Sikertelen törlés esetén null-t adunk vissza
         }
     }
 }

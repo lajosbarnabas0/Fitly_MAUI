@@ -31,6 +31,12 @@ namespace Fitly.ViewModels
         }
 
         [RelayCommand]
+        async Task NavigateToOwnPosts()
+        {
+            await Shell.Current.GoToAsync(nameof(OwnPostListPage));
+        }
+
+        [RelayCommand]
         async Task Appearing()
         {
             try

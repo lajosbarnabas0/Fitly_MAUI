@@ -12,7 +12,7 @@
     <Color x:Key="Tertiary">#2B0B98</Color>
 
     <Color x:Key="fitly_darkgray">#131213</Color>
-    <Color x:Key="fitly_darkgreen">#002128</Color>
+    <Color x:Key="fitly_darkgreen">#012128</Color>
     <Color x:Key="fitly_white">#fdfdfd</Color>
     <Color x:Key="fitly_green">#6abc5c</Color>
     <Color x:Key="fitly_gray">#2B2A2B</Color>

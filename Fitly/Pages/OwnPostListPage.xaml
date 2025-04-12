@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fitly.Pages.OwnPostListPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:Fitly.Models"
+    xmlns:pages="clr-namespace:Fitly.Pages"
+    xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+    BackgroundColor="{x:StaticResource fitly_darkgray}"
+    Shell.NavBarIsVisible="True">
+
+    <ContentPage.Behaviors>
+        <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+
+    <ScrollView>
+        <Grid RowDefinitions="0.2*,*">
+            <Label
+                FontSize="22"
+                HorizontalOptions="CenterAndExpand"
+                Text="Saját bejegyzések"
+                TextColor="White"
+                VerticalOptions="StartAndExpand" />
+
+            <CollectionView
+                Grid.Row="1"
+                HorizontalOptions="StartAndExpand"
+                ItemsSource="{Binding UsersPosts}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                            Margin="10"
+                            BackgroundColor="{x:StaticResource Gray900}"
+                            Stroke="{x:StaticResource Gray900}"
+                            StrokeShape="RoundRectangle 10">
+                            <StackLayout Orientation="Horizontal">
+                                <Label
+                                    Margin="5"
+                                    HorizontalOptions="StartAndExpand"
+                                    LineBreakMode="TailTruncation"
+                                    Text="{Binding Title}"
+                                    TextColor="White"
+                                    VerticalOptions="CenterAndExpand" />
+                                <Button
+                                    Margin="5"
+                                    Padding="20,10,20,10"
+                                    BackgroundColor="{x:StaticResource fitly_red}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type pages:OwnPostListPage}}, Path=BindingContext.DeletePostCommand}"
+                                    CommandParameter="{Binding .}"
+                                    HorizontalOptions="EndAndExpand"
+                                    Text="Törlés"
+                                    VerticalOptions="CenterAndExpand" />
+                            </StackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ScrollView>
+</ContentPage>
