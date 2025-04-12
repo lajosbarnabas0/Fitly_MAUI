@@ -11,12 +11,12 @@ using Fitly.Models;
 
 namespace Fitly.ViewModels
 {
-    public partial class OwnPostListViewModel : ObservableObject
+    public partial class OwnRecipeListViewModel : ObservableObject
     {
-        public ObservableCollection<Post> Posts { get; set; } = new ObservableCollection<Post>();
+        public ObservableCollection<Recipe> Recipes { get; set; } = new ObservableCollection<Recipe>();
 
         [ObservableProperty]
-        public ObservableCollection<Post> usersPosts = new ObservableCollection<Post>();
+        public ObservableCollection<Recipe> usersRecipes = new ObservableCollection<Recipe>();
 
         [RelayCommand]
         async Task Appearing()
@@ -26,23 +26,23 @@ namespace Fitly.ViewModels
                 string? isLoginSet = await SecureStorage.Default.GetAsync("LoginToken");
                 string? userID = await SecureStorage.Default.GetAsync("UserId");
 
-                string apiUrl = "https://bgs.jedlik.eu/hm/backend/public/api/posts";
-                var postsFromApi = await HTTPRequest<ObservableCollection<Post>>.Get(apiUrl);
+                string apiUrl = "https://bgs.jedlik.eu/hm/backend/public/api/recipes";
+                var recipesFromApi = await HTTPRequest<ObservableCollection<Recipe>>.Get(apiUrl);
 
-                if (postsFromApi != null)
+                if (recipesFromApi != null)
                 {
-                    Posts.Clear();
-                    foreach (var post in postsFromApi)
+                    Recipes.Clear();
+                    foreach (var recipe in recipesFromApi)
                     {
-                        Posts.Add(post);
+                        Recipes.Add(recipe);
                     }
 
                     if (int.TryParse(userID, out int userIdInt)) // Megpróbáljuk konvertálni a userID-t int-re
                     {
-                        UsersPosts.Clear(); // Töröljük az usersPosts gyűjteményt
-                        foreach (var post in Posts.Where(x => x.user_id == userIdInt)) // Szűrés a konvertált értékkel
+                        UsersRecipes.Clear(); // Töröljük az usersPosts gyűjteményt
+                        foreach (var post in Recipes.Where(x => x.user_id == userIdInt)) // Szűrés a konvertált értékkel
                         {
-                            UsersPosts.Add(post); // Csak a feltételnek megfelelő elemeket adjuk hozzá
+                            UsersRecipes.Add(post); // Csak a feltételnek megfelelő elemeket adjuk hozzá
                         }
                     }
                     else
@@ -58,22 +58,23 @@ namespace Fitly.ViewModels
         }
 
         [RelayCommand]
-        async Task DeletePost(Post post)
+        async Task DeleteRecipe(Recipe recipe)
         {
-            bool answer = await Shell.Current.DisplayAlert("Megerősítés", "Biztosan törölni akarja a bejegyzést?", "Igen", "Nem");
-            string url = $"https://bgs.jedlik.eu/hm/backend/public/api/posts/{post.id}";
+            bool answer = await Shell.Current.DisplayAlert("Megerősítés", "Biztosan törölni akarja a receptet?", "Igen", "Nem");
+            string url = $"https://bgs.jedlik.eu/hm/backend/public/api/recipes/{recipe.id}";
 
-            if (post != null && UsersPosts.Contains(post) && answer)
+            if (recipe != null && UsersRecipes.Contains(recipe) && answer)
             {
-                UsersPosts.Remove(post);
+                UsersRecipes.Remove(recipe);
                 var message = SendData.DeletePost(url);
 
-                if(message != null)
+                if (message != null)
                 {
                     await Shell.Current.DisplayAlert("Információ", "Sikeres törlés", "Ok");
                     return;
                 }
             }
         }
+
     }
 }

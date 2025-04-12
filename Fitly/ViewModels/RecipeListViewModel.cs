@@ -35,11 +35,17 @@ namespace Fitly.ViewModels
         }
 
         [RelayCommand]
+        async Task NavigateToOwnRecipes()
+        {
+            await Shell.Current.GoToAsync(nameof(OwnRecipeListPage));
+        }
+
+        [RelayCommand]
         async Task Appearing()
         {
             try
             {
-                string? isLoginSet = SecureStorage.Default.GetAsync("LoginToken").Result;
+                string? isLoginSet = await SecureStorage.Default.GetAsync("LoginToken");
                 string apiUrl = "https://bgs.jedlik.eu/hm/backend/public/api/recipes";
                 var recipesFromApi = await HTTPRequest<ObservableCollection<Recipe>>.Get(apiUrl);
 
