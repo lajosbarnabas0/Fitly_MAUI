@@ -35,7 +35,7 @@
                 VerticalOptions="Center"
                 WidthRequest="300">
                 <Border.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="CaloriePage_Tapped" />
+                    <TapGestureRecognizer Command="{Binding NavigateToCalorieCommand}" />
                 </Border.GestureRecognizers>
                 <StackLayout
                     Padding="10"
@@ -70,7 +70,7 @@
                 VerticalOptions="Center"
                 WidthRequest="300">
                 <Border.GestureRecognizers>
-                    <TapGestureRecognizer />
+                    <TapGestureRecognizer Command="{Binding NavigateToWorkoutCommand}"/>
                 </Border.GestureRecognizers>
                 <StackLayout
                     Padding="10"

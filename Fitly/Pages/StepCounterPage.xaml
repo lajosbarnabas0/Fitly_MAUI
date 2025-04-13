@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fitly.Pages.StepCounterPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="{x:StaticResource fitly_darkgray}">
+
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontFamily" Value="Montserrat" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="0.5*,*,*,*">
+        <Label
+            Grid.Row="0"
+            FontSize="26"
+            HorizontalOptions="CenterAndExpand"
+            Text="Lépés számláló"
+            VerticalOptions="StartAndExpand" />
+        <Border
+            Grid.Row="1"
+            Padding="20"
+            BackgroundColor="{x:StaticResource Gray900}"
+            HorizontalOptions="CenterAndExpand"
+            Stroke="{x:StaticResource Gray900}"
+            StrokeShape="RoundRectangle 15"
+            VerticalOptions="CenterAndExpand">
+            <Label
+                FontSize="22"
+                HorizontalOptions="CenterAndExpand"
+                Text="{Binding NumberOfSteps, StringFormat='Bevitt lépések: {0}'}" />
+        </Border>
+        <Button
+            Grid.Row="2"
+            Padding="30,20,30,20"
+            BackgroundColor="{x:StaticResource fitly_green}"
+            Command="{Binding StartCountingCommand}"
+            FontAttributes="Bold"
+            FontSize="18"
+            HorizontalOptions="CenterAndExpand"
+            Text="Lépések indítása"
+            VerticalOptions="CenterAndExpand" />
+
+        <Button
+            Grid.Row="3"
+            Padding="30,20,30,20"
+            BackgroundColor="{x:StaticResource fitly_red}"
+            Command="{Binding StopCountingCommand}"
+            FontAttributes="Bold"
+            FontSize="18"
+            HorizontalOptions="CenterAndExpand"
+            Text="Lépések befejezése"
+            VerticalOptions="CenterAndExpand" />
+    </Grid>
+</ContentPage>

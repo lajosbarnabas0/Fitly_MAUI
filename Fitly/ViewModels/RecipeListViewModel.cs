@@ -17,11 +17,6 @@ namespace Fitly.ViewModels
     {
         public ObservableCollection<Recipe> Recipes { get; set; } = new ObservableCollection<Recipe>();
 
-        public RecipeListViewModel()
-        {
-
-        }
-
         [ObservableProperty]
         Recipe selectedRecipe;
 

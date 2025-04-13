@@ -2,6 +2,7 @@
 using Fitly.Pages;
 using Fitly.ViewModels;
 using Microsoft.Extensions.Logging;
+using Plugin.Maui.Pedometer;
 
 namespace Fitly
 {
@@ -54,6 +55,9 @@ namespace Fitly
             builder.Services.AddSingleton<OwnPostListViewModel>();
             builder.Services.AddSingleton<OwnRecipeListPage>();
             builder.Services.AddSingleton<OwnRecipeListViewModel>();
+            builder.Services.AddSingleton<StepCounterPage>();
+            builder.Services.AddSingleton<StepCounterViewModel>();
+            builder.Services.AddSingleton(Pedometer.Default);
 
 
             Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping(nameof(Entry), (handler, view) =>

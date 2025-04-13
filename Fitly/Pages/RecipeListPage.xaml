@@ -31,7 +31,7 @@
             </Border.GestureRecognizers>
         </Border>
 
-        <Grid Grid.Row="1" RowDefinitions="0.2*,0.3*,1.6*">
+        <Grid Grid.Row="1" RowDefinitions="0.3*,0.3*,1.6*">
             <StackLayout Grid.Row="0" Orientation="Horizontal">
                 <Label
                     Margin="15"
@@ -60,7 +60,7 @@
                 IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:RecipeListPage}}, Path=BindingContext.IsVisible}"
                 Text="Saját receptek"
                 VerticalOptions="CenterAndExpand" />
-            
+
             <CollectionView
                 Grid.Row="2"
                 HorizontalOptions="Fill"

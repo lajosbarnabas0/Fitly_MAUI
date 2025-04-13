@@ -79,11 +79,12 @@
                     Clicked="LetsBegin_Button_Clicked"
                     Command="{Binding LetsBeginButtonClickedCommand}"
                     FontAutoScalingEnabled="True"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand"
                     FontSize="20"
                     HeightRequest="70"
                     StyleId="Register_Button"
-                    Text="Kezdjünk bele!"
-                    WidthRequest="200" />
+                    Text="Kezdjünk bele!"/>
             </Grid>
         </Grid>
     </ScrollView>
