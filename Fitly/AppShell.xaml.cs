@@ -15,11 +15,11 @@ namespace Fitly
             Routing.RegisterRoute(nameof(NewRecipePage), typeof(NewRecipePage));
             Routing.RegisterRoute(nameof(NewPostPage), typeof(NewPostPage));
             Routing.RegisterRoute(nameof(CaloriePage), typeof(CaloriePage));
-            Routing.RegisterRoute(nameof(ChangePage), typeof(ChangePage));
             Routing.RegisterRoute(nameof(NewMealPage), typeof(NewMealPage));
             Routing.RegisterRoute(nameof(OwnPostListPage), typeof(OwnPostListPage));
             Routing.RegisterRoute(nameof(OwnRecipeListPage), typeof(OwnRecipeListPage));
             Routing.RegisterRoute(nameof(StepCounterPage), typeof(StepCounterPage));
+            Routing.RegisterRoute(nameof(WorkoutsPage), typeof(WorkoutsPage));
         }
     }
 }

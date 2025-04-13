@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fitly.Pages.WorkoutsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="{x:StaticResource fitly_darkgray}"
+    Shell.NavBarIsVisible="True">
+    <Grid RowDefinitions="0.3*,*">
+        <Label
+            Grid.Row="0"
+            FontSize="24"
+            HorizontalOptions="CenterAndExpand"
+            Text="Edzések"
+            TextColor="White" />
+        <Border
+            Grid.Row="1"
+            Padding="20"
+            BackgroundColor="{x:StaticResource Gray900}"
+            HorizontalOptions="CenterAndExpand"
+            Stroke="{x:StaticResource Gray900}"
+            StrokeShape="RoundRectangle 10"
+            VerticalOptions="StartAndExpand"
+            WidthRequest="300">
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding NavigateToStepCounterCommand}" />
+            </Border.GestureRecognizers>
+            <Grid ColumnDefinitions="*,*">
+                <Label
+                    Grid.Column="0"
+                    FontSize="20"
+                    HorizontalOptions="EndAndExpand"
+                    Text="Lépés számláló"
+                    TextColor="White"
+                    VerticalOptions="CenterAndExpand" />
+                <Image
+                    Grid.Column="1"
+                    HorizontalOptions="CenterAndExpand"
+                    Source="walk_36.png"
+                    VerticalOptions="CenterAndExpand" />
+            </Grid>
+        </Border>
+    </Grid>
+</ContentPage>

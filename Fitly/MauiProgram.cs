@@ -57,6 +57,8 @@ namespace Fitly
             builder.Services.AddSingleton<OwnRecipeListViewModel>();
             builder.Services.AddSingleton<StepCounterPage>();
             builder.Services.AddSingleton<StepCounterViewModel>();
+            builder.Services.AddSingleton<WorkoutsPage>();
+            builder.Services.AddSingleton<WorkoutViewModel>();
             builder.Services.AddSingleton(Pedometer.Default);
 
 

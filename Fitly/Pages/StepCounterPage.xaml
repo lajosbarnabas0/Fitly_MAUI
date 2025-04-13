@@ -3,7 +3,8 @@
     x:Class="Fitly.Pages.StepCounterPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    BackgroundColor="{x:StaticResource fitly_darkgray}">
+    BackgroundColor="{x:StaticResource fitly_darkgray}"
+    Shell.NavBarIsVisible="True">
 
     <ContentPage.Resources>
         <Style TargetType="Label">
@@ -12,7 +13,7 @@
         </Style>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="0.5*,*,*,*">
+    <Grid RowDefinitions="0.5*,*,*,*,*">
         <Label
             Grid.Row="0"
             FontSize="26"
@@ -45,6 +46,18 @@
 
         <Button
             Grid.Row="3"
+            Padding="30,20,30,20"
+            BackgroundColor="{x:StaticResource fitly_white}"
+            Command="{Binding ResetCountingCommand}"
+            FontAttributes="Bold"
+            FontSize="18"
+            TextColor="Black"
+            HorizontalOptions="CenterAndExpand"
+            Text="Lépések nullázása"
+            VerticalOptions="CenterAndExpand" />
+
+        <Button
+            Grid.Row="4"
             Padding="30,20,30,20"
             BackgroundColor="{x:StaticResource fitly_red}"
             Command="{Binding StopCountingCommand}"

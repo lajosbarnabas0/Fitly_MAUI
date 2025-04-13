@@ -11,7 +11,9 @@ namespace Fitly.ViewModels
 {
     public partial class StepCounterViewModel : ObservableObject
     {
-        readonly IPedometer pedometer;
+
+        private int _baselineSteps = 0;
+        IPedometer pedometer;
 
         [ObservableProperty]
         int numberOfSteps;
@@ -26,7 +28,7 @@ namespace Fitly.ViewModels
         {
             pedometer.ReadingChanged += (sender, reading) =>
             {
-                NumberOfSteps = reading.NumberOfSteps;
+                NumberOfSteps = reading.NumberOfSteps - _baselineSteps;
             };
 
             pedometer.Start();
@@ -36,7 +38,14 @@ namespace Fitly.ViewModels
         public void StopCounting()
         {
             pedometer.Stop();
-            NumberOfSteps = 0;
         }
+
+        [RelayCommand]
+        public void ResetCounting()
+        {
+            _baselineSteps = NumberOfSteps + _baselineSteps; // Új baseline érték
+            NumberOfSteps = 0; // Felhasználói felület frissítése
+        }
+
     }
 }

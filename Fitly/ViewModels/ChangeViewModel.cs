@@ -30,7 +30,7 @@ namespace Fitly.ViewModels
         {
             try
 		    {
-                Shell.Current.GoToAsync(nameof(StepCounterPage));
+                Shell.Current.GoToAsync(nameof(WorkoutsPage));
 		    }
 		    catch (Exception ex)
 		    {
