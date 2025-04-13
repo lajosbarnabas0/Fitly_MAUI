@@ -50,7 +50,45 @@
                     HorizontalOptions="Center"
                     Text="Az én adataim" />
 
-                <Image Source=""/>
+                <Border
+                    Grid.Row="1"
+                    Padding="5"
+                    BackgroundColor="{x:StaticResource Gray900}"
+                    HorizontalOptions="CenterAndExpand"
+                    Stroke="{x:StaticResource Gray900}"
+                    StrokeShape="RoundRectangle 10"
+                    VerticalOptions="Center">
+                    <StackLayout>
+                        <Image
+                            HeightRequest="250"
+                            HorizontalOptions="CenterAndExpand"
+                            Source="{Binding SelectedUser.avatar}"
+                            WidthRequest="250" />
+                        <StackLayout>
+                            <Button
+                                Margin="10"
+                                Padding="10"
+                                BackgroundColor="{x:StaticResource fitly_green}"
+                                Command="{Binding AddImagesCommand}"
+                                FontAttributes="Bold"
+                                FontSize="16"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="Kép változtatása"
+                                VerticalOptions="CenterAndExpand" />
+
+                            <Button
+                                Padding="10"
+                                BackgroundColor="{x:StaticResource fitly_green}"
+                                Command="{Binding SaveAvatarCommand}"
+                                FontAttributes="Bold"
+                                FontSize="16"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="Kép mentése"
+                                VerticalOptions="CenterAndExpand" />
+
+                        </StackLayout>
+                    </StackLayout>
+                </Border>
 
                 <Border
                     Grid.Row="2"

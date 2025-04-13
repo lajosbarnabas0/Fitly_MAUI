@@ -8,6 +8,6 @@ namespace Fitly.Models
 {
     public class DeleteResponse
     {
-        public bool message { get; set; }
+        public string message { get; set; }
     }
 }

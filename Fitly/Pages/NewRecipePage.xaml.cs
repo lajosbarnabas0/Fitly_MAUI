@@ -11,8 +11,4 @@ public partial class NewRecipePage : ContentPage
 		BindingContext = vm;
 	}
 
-    private async void ContentPage_Loaded(object sender, EventArgs e)
-    {
-        await LoadedAnimation.AnimateElementsOnPage(this);
-    }
 }

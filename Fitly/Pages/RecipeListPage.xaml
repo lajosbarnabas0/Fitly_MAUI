@@ -6,7 +6,6 @@
     xmlns:local="clr-namespace:Fitly.Pages"
     xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
     BackgroundColor="{x:StaticResource fitly_darkgray}"
-    Loaded="ContentPage_Loaded"
     Shell.NavBarIsVisible="True">
 
 
@@ -84,9 +83,10 @@
                                     BackgroundColor="{x:StaticResource Gray700}"
                                     Stroke="{x:StaticResource Gray700}"
                                     StrokeShape="RoundRectangle 15">
-                                    <StackLayout Orientation="Horizontal">
+                                    <Grid ColumnDefinitions="2*,*">
                                         <Label
                                             x:Name="title_LBL"
+                                            Grid.Column="0"
                                             Padding="7"
                                             FontSize="16"
                                             Text="{Binding title}"
@@ -95,13 +95,14 @@
 
                                         <Label
                                             x:Name="author_LBL"
+                                            Grid.Column="1"
                                             Padding="7"
                                             FontSize="16"
                                             HorizontalOptions="EndAndExpand"
                                             Text="{Binding Author}"
                                             TextColor="LightGray"
                                             VerticalTextAlignment="Center" />
-                                    </StackLayout>
+                                    </Grid>
                                 </Border>
 
                                 <Border

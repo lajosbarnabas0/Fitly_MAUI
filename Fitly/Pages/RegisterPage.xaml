@@ -3,6 +3,9 @@
     x:Class="Fitly.Pages.RegisterPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+    xmlns:pages="clr-namespace:Fitly.Pages"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     BackgroundColor="{x:StaticResource fitly_darkgray}"
     Loaded="ContentPage_Loaded"
     Shell.NavBarIsVisible="False">
@@ -142,7 +145,10 @@
                                 BackgroundColor="{x:StaticResource Gray900}"
                                 Stroke="{x:StaticResource Gray900}"
                                 StrokeShape="RoundRectangle 10">
-                                <DatePicker Date="{Binding Birthday}" TextColor="LightGray" />
+                                <DatePicker
+                                    Date="{Binding Birthday}"
+                                    MaximumDate="{x:Static sys:DateTime.Today}"
+                                    TextColor="LightGray" />
                             </Border>
                         </StackLayout>
                         <StackLayout WidthRequest="160">

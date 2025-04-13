@@ -110,8 +110,8 @@
                             Grid.Column="0"
                             FontAutoScalingEnabled="True"
                             FontSize="16"
-                            HorizontalOptions="End"
-                            Text="Van már fiókod?" />
+                            HorizontalOptions="EndAndExpand"
+                            Text="Nincs még fiókod?" />
                         <Label
                             Grid.Row="0"
                             Grid.Column="1"

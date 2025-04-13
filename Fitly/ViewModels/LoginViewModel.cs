@@ -46,9 +46,9 @@ namespace Fitly.ViewModels
                 {
                     await SecureStorage.Default.SetAsync("LoginToken", response.token);
                     await SecureStorage.Default.SetAsync("UserId", response.user.id.ToString());
+                    await Shell.Current.DisplayAlert("Hiba", "Sikeres bejelentkezés", "Ok");
                     await Shell.Current.GoToAsync("//ProfilePage");
                     ResetFields();
-
                 }
                 else
                 {
@@ -57,7 +57,7 @@ namespace Fitly.ViewModels
             }
             else
             {
-                await Shell.Current.DisplayAlert("Hiba", "Kérlek add meg az adataid!", "Ok");
+                await Shell.Current.DisplayAlert("Hiba", "Hiba történt!", "Ok");
             }
         }
 

@@ -44,6 +44,10 @@ namespace Fitly.ViewModels
                 {
                     CommentEnabled = true;
                 }
+                else
+                {
+                    CommentEnabled = false;
+                }
 
                 if(commentsFromApi != null)
                 {

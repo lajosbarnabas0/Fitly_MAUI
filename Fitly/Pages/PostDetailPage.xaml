@@ -6,7 +6,6 @@
     xmlns:models="clr-namespace:Fitly.Models"
     xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
     BackgroundColor="{x:StaticResource fitly_darkgray}"
-    Loaded="ContentPage_Loaded"
     Shell.NavBarIsVisible="True">
 
     <ContentPage.Behaviors>
@@ -124,7 +123,10 @@
                                 BackgroundColor="{x:StaticResource Gray700}"
                                 Stroke="{x:StaticResource Gray700}"
                                 StrokeShape="RoundRectangle 5">
-                                <Label Text="{Binding content}" />
+                                <Grid ColumnDefinitions="2*,*">
+                                    <Label Text="{Binding content}" Grid.Column="0" />
+                                    <Label Text="{Binding user.Name}" Grid.Column="1"/>
+                                </Grid>
                             </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

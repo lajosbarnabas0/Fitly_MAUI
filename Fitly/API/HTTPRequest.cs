@@ -102,27 +102,44 @@ namespace Fitly.API
 
         public static async Task<T?> Delete(string url)
         {
-            var request = new HttpRequestMessage(HttpMethod.Delete, url);
-            request.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
-            var loginToken = await SecureStorage.Default.GetAsync("LoginToken");
-
-            // Authorization fejléc hozzáadása, ha van token
-            if (loginToken != null)
+            try
             {
-                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", loginToken);
+                var request = new HttpRequestMessage(HttpMethod.Delete, url);
+                request.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
+                var loginToken = await SecureStorage.Default.GetAsync("LoginToken");
+
+                // Authorization fejléc hozzáadása, ha van token
+                if (loginToken != null)
+                {
+                    request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", loginToken);
+                }
+
+                using var response = await client.SendAsync(request).ConfigureAwait(false);
+
+                // Ellenőrizzük, hogy sikeres volt-e a kérés
+                if (response.IsSuccessStatusCode)
+                {
+                    string resultString = await response.Content.ReadAsStringAsync();
+                    return JsonSerializer.Deserialize<T>(resultString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                }
+                else
+                {
+                    Console.WriteLine($"Hiba a DELETE kérés során: {response.StatusCode}");
+                    await MainThread.InvokeOnMainThreadAsync(async () =>
+                    {
+                        await Shell.Current.DisplayAlert("Hiba", $"Sikertelen törlés!", "OK");
+                    });
+                }
+
             }
-
-            using var response = await client.SendAsync(request).ConfigureAwait(false);
-
-            // Ellenőrizzük, hogy sikeres volt-e a kérés
-            if (response.IsSuccessStatusCode)
+            catch (Exception)
             {
-                string resultString = await response.Content.ReadAsStringAsync();
-                return JsonSerializer.Deserialize<T>(resultString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                await MainThread.InvokeOnMainThreadAsync(async () =>
+                {
+                    await Shell.Current.DisplayAlert("Hiba", "Váratlan hiba történt a törlés során.", "OK");
+                });
             }
-
-            Console.WriteLine($"Hiba a DELETE kérés során: {response.StatusCode}");
-            return null; // Sikertelen törlés esetén null-t adunk vissza
+            return null;
         }
     }
 }

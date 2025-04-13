@@ -6,7 +6,6 @@
     xmlns:local="clr-namespace:Fitly.Pages"
     xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
     BackgroundColor="{x:StaticResource fitly_darkgray}"
-    Loaded="ContentPage_Loaded"
     Shell.NavBarIsVisible="True">
 
     <ContentPage.Resources>
@@ -39,13 +38,12 @@
                     Stroke="{x:StaticResource Gray900}"
                     StrokeShape="RoundRectangle 10">
                     <Entry
-                        HorizontalOptions="CenterAndExpand"
+                        HorizontalOptions="FillAndExpand"
                         Placeholder="Cím"
                         PlaceholderColor="LightGray"
                         ReturnType="Done"
                         Text="{Binding NewRecipe.title}"
-                        TextColor="White"
-                        VerticalOptions="CenterAndExpand" />
+                        TextColor="White"/>
                 </Border>
             </StackLayout>
 
@@ -63,7 +61,7 @@
                     Stroke="{x:StaticResource Gray900}"
                     StrokeShape="RoundRectangle 10">
                     <Entry
-                        HorizontalOptions="CenterAndExpand"
+                        HorizontalOptions="FillAndExpand"
                         Placeholder="Összetevők"
                         PlaceholderColor="LightGray"
                         ReturnType="Done"
@@ -86,7 +84,7 @@
                     Stroke="{x:StaticResource Gray900}"
                     StrokeShape="RoundRectangle 10">
                     <Entry
-                        HorizontalOptions="CenterAndExpand"
+                        HorizontalOptions="FillAndExpand"
                         Placeholder="Leírás"
                         PlaceholderColor="LightGray"
                         ReturnType="Done"
@@ -109,7 +107,7 @@
                     Stroke="{x:StaticResource Gray900}"
                     StrokeShape="RoundRectangle 10">
                     <Entry
-                        HorizontalOptions="CenterAndExpand"
+                        HorizontalOptions="FillAndExpand"
                         Placeholder="Elkészítési idő"
                         PlaceholderColor="LightGray"
                         ReturnType="Done"
@@ -143,6 +141,8 @@
                 HorizontalOptions="CenterAndExpand"
                 Text="Recept mentése"
                 VerticalOptions="CenterAndExpand" />
+            
+            
 
         </Grid>
     </ScrollView>

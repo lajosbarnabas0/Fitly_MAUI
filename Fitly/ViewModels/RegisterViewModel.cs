@@ -61,22 +61,46 @@ namespace Fitly.ViewModels
         [RelayCommand]
         public async Task Register()
         {
-            string url = "https://bgs.jedlik.eu/hm/backend/public/api/register";
-            var requestData = new RegisterUserRequest
+            try
             {
-                name = Name,
-                email = Email,
-                password = Password,
-                password_confirmation = Password_confirmation,
-                birthday = Birthday,
-                gender = ConvertGenderToServerFormat(Gender)
-            };
+                if (!ValidateFields())
+                {
+                    await Shell.Current.DisplayAlert("Hiba", "Kérjük, töltse ki az összes mezőt.", "Ok");
+                    return;
+                }
 
-            var response = await AuthData.RegisterUser(url, requestData);
+                if (!ValidatePassword(Password))
+                {
+                    await Shell.Current.DisplayAlert("Hiba", "A jelszónak legalább 8 karakter hosszúnak kell lennie, tartalmaznia kell egy nagybetűt és egy számot.", "Ok");
+                    return;
+                }
 
-            if (response != null)
-            {
-                if (response != null)
+                if(!PasswordsMatch(Password, Password_confirmation))
+                {
+                    await Shell.Current.DisplayAlert("Hiba", "A két jelszó nem egyezik!", "Ok");
+                    return;
+                }
+
+                // Mezők validációja
+
+                string url = "https://bgs.jedlik.eu/hm/backend/public/api/register";
+                var requestData = new RegisterUserRequest
+                {
+                    name = Name,
+                    email = Email,
+                    password = Password,
+                    password_confirmation = Password_confirmation,
+                    birthday = Birthday,
+                    gender = ConvertGenderToServerFormat(Gender)
+                };
+
+                // Jelszó validáció
+
+                // API hívás
+                var response = await AuthData.RegisterUser(url, requestData);
+
+                // Sikeres válasz kezelése
+                if (response != null )
                 {
                     await Shell.Current.DisplayAlert("Információ", "Sikeres regisztráció!", "Ok");
                     await Shell.Current.GoToAsync("//LoginPage");
@@ -84,13 +108,52 @@ namespace Fitly.ViewModels
                 }
                 else
                 {
-                    await Shell.Current.DisplayAlert("Hiba", "Sikertelen regisztráció", "Ok");
+                    await Shell.Current.DisplayAlert("Hiba", $"Sikertelen regisztráció", "Ok");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                await Shell.Current.DisplayAlert("Hiba", "Kérlek add meg az adataid!", "Ok");
+                // Hibakezelés: váratlan hiba esetén jeleníts meg üzenetet
+                await Shell.Current.DisplayAlert("Hiba", "Váratlan hiba történt a regisztráció során. Kérjük, próbálja újra később.", "Ok");
             }
+        }
+
+        private bool ValidatePassword(string password)
+        {
+            if (string.IsNullOrWhiteSpace(password))
+                return false;
+
+            if (password.Length < 8)
+                return false;
+
+            if (!password.Any(char.IsUpper))
+                return false;
+
+            if (!password.Any(char.IsDigit))
+                return false;
+
+            return true;
+        }
+
+        private bool ValidateFields()
+        {
+            if (string.IsNullOrWhiteSpace(Name) ||
+                string.IsNullOrWhiteSpace(Email) ||
+                string.IsNullOrWhiteSpace(Password) ||
+                string.IsNullOrWhiteSpace(Password_confirmation) ||
+                string.IsNullOrWhiteSpace(Birthday) ||
+                string.IsNullOrWhiteSpace(Gender))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool PasswordsMatch(string p1, string p2)
+        {
+            if(p1 != p2 || p1.Length != p2.Length)
+                return false;
+            return true;
         }
     }
 }

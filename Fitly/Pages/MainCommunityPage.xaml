@@ -35,7 +35,7 @@
                 VerticalOptions="Center"
                 WidthRequest="300">
                 <Border.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="posts_BDR_Tapped" />
+                    <TapGestureRecognizer Command="{Binding GoToPostsCommand}" />
                 </Border.GestureRecognizers>
                 <StackLayout
                     Padding="10"
@@ -70,7 +70,7 @@
                 VerticalOptions="Center"
                 WidthRequest="300">
                 <Border.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="recipes_BDR_Tapped" />
+                    <TapGestureRecognizer Command="{Binding GoToRecipesCommand}" />
                 </Border.GestureRecognizers>
                 <StackLayout
                     Padding="10"

@@ -6,7 +6,6 @@
     xmlns:local="clr-namespace:Fitly.Pages"
     xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
     BackgroundColor="{x:StaticResource fitly_darkgray}"
-    Loaded="ContentPage_Loaded"
     Shell.NavBarIsVisible="True">
 
     <ContentPage.Resources>
@@ -39,7 +38,7 @@
                     Stroke="{x:StaticResource Gray900}"
                     StrokeShape="RoundRectangle 10">
                     <Entry
-                        HorizontalOptions="CenterAndExpand"
+                        HorizontalOptions="FillAndExpand"
                         Placeholder="Cím"
                         PlaceholderColor="LightGray"
                         ReturnType="Done"
@@ -63,7 +62,7 @@
                     Stroke="{x:StaticResource Gray900}"
                     StrokeShape="RoundRectangle 10">
                     <Entry
-                        HorizontalOptions="CenterAndExpand"
+                        HorizontalOptions="FillAndExpand"
                         Placeholder="Leírás"
                         PlaceholderColor="LightGray"
                         ReturnType="Done"

@@ -9,7 +9,6 @@
     xmlns:viewmodels="clr-namespace:Fitly.ViewModels"
     x:DataType="viewmodels:PostListViewModel"
     BackgroundColor="{x:StaticResource fitly_darkgray}"
-    Loaded="ContentPage_Loaded"
     Shell.NavBarIsVisible="True">
 
     <ContentPage.Behaviors>
@@ -87,10 +86,10 @@
                                     BackgroundColor="{x:StaticResource Gray700}"
                                     Stroke="{x:StaticResource Gray700}"
                                     StrokeShape="RoundRectangle 15">
-                                    <StackLayout Orientation="Horizontal">
+                                    <Grid ColumnDefinitions="2*,*">
                                         <Label
                                             x:Name="title_LBL"
-                                            Grid.Row="0"
+                                            Grid.Column="0"
                                             Padding="7"
                                             FontSize="16"
                                             LineBreakMode="TailTruncation"
@@ -100,16 +99,17 @@
 
                                         <Label
                                             x:Name="author_LBL"
-                                            Grid.Row="1"
+                                            Grid.Column="1"
                                             Padding="7"
                                             FontSize="14"
+                                            WidthRequest="60"
                                             HorizontalOptions="EndAndExpand"
                                             LineBreakMode="TailTruncation"
                                             Text="{Binding Author}"
                                             TextColor="LightGray"
                                             VerticalTextAlignment="End" />
 
-                                    </StackLayout>
+                                    </Grid>
 
                                 </Border>
                                 <Border

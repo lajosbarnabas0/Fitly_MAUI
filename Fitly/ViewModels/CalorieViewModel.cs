@@ -29,6 +29,8 @@ namespace Fitly.ViewModels
         public Meal Meal { get; set; }
         public string Grams { get; set; }
 
+        private bool isUserDataValid = false;
+
         [ObservableProperty]
         public ObservableCollection<Meal> selectedMeals;
 
@@ -53,6 +55,7 @@ namespace Fitly.ViewModels
 
         public CalorieViewModel()
         {
+
             SelectedMeals = new ObservableCollection<Meal>();
             SelectedMeals.CollectionChanged += (s, e) =>
             {
@@ -119,7 +122,10 @@ namespace Fitly.ViewModels
                         string userJson = JsonSerializer.Serialize(user);
                         Preferences.Set("UserData", userJson);
                         SelectedUser = user;
-
+                        if(SelectedUser != null)
+                        {
+                            CheckData(SelectedUser);
+                        }
                     }
                     else
                     {
@@ -141,14 +147,16 @@ namespace Fitly.ViewModels
             }
         }
 
-        [RelayCommand]
-        async Task CalculateCalorie()
+        public async Task CheckData(User user)
         {
-            if (SelectedUser.weight == null || SelectedUser.height == null || SelectedUser.lose_or_gain == null || SelectedUser.birthday == "" || SelectedUser.gender == null)
+            if (!isUserDataValid && (user.weight == null || user.height == null || user.lose_or_gain == null || user.birthday == "" || user.gender == null))
             {
-                Shell.Current?.DisplayAlert("Hiányos adatok", "Kérjük töltse ki a profil oldalon az adatait, hogy ki tudjuk számítani az ajánlott kalóriát!", "Ok");
-                Shell.Current?.GoToAsync(nameof(ProfilePage));
+                await Shell.Current.DisplayAlert("Hiányos adatok", "Kérjük töltse ki a profil oldalon az adatait, hogy ki tudjuk számítani az ajánlott kalóriát!", "Ok");
                 return;
+            }
+            else
+            {
+                isUserDataValid = true; // Az adatok érvényesek
             }
         }
 

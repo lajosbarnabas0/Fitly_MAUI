@@ -11,10 +11,4 @@ public partial class PostDetailPage : ContentPage
 		InitializeComponent();
         BindingContext = vm;
 	}
-
-    private async void ContentPage_Loaded(object sender, EventArgs e)
-    {
-        await LoadedAnimation.AnimateElementsOnPage(this);
-    }
-
 }

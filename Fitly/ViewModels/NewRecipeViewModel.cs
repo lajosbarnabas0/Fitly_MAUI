@@ -44,11 +44,6 @@ namespace Fitly.ViewModels
         {
             try
             {
-                if (SelectedImageFile == null)
-                {
-                    Console.WriteLine("Nincs kiválasztott fájl.");
-                    return;
-                }
 
                 // Létrehozzuk a HttpClient példányt
                 using var httpClient = new HttpClient();
@@ -65,10 +60,13 @@ namespace Fitly.ViewModels
                 using var formData = new MultipartFormDataContent();
 
                 // Fájl hozzáadása form-data-hoz
-                var fileStream = await SelectedImageFile.OpenReadAsync();
-                var streamContent = new StreamContent(fileStream);
-                streamContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
-                formData.Add(streamContent, "image_paths[]", SelectedImageFile.FileName);
+                if(SelectedImageFile != null)
+                {
+                    var fileStream = await SelectedImageFile.OpenReadAsync();
+                    var streamContent = new StreamContent(fileStream);
+                    streamContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+                    formData.Add(streamContent, "image_paths[]", SelectedImageFile.FileName);
+                }
 
                 // Egyéb mezők hozzáadása
                 formData.Add(new StringContent(NewRecipe.title), "title");
@@ -84,7 +82,8 @@ namespace Fitly.ViewModels
                 if (response.IsSuccessStatusCode)
                 {
                     Shell.Current?.DisplayAlert("Siker", "A recept mentése sikeres volt!", "Ok");
-                    Console.WriteLine("Fájl sikeresen feltöltve!");
+                    await Shell.Current.GoToAsync(nameof(RecipeListPage));
+                    NewRecipe = new Recipe();
                 }
                 else
                 {

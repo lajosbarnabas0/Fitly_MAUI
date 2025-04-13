@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -29,6 +30,8 @@ namespace Fitly.ViewModels
         [ObservableProperty]
         User originalUser;
 
+        public FileResult SelectedImageFile { get; private set; }
+
         // Enum szöveges értékei a Pickerhez
         public ObservableCollection<LoseOrGain> LoseOrGainOptions { get; } = new()
         {
@@ -36,6 +39,84 @@ namespace Fitly.ViewModels
             LoseOrGain.Hízás
         };
 
+
+        [RelayCommand]
+        public async Task AddImages()
+        {
+            try
+            {
+                var result = await MediaPicker.PickPhotoAsync();
+                if (result != null)
+                {
+                    SelectedImageFile = result;
+                    Shell.Current?.DisplayAlert("Feltöltés", "A kép feltöltése sikeres!", "Ok");
+                }
+            }
+            catch (Exception ex)
+            {
+                Shell.Current?.DisplayAlert("Feltöltés", "A kép feltöltése sikertelen!", "Ok");
+                Console.WriteLine($"Hiba kép kiválasztásnál: {ex.Message}");
+                return;
+            }
+        }
+
+        [RelayCommand]
+        async Task SaveAvatar()
+        {
+            try
+            {
+                if (SelectedImageFile == null)
+                {
+                    Console.WriteLine("Nincs kiválasztott fájl.");
+                    return;
+                }
+
+                // Létrehozzuk a HttpClient példányt
+                using var httpClient = new HttpClient();
+
+                // Hozzáadjuk a szükséges headereket
+                httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
+                var token = await SecureStorage.Default.GetAsync("LoginToken");
+                if (!string.IsNullOrEmpty(token))
+                {
+                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                }
+
+                // Létrehozzuk a MultipartFormDataContent-et
+                using var formData = new MultipartFormDataContent();
+
+                // Fájl hozzáadása form-data-hoz
+                var fileStream = await SelectedImageFile.OpenReadAsync();
+                var streamContent = new StreamContent(fileStream);
+                streamContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+                formData.Add(streamContent, "avatar", SelectedImageFile.FileName);
+
+                // Küldés az API végpontra
+                var url = "https://bgs.jedlik.eu/hm/backend/public/api/user/avatar";
+                var response = await httpClient.PostAsync(url, formData);
+
+                // Ellenőrizzük a választ
+                if (response.IsSuccessStatusCode)
+                {
+                    Shell.Current?.DisplayAlert("Siker", "A bejegyzés mentése sikeres volt!", "Ok");
+                    Console.WriteLine("Fájl sikeresen feltöltve!");
+                }
+                else
+                {
+                    Console.WriteLine($"Hiba történt: {response.StatusCode}");
+                    var errorMessage = await response.Content.ReadAsStringAsync();
+                    Shell.Current?.DisplayAlert("Hiba", "Hiba történt!", "Ok");
+                    Console.WriteLine($"Hibaüzenet: {errorMessage}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Shell.Current?.DisplayAlert("Hiba", "Hiba történt!", "Ok");
+                Console.WriteLine($"Hiba fájlfeltöltés közben: {ex.Message}");
+                return;
+            }
+
+        }
 
 
         private readonly string url = "https://bgs.jedlik.eu/hm/backend/public/api/users";

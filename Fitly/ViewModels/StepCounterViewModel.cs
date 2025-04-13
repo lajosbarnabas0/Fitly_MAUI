@@ -43,8 +43,8 @@ namespace Fitly.ViewModels
         [RelayCommand]
         public void ResetCounting()
         {
-            _baselineSteps = NumberOfSteps + _baselineSteps; // Új baseline érték
-            NumberOfSteps = 0; // Felhasználói felület frissítése
+            _baselineSteps = NumberOfSteps + _baselineSteps; 
+            NumberOfSteps = 0; 
         }
 
     }
