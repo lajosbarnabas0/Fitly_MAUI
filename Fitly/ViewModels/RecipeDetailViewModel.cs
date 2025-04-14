@@ -61,7 +61,7 @@ namespace Fitly.ViewModels
             }
             catch (Exception ex)
             {
-                return;
+                await Shell.Current.DisplayAlert("Hiba", "Hiba történt!", "Ok");
             }
         }
 
