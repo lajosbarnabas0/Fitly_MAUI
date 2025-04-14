@@ -9,6 +9,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Fitly.API;
 using Fitly.Models;
+using Microsoft.Maui.Networking;
 
 
 namespace Fitly.ViewModels
@@ -21,6 +22,22 @@ namespace Fitly.ViewModels
 
         [ObservableProperty]
         string? password;
+
+        [RelayCommand]
+        async Task Appearing()
+        {
+            NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+
+            if (accessType == NetworkAccess.Internet)
+            {
+                return;
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Hiba", "Kérjük csatlakozzon az internethez!", "Ok");
+                return;
+            }
+        }
 
         private void ResetFields()
         {
@@ -46,7 +63,7 @@ namespace Fitly.ViewModels
                 {
                     await SecureStorage.Default.SetAsync("LoginToken", response.token);
                     await SecureStorage.Default.SetAsync("UserId", response.user.id.ToString());
-                    await Shell.Current.DisplayAlert("Hiba", "Sikeres bejelentkezés", "Ok");
+                    await Shell.Current.DisplayAlert("Információ", "Sikeres bejelentkezés", "Ok");
                     await Shell.Current.GoToAsync("//ProfilePage");
                     ResetFields();
                 }
@@ -66,5 +83,7 @@ namespace Fitly.ViewModels
         {
             Shell.Current.GoToAsync("//RegisterPage");
         }
+
+
     }
 }

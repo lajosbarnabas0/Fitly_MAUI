@@ -21,6 +21,18 @@ namespace Fitly.ViewModels
         [RelayCommand]
         async Task Appearing()
         {
+            NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+
+            if (accessType == NetworkAccess.Internet)
+            {
+                return;
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Hiba", "Kérjük csatlakozzon az internethez!", "Ok");
+                return;
+            }
+
             try
             {
                 string? isLoginSet = await SecureStorage.Default.GetAsync("LoginToken");
@@ -60,9 +72,9 @@ namespace Fitly.ViewModels
         [RelayCommand]
         async Task DeletePost(Post post)
         {
-            bool answer = await Shell.Current.DisplayAlert("Megerősítés", "Biztosan törölni akarja a bejegyzést?", "Igen", "Nem");
             string url = $"https://bgs.jedlik.eu/hm/backend/public/api/posts/{post.id}";
 
+            bool answer = await Shell.Current.DisplayAlert("Megerősítés", "Biztosan törölni akarja a bejegyzést?", "Igen", "Nem");
             if (post != null && UsersPosts.Contains(post) && answer)
             {
                 UsersPosts.Remove(post);

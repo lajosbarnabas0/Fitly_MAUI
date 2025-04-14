@@ -34,7 +34,19 @@ namespace Fitly.ViewModels
         [RelayCommand]
         async Task Appearing()
         {
-            if(SelectedRecipe.image_urls == null)
+            NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+
+            if (accessType == NetworkAccess.Internet)
+            {
+                return;
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Hiba", "Kérjük csatlakozzon az internethez!", "Ok");
+                return;
+            }
+
+            if (SelectedRecipe.image_urls == null)
             {
                 await Shell.Current.DisplayAlert("Hiba", "Hiba történt a recept betöltésekor!", "Ok");
                 return;

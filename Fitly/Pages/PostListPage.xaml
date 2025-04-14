@@ -102,12 +102,12 @@
                                             Grid.Column="1"
                                             Padding="7"
                                             FontSize="14"
-                                            WidthRequest="60"
                                             HorizontalOptions="EndAndExpand"
                                             LineBreakMode="TailTruncation"
                                             Text="{Binding Author}"
                                             TextColor="LightGray"
-                                            VerticalTextAlignment="End" />
+                                            VerticalTextAlignment="End"
+                                            WidthRequest="60" />
 
                                     </Grid>
 

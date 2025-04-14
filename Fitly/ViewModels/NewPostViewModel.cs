@@ -44,11 +44,8 @@ namespace Fitly.ViewModels
         {
             try
             {
-
-                // Létrehozzuk a HttpClient példányt
                 using var httpClient = new HttpClient();
 
-                // Hozzáadjuk a szükséges headereket
                 httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
                 var token = await SecureStorage.Default.GetAsync("LoginToken");
                 if (!string.IsNullOrEmpty(token))
@@ -56,7 +53,6 @@ namespace Fitly.ViewModels
                     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 }
 
-                // Létrehozzuk a MultipartFormDataContent-et
                 using var formData = new MultipartFormDataContent();
 
                 // Fájl hozzáadása form-data-hoz
@@ -72,11 +68,9 @@ namespace Fitly.ViewModels
                 formData.Add(new StringContent(NewPost.Title), "title");
                 formData.Add(new StringContent(NewPost.Content), "content");
 
-                // Küldés az API végpontra
                 var url = "https://bgs.jedlik.eu/hm/backend/public/api/posts";
                 var response = await httpClient.PostAsync(url, formData);
 
-                // Ellenőrizzük a választ
                 if (response.IsSuccessStatusCode)
                 {
                     Shell.Current?.DisplayAlert("Siker", "A bejegyzés mentése sikeres volt!", "Ok");
@@ -98,6 +92,22 @@ namespace Fitly.ViewModels
                 return;
             }
 
+        }
+
+        [RelayCommand]
+        async Task Appearing()
+        {
+            NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+
+            if (accessType == NetworkAccess.Internet)
+            {
+                return;
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Hiba", "Kérjük csatlakozzon az internethez!", "Ok");
+                return;
+            }
         }
     }
 }

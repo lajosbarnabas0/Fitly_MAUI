@@ -17,5 +17,21 @@ namespace Fitly.ViewModels
         {
             await Shell.Current.GoToAsync(nameof(StepCounterPage));
         }
-}
+
+        [RelayCommand]
+        async Task Appearing()
+        {
+            NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+
+            if (accessType == NetworkAccess.Internet)
+            {
+                return;
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Hiba", "Kérjük csatlakozzon az internethez!", "Ok");
+                return;
+            }
+        }
+    }
 }

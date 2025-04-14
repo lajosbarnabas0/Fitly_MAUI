@@ -76,7 +76,7 @@ namespace Fitly.API
                 var request = new HttpRequestMessage(HttpMethod.Put, url) { Content = content };
                 request.Headers.Add("Accept", "application/json");
                 var loginToken = await SecureStorage.Default.GetAsync("LoginToken");
-                // Authorization fejléc hozzáadása, ha van token
+
                 if (loginToken != null)
                 {
                     request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", loginToken);
@@ -108,7 +108,6 @@ namespace Fitly.API
                 request.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
                 var loginToken = await SecureStorage.Default.GetAsync("LoginToken");
 
-                // Authorization fejléc hozzáadása, ha van token
                 if (loginToken != null)
                 {
                     request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", loginToken);
@@ -116,7 +115,6 @@ namespace Fitly.API
 
                 using var response = await client.SendAsync(request).ConfigureAwait(false);
 
-                // Ellenőrizzük, hogy sikeres volt-e a kérés
                 if (response.IsSuccessStatusCode)
                 {
                     string resultString = await response.Content.ReadAsStringAsync();

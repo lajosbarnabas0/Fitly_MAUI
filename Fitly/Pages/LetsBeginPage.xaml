@@ -7,8 +7,10 @@
     BackgroundColor="{x:StaticResource fitly_darkgray}"
     Loaded="ContentPage_Loaded"
     Shell.NavBarIsVisible="False">
+    
     <ContentPage.Behaviors>
         <tool:StatusBarBehavior StatusBarColor="{x:StaticResource fitly_darkgray}" />
+        <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing"/>
     </ContentPage.Behaviors>
 
     <ScrollView>

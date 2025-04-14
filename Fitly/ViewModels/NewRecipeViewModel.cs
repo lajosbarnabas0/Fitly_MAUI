@@ -35,7 +35,8 @@ namespace Fitly.ViewModels
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Hiba kép kiválasztásnál: {ex.Message}");
+                Shell.Current?.DisplayAlert("Hiba","Hiba kép kiválasztásnál", "Ok");
+                return;
             }
         }
 
@@ -56,7 +57,6 @@ namespace Fitly.ViewModels
                     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 }
 
-                // Létrehozzuk a MultipartFormDataContent-et
                 using var formData = new MultipartFormDataContent();
 
                 // Fájl hozzáadása form-data-hoz
@@ -68,7 +68,6 @@ namespace Fitly.ViewModels
                     formData.Add(streamContent, "image_paths[]", SelectedImageFile.FileName);
                 }
 
-                // Egyéb mezők hozzáadása
                 formData.Add(new StringContent(NewRecipe.title), "title");
                 formData.Add(new StringContent(NewRecipe.ingredients), "ingredients");
                 formData.Add(new StringContent(NewRecipe.description), "description");
@@ -97,6 +96,22 @@ namespace Fitly.ViewModels
                 Console.WriteLine($"Hiba fájlfeltöltés közben: {ex.Message}");
             }
 
+        }
+
+        [RelayCommand]
+        async Task Appearing()
+        {
+            NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+
+            if (accessType == NetworkAccess.Internet)
+            {
+                return;
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Hiba", "Kérjük csatlakozzon az internethez!", "Ok");
+                return;
+            }
         }
     }
 }

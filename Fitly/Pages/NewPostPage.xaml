@@ -8,6 +8,10 @@
     BackgroundColor="{x:StaticResource fitly_darkgray}"
     Shell.NavBarIsVisible="True">
 
+    <ContentPage.Behaviors>
+        <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+
     <ContentPage.Resources>
         <Style TargetType="Label">
             <Setter Property="TextColor" Value="White" />

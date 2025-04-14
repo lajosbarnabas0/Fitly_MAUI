@@ -8,6 +8,10 @@
     BackgroundColor="{x:StaticResource fitly_darkgray}"
     Shell.NavBarIsVisible="False">
 
+    <ContentPage.Behaviors>
+        <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+
     <Grid RowDefinitions="0.2*,1.5*">
         <Border HorizontalOptions="Center" Stroke="{x:StaticResource fitly_darkgray}">
             <StackLayout Orientation="Horizontal">

@@ -8,6 +8,10 @@
     BackgroundColor="{x:StaticResource fitly_darkgray}"
     Shell.NavBarIsVisible="True">
 
+    <ContentPage.Behaviors>
+        <tool:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+
     <ContentPage.Resources>
         <Style TargetType="Label">
             <Setter Property="TextColor" Value="White" />
@@ -43,7 +47,7 @@
                         PlaceholderColor="LightGray"
                         ReturnType="Done"
                         Text="{Binding NewRecipe.title}"
-                        TextColor="White"/>
+                        TextColor="White" />
                 </Border>
             </StackLayout>
 
@@ -141,8 +145,8 @@
                 HorizontalOptions="CenterAndExpand"
                 Text="Recept mentése"
                 VerticalOptions="CenterAndExpand" />
-            
-            
+
+
 
         </Grid>
     </ScrollView>
