@@ -46,19 +46,9 @@ namespace Fitly.ViewModels
                 await Shell.Current.DisplayAlert("Hiba", "Hiba történt a recept betöltésekor!", "Ok");
                 return;
             }
-            string url = "https://bgs.jedlik.eu/hm/backend/public/api/users";
-            int? userID = SelectedRecipe.user_id;
+
             try
             {
-                User? user = await GetData.GetUserById($"{url}/{userID}");
-                if (user != null)
-                {
-                    UserName = user.Name;
-                }
-                else
-                {
-                    return;
-                }
 
                 if(SelectedRecipe.image_urls.Length > 1)
                 {

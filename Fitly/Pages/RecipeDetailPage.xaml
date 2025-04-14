@@ -31,7 +31,7 @@
                     FontAttributes="Bold"
                     FontSize="18"
                     HorizontalOptions="CenterAndExpand"
-                    Text="{Binding UserName, StringFormat='{0} receptje'}"
+                    Text="{Binding SelectedRecipe.user.Name, StringFormat='{0} receptje'}"
                     VerticalOptions="StartAndExpand" />
                 <Line
                     Grid.Row="1"
