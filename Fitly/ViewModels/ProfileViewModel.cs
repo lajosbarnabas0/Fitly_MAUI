@@ -182,7 +182,6 @@ namespace Fitly.ViewModels
             if (IsUserDataChanged())
             {
                 CalculateCalorie();
-                UpdateWeightGoalStatus();
                 string url = "https://bgs.jedlik.eu/hm/backend/public/api/users/profile";
                 var requestData = new User
                 {
@@ -213,6 +212,7 @@ namespace Fitly.ViewModels
                 }
                 IsReadOnly = true;
                 OnPropertyChanged(nameof(SelectedUser));
+                OnPropertyChanged(nameof(SelectedUser.goal_weight));
                 OriginalUser = SelectedUser;
             }
             else
@@ -238,7 +238,12 @@ namespace Fitly.ViewModels
 
         private async void CalculateRecommendedCalorie()
         {
-            // Ellenőrizzük, hogy a szükséges adatok elérhetők-e
+            if (SelectedUser?.weight == null || SelectedUser?.goal_weight == null) return;
+
+            SelectedUser.LoseOrGainEnum = SelectedUser.goal_weight < SelectedUser.weight
+                ? LoseOrGain.Fogyás
+                : LoseOrGain.Hízás;
+
             if (string.IsNullOrWhiteSpace(SelectedUser.birthday) ||
                 SelectedUser.height == null || SelectedUser.weight == null)
             {
@@ -246,7 +251,6 @@ namespace Fitly.ViewModels
                 return;
             }
 
-            // Próbáljuk meg parse-olni a születési dátumot
             if (!DateTime.TryParse(SelectedUser.birthday, out DateTime birthDate))
             {
                 SelectedUser.recommended_calories = null;
@@ -272,16 +276,21 @@ namespace Fitly.ViewModels
                     return;
             }
 
+            // Kalóriamódosítás LoseOrGainEnum alapján
+            switch (SelectedUser.LoseOrGainEnum)
+            {
+                case LoseOrGain.Fogyás:
+                    bmr *= 0.8; // 20% kalóriadeficit
+                    break;
+                case LoseOrGain.Hízás:
+                    bmr *= 1.15; // 15% kalóriatöbblet
+                    break;
+                default:
+                    // Alap BMR, ha nincs beállítva cél
+                    break;
+            }
+
             SelectedUser.recommended_calories = Math.Round(bmr);
-        }
-
-        private void UpdateWeightGoalStatus()
-        {
-            if (SelectedUser?.weight == null || SelectedUser?.goal_weight == null) return;
-
-            SelectedUser.LoseOrGainEnum = SelectedUser.goal_weight < SelectedUser.weight
-                ? LoseOrGain.Fogyás
-                : LoseOrGain.Hízás;
         }
     }
 }
