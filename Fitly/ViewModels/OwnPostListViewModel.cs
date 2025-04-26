@@ -16,7 +16,7 @@ namespace Fitly.ViewModels
         public ObservableCollection<Post> Posts { get; set; } = new ObservableCollection<Post>();
 
         [ObservableProperty]
-        public ObservableCollection<Post> usersPosts = new ObservableCollection<Post>();
+        public ObservableCollection<Post> usersPosts = new();
 
         [RelayCommand]
         async Task Appearing()

@@ -215,7 +215,7 @@
                         <Picker
                             Title="Célkitűzés"
                             HorizontalTextAlignment="Center"
-                            IsEnabled="{Binding IsPickerEnabled}"
+                            IsEnabled="False"
                             ItemsSource="{Binding LoseOrGainOptions}"
                             SelectedItem="{Binding SelectedUser.LoseOrGainEnum, Mode=TwoWay}"
                             TextColor="White" />

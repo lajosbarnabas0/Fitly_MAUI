@@ -17,7 +17,6 @@ namespace Fitly.API
         
         public static async Task<Meal> SendMeal(string url, object data)
         {
-            // Explicit típusmegadás
             return await HTTPRequest<Meal>.Post(url, data);
         }
         

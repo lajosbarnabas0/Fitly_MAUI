@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Globalization;
-using System.Linq;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Fitly.API;
 using Fitly.Models;
-using Fitly.Pages;
 namespace Fitly.ViewModels
 {
     public partial class ProfileViewModel : ObservableObject, INotifyPropertyChanged
@@ -20,9 +13,6 @@ namespace Fitly.ViewModels
 
         [ObservableProperty]
         bool isReadOnly = true;
-
-        [ObservableProperty]
-        bool isPickerEnabled = false;
 
         [ObservableProperty]
         User selectedUser;
@@ -171,7 +161,6 @@ namespace Fitly.ViewModels
         async Task editButton()
         {
             IsReadOnly = false;
-            IsPickerEnabled = true;
             OriginalUser = JsonSerializer.Deserialize<User>(JsonSerializer.Serialize(SelectedUser));
         }
 
@@ -179,7 +168,6 @@ namespace Fitly.ViewModels
         async Task cancelButton()
         {
             IsReadOnly = true;
-            IsPickerEnabled = false;
             SelectedUser.weight = OriginalUser.weight;
             SelectedUser.height = OriginalUser.height;
             SelectedUser.lose_or_gain = OriginalUser.lose_or_gain;
@@ -194,6 +182,7 @@ namespace Fitly.ViewModels
             if (IsUserDataChanged())
             {
                 CalculateCalorie();
+                UpdateWeightGoalStatus();
                 string url = "https://bgs.jedlik.eu/hm/backend/public/api/users/profile";
                 var requestData = new User
                 {
@@ -223,7 +212,6 @@ namespace Fitly.ViewModels
                     await Shell.Current.DisplayAlert("Hiba", "Hiba történt!", "Ok");
                 }
                 IsReadOnly = true;
-                IsPickerEnabled = false;
                 OnPropertyChanged(nameof(SelectedUser));
                 OriginalUser = SelectedUser;
             }
@@ -285,6 +273,15 @@ namespace Fitly.ViewModels
             }
 
             SelectedUser.recommended_calories = Math.Round(bmr);
+        }
+
+        private void UpdateWeightGoalStatus()
+        {
+            if (SelectedUser?.weight == null || SelectedUser?.goal_weight == null) return;
+
+            SelectedUser.LoseOrGainEnum = SelectedUser.goal_weight < SelectedUser.weight
+                ? LoseOrGain.Fogyás
+                : LoseOrGain.Hízás;
         }
     }
 }

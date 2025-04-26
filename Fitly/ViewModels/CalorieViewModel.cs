@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Fitly.API;
@@ -64,7 +59,7 @@ namespace Fitly.ViewModels
         }
 
         [RelayCommand]
-        async Task ResetMeals() 
+        async Task ResetMeals()
         {
             SelectedMeals.Clear();
         }
@@ -72,7 +67,7 @@ namespace Fitly.ViewModels
         [RelayCommand]
         public async Task AddMeal()
         {
-            if(Grams == null)
+            if (Grams == null)
             {
                 await Shell.Current.DisplayAlert("Hiba", "Kérjük adja meg a gramm értéket!", "Ok");
                 return;
@@ -129,7 +124,7 @@ namespace Fitly.ViewModels
                         string userJson = JsonSerializer.Serialize(user);
                         Preferences.Set("UserData", userJson);
                         SelectedUser = user;
-                        if(SelectedUser != null)
+                        if (SelectedUser != null)
                         {
                             CheckData(SelectedUser);
                         }
@@ -171,7 +166,7 @@ namespace Fitly.ViewModels
         {
             if (mealGrams.TryGetValue(meal, out double grams))
             {
-                return (meal.fat / 100.0) * grams; 
+                return (meal.fat / 100.0) * grams;
             }
             return 0;
         }):F2} g";
