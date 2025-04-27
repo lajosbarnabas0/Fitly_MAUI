@@ -20,6 +20,9 @@ namespace Fitly.ViewModels
         [ObservableProperty]
         User originalUser;
 
+        [ObservableProperty]
+        string age;
+
         public FileResult SelectedImageFile { get; private set; }
 
         // Enum szöveges értékei a Pickerhez
@@ -120,6 +123,8 @@ namespace Fitly.ViewModels
             {
                 await Shell.Current.DisplayAlert("Hiba", "Kérjük csatlakozzon az internethez!", "Ok");
             }
+
+            UpdateAge();
 
             string? isLoginSet = SecureStorage.Default.GetAsync("LoginToken").Result;
             string? userID = SecureStorage.Default.GetAsync("UserId").Result;
@@ -280,17 +285,39 @@ namespace Fitly.ViewModels
             switch (SelectedUser.LoseOrGainEnum)
             {
                 case LoseOrGain.Fogyás:
-                    bmr *= 0.8; // 20% kalóriadeficit
+                    bmr *= 0.8; 
                     break;
                 case LoseOrGain.Hízás:
-                    bmr *= 1.15; // 15% kalóriatöbblet
+                    bmr *= 1.15; 
                     break;
                 default:
-                    // Alap BMR, ha nincs beállítva cél
                     break;
             }
 
             SelectedUser.recommended_calories = Math.Round(bmr);
+        }
+
+        private void UpdateAge()
+        {
+            if (SelectedUser == null || string.IsNullOrWhiteSpace(SelectedUser.birthday))
+            {
+                Age = string.Empty;
+                return;
+            }
+
+            if (!DateTime.TryParse(SelectedUser.birthday, out var birthDate))
+            {
+                Age = string.Empty;
+                return;
+            }
+
+            var today = DateTime.Today;
+            int age = today.Year - birthDate.Year;
+
+            if (today < birthDate.AddYears(age))
+                age--;
+
+            Age = age.ToString();
         }
     }
 }

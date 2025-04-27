@@ -21,8 +21,6 @@ namespace Fitly.Models
         public DateTime? updated_at { get; set; }
         public string[]? image_urls { get; set; }
 
-        public string? avatar { get; set; }
-
         public User? user { get; set; }
 
         private string? _author;

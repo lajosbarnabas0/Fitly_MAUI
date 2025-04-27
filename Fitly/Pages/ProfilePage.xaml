@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+    xmlns:local="clr-namespace:Fitly.Pages"
     BackgroundColor="{x:StaticResource fitly_darkgray}"
     Loaded="ContentPage_Loaded"
     Shell.NavBarIsVisible="False">
@@ -60,9 +61,9 @@
                     VerticalOptions="Center">
                     <StackLayout>
                         <Image
+                            Source="{Binding SelectedUser.avatar}"
                             HeightRequest="250"
                             HorizontalOptions="CenterAndExpand"
-                            Source="{Binding SelectedUser.avatar}"
                             WidthRequest="250" />
                         <StackLayout>
                             <Button
@@ -104,11 +105,20 @@
                             FontSize="16"
                             HorizontalOptions="StartAndExpand"
                             Text="{Binding SelectedUser.Email, StringFormat='Email: {0}'}" />
-                        <Label
-                            Margin="10"
-                            FontSize="16"
-                            HorizontalOptions="EndAndExpand"
-                            Text="{Binding SelectedUser.Name, StringFormat='Név: {0}'}" />
+                        <StackLayout>
+                            <Label
+                                Margin="10"
+                                FontSize="16"
+                                HorizontalOptions="EndAndExpand"
+                                Text="{Binding SelectedUser.Name, StringFormat='Név: {0}'}" />
+
+                            <Label
+                                Margin="10"
+                                FontSize="16"
+                                HorizontalOptions="EndAndExpand"
+                                Text="{Binding Age, StringFormat='Kor: {0}'}" />
+
+                        </StackLayout>
                     </StackLayout>
                 </Border>
 

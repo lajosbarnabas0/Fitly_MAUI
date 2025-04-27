@@ -57,6 +57,8 @@ namespace Fitly.Models
         public double? goal_weight { get; set; }
         public bool? admin { get; set; }
 
+        public string? avatar {  get; set; }
+
     }
     public enum Gender
     {
